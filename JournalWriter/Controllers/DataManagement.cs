@@ -5,8 +5,11 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.Windows.Forms;
+using JournalWriter;
+using JournalWriter.Views;
+using JournalWriter.Models;
 
-namespace JournalWriter
+namespace JournalWriter.Controllers
 {
     public class DataManagement
     {

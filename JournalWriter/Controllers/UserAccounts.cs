@@ -3,30 +3,32 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
-using JournalWriter.Menus;
+using JournalWriter;
+using JournalWriter.Views;
+using JournalWriter.Models;
 
 
 
-namespace JournalWriter
+namespace JournalWriter.Controllers
 {
-    public class UserAccounts
+    public static class UserAccounts
     {
         public static List<User> Users = new List<User>();
-        public static User CurrentUser { get; set; }
+        public static User CurrentUser { get; private set; }
         public static bool loggedIn { get; set; }
 
 
         public static void Login()
         {
-            string input;
+            string input = "";
             string userName = "";
             loggedIn = false;
 
-            Console.WriteLine("Please enter username: ");
+            Console.WriteLine("Please enter username or press ESC to go back.");
 
-            while (loggedIn == false)
+            while (loggedIn == false )
             {
-                input = Console.ReadLine();
+                  input = Console.ReadLine();
 
                 if (CheckValidNameInput(input))
                 {
@@ -67,7 +69,7 @@ namespace JournalWriter
         }
         public static bool CheckPasswordCorrect(string userName, string password)
         {
-            if(Users[Users.FindIndex(x => x.Name == userName)].DecryptPassword() == password)
+            if (Users[Users.FindIndex(x => x.Name == userName)].DecryptPassword() == password)
             {
                 return true;
             }
@@ -149,7 +151,7 @@ namespace JournalWriter
         }
         public static void CreateUserAccount(string _name, string _password)
         {
-            User user = new User(_password) { Name = _name, Id = Users.Count};
+            User user = new User(_password) { Name = _name, Id = Users.Count };
             Users.Add(user);
         }
         public static bool CheckAccountExists(string _name)
@@ -167,13 +169,25 @@ namespace JournalWriter
         }
         public static void PrintUsers()
         {
-            foreach(User u in Users)
+            foreach (User u in Users)
             {
                 Console.WriteLine($"Name: {u.Name} ID: {u.Id}");
             }
         }
 
+        public static bool EscKeyPressed()
+        {
 
+            ConsoleKeyInfo key;
 
+            key = Console.ReadKey(true);
+
+            if (key.Key == ConsoleKey.Escape)
+            {
+                return true;
+            }
+            else { return false; }
+
+        }
     }
 }
