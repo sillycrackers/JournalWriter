@@ -4,17 +4,19 @@ using System.Text;
 using System.IO;
 using System.Diagnostics;
 using System.Windows.Forms;
+using JournalWriter;
+using JournalWriter.Controllers;
 
-namespace JournalWriter
+namespace JournalWriter.Models
 {
     public class Entry
     {
-        public static DateTime creationDate { get; set; }
-        public static string title { get; set; }
+        public  DateTime creationDate { get; set; }
+        public  string title { get; set; }
 
-        public static StringBuilder text = new StringBuilder();
+        public  StringBuilder text = new StringBuilder();
 
-        public static void CreateEntry()
+        public  void CreateEntry()
         {
             string input = "";
 
@@ -40,7 +42,7 @@ namespace JournalWriter
 
             SaveEntry();
         }
-        public static void WriteEntry()
+        public  void WriteEntry()
         {
             string input = "";
 
@@ -60,7 +62,7 @@ namespace JournalWriter
 
         }
 
-        public static void SaveEntry()
+        public  void SaveEntry()
         {
             
             DataManagement.CreateEntry(title, text);

@@ -2,58 +2,25 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using JournalWriter;
+using JournalWriter.Controllers;
 
-namespace JournalWriter.Menus
+namespace JournalWriter.Models
 {
     public class Menu
     {
-        //Takes a string of selections and the number of selections and returns the number selected
-        public static int Selection(string selects, int numSel)
+
+        public Cursor Cursor = new Cursor();
+
+        public List<string> Selections;
+
+        public Menu()
         {
-            Console.WriteLine(selects);
-
-            while (true)
-            {
-                string input = Console.ReadLine();
-
-                if (ValidSelection(input, numSel))
-                {
-
-                    return Convert.ToInt32(input);
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Selection try again.");
-                }
-            }
-        }
-
-        //Verifies if the user input valid number which is in the range of displayed selections
-        public static bool ValidSelection(string input, int numOfSelections)
-        {
-
-            if (ValidNumber(input))
-            {
-                int inputNum = Convert.ToInt32(input);
-
-                if (inputNum <= numOfSelections && inputNum > 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
-
+            Selections = new List<string>();
         }
 
         //Checks if the string is an integer value
-        private static bool ValidNumber(string s)
+        private bool ValidNumber(string s)
         {
             if (String.IsNullOrWhiteSpace(s))
             {
@@ -73,7 +40,7 @@ namespace JournalWriter.Menus
         }
 
         //Password entry displaying only ****
-        public static string GetHiddenConsoleInput()
+        public string GetHiddenConsoleInput()
         {
             StringBuilder input = new StringBuilder();
 
@@ -98,6 +65,16 @@ namespace JournalWriter.Menus
             }
             return input.ToString();
         }
+
+        //Display Menu
+        public void Display()
+        {
+            foreach(string s in Selections)
+            {
+                Console.WriteLine(s);
+            }
+        }
+
 
     }
 }

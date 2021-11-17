@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Security.Cryptography;
+using JournalWriter;
+using JournalWriter.Controllers;
 
 
-namespace JournalWriter
+namespace JournalWriter.Models
 {
     [Serializable()]
     public class User
