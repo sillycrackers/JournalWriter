@@ -26,7 +26,7 @@ namespace JournalWriter.Models
             {
                 input = Console.ReadLine();
 
-                if (DataManagement.CheckForEntry(input))
+                if (FileManagement.CheckForEntryFile(input))
                 {
                     Console.WriteLine("File already exists try another name...");
                 }
@@ -65,7 +65,7 @@ namespace JournalWriter.Models
         public  void SaveEntry()
         {
             
-            DataManagement.CreateEntry(title, text);
+            FileManagement.CreateEntryFile(title, text);
             Console.Clear();
             Console.WriteLine("Entry Created");
 

@@ -11,7 +11,7 @@ using JournalWriter.Models;
 
 namespace JournalWriter.Controllers
 {
-    public class DataManagement
+    public static class FileManagement
     {
 
         public static string RootPath = Directory.GetCurrentDirectory();
@@ -20,7 +20,7 @@ namespace JournalWriter.Controllers
         public static string EntryPath = Path.Combine(RootPath, EntryFolder);
         public static string DataPath = Path.Combine(RootPath, ObjectDataFolder, "data.bin");
 
-        public static void SaveData(List<User> u)
+        public static void SaveUserData(List<User> u)
         {
 
             IFormatter formatter = new BinaryFormatter();
@@ -33,7 +33,7 @@ namespace JournalWriter.Controllers
 
             u = null;
         }
-        public static List<User> LoadData()
+        public static List<User> LoadUserData()
         {
 
             List<User> u = new List<User>();
@@ -54,7 +54,7 @@ namespace JournalWriter.Controllers
 
             Directory.CreateDirectory(RootPath + @"\" + ObjectDataFolder);
         }
-        public void OpenBrowserSelectFolder()
+        public static void OpenBrowserSelectFolder()
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             fbd.ShowDialog();
@@ -66,11 +66,11 @@ namespace JournalWriter.Controllers
 
             if (!File.Exists(DataPath))
             {
-                SaveData(UserAccounts.Users);
+                //SaveData(UserAccounts.Users);
             }
         }
 
-        public static void CreateEntry(string name, StringBuilder sb)
+        public static void CreateEntryFile(string name, StringBuilder sb)
         {
             string path = Path.Combine(EntryPath, name + ".txt");
 
@@ -78,7 +78,7 @@ namespace JournalWriter.Controllers
 
         }
 
-        public static bool CheckForEntry(string name)
+        public static bool CheckForEntryFile(string name)
         {
             string path = Path.Combine(EntryPath, name + ".txt");
 
