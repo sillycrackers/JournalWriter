@@ -8,21 +8,29 @@ namespace JournalWriter.Models
 {
     public class Cursor 
     {
+
+        //-------Properties-------//
+
         public char Symbol { get; private set; } = '<';
         public int CurrentSelection { get; private set; }
         public CursorPos Pos { get; private set; }
         public List<int> MenuSizes { get; private set; }
 
         private ConsoleKeyInfo _keyInfo;
+        private ConsoleColor _defaultConsoleColor;
 
 
-        public Cursor(List<int> menuSizes)
+        //-------Constructors-------//
+
+        public Cursor(List<int> menuSizes, ConsoleColor defaultConsoleColor)
         {
             Pos = new CursorPos(menuSizes);
+            _defaultConsoleColor = defaultConsoleColor;
             MoveCursorToHome();
-                       
         }
 
+
+        //-------Methods-------//
         public void UpdatePosition()
         {
             _keyInfo = Console.ReadKey(true);
@@ -46,13 +54,11 @@ namespace JournalWriter.Models
 
         public void PrintCursor()
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.White;
             Console.Write("\b \b");
             Console.SetCursorPosition(Pos.LeftPos, Pos.TopPos);
             Console.Write(Symbol);
-            Console.ForegroundColor = ConsoleColor.Green;
-
+            Console.ForegroundColor = _defaultConsoleColor;
         }
-        
     }
 }

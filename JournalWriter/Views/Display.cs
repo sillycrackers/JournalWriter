@@ -9,8 +9,8 @@ namespace JournalWriter.Views
 {
     public static class Display
     {
-
-        //Password entry displaying only ****
+        
+        //Method for password entry displaying only ****
         public static string GetHiddenConsoleInput()
         {
             StringBuilder input = new StringBuilder();

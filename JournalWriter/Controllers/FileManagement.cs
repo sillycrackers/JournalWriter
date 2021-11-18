@@ -13,13 +13,15 @@ namespace JournalWriter.Controllers
 {
     public static class FileManagement
     {
-
+        //-------Properties-------//
         public static string RootPath { get; private set; } = Directory.GetCurrentDirectory();
-        public static string ObjectDataFolder { get; private set; } = "ObjectData";
+        public static string ObjectDataFolderName { get; private set; } = "ObjectData";
         public static string EntryFolder { get; private set; } = "Entries";
         public static string EntryPath { get; private set; } = Path.Combine(RootPath, EntryFolder);
-        public static string DataPath { get; private set; } = Path.Combine(RootPath, ObjectDataFolder, "data.bin");
+        public static string DataPath { get; private set; } = Path.Combine(RootPath, ObjectDataFolderName, "data.bin");
 
+
+        //-------Methods-------//
         public static void SaveUserData(List<User> u)
         {
 
@@ -52,7 +54,7 @@ namespace JournalWriter.Controllers
         public static void CreateDirectory()
         {
 
-            Directory.CreateDirectory(RootPath + @"\" + ObjectDataFolder);
+            Directory.CreateDirectory(RootPath + @"\" + ObjectDataFolderName);
         }
         public static void OpenBrowserSelectFolder()
         {
@@ -69,7 +71,6 @@ namespace JournalWriter.Controllers
                 //SaveData(UserAccounts.Users);
             }
         }
-
         public static void CreateEntryFile(string name, StringBuilder sb)
         {
             string path = Path.Combine(EntryPath, name + ".txt");
@@ -77,7 +78,6 @@ namespace JournalWriter.Controllers
             File.WriteAllText(path, sb.ToString());
 
         }
-
         public static bool CheckForEntryFile(string name)
         {
             string path = Path.Combine(EntryPath, name + ".txt");

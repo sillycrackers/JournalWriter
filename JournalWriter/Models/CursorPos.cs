@@ -8,17 +8,25 @@ namespace JournalWriter.Models
 {
     public class CursorPos
     {
+
+        //-------Properties-------//
         public int TopPos { get; set; } = 0;
         public int LeftPos { get; set; }
         public int HomePos { get; set; }
 
         private List<int> _menuSizes;
 
+
+        //-------Constructors-------//
         public CursorPos(List<int> menuSizes)
         {
             this._menuSizes = new List<int>(menuSizes);
             HomePos = _menuSizes[0];
         }
+
+
+
+        //-------Methods-------//
         public void MoveDown()
         {
             if (TopPos < _menuSizes.Count - 1)

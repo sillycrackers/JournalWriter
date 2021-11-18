@@ -11,12 +11,24 @@ namespace JournalWriter.Models
 {
     public class Entry
     {
-        public  DateTime CreationDate { get; set; }
+
+        //-------Properties-------//
+        public DateTime CreationDate { get; set; }
         public  string Title { get; set; }
 
         public  StringBuilder EntryText = new StringBuilder();
 
-        public  void CreateEntry()
+
+        //-------Constructors-------//
+        public Entry()
+        {
+
+        }
+
+
+
+        //-------Methods-------//
+        public void CreateEntry()
         {
             string input = "";
 
