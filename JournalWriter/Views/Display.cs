@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Text;
 using JournalWriter;
@@ -37,5 +38,9 @@ namespace JournalWriter.Views
         }
 
 
+        public static void SetupConsoleDefaults()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+        }
     }
 }

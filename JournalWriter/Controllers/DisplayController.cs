@@ -28,6 +28,7 @@ namespace JournalWriter.Controllers
         static DisplayController()
         {
             CurrentMenu = MainMenu;
+            Display.SetupConsoleDefaults();
         }
         public static void DisplayMenu()
         {

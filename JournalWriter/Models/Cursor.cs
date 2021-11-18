@@ -47,9 +47,12 @@ namespace JournalWriter.Models
 
         public void PrintCursor()
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("\b \b");
             Console.SetCursorPosition(pos.LeftPos, pos.TopPos);
             Console.Write(Symbol);
+            Console.ForegroundColor = ConsoleColor.Green;
+
         }
         
     }
