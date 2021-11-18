@@ -42,5 +42,20 @@ namespace JournalWriter.Views
         {
             Console.ForegroundColor = ConsoleColor.Green;
         }
+
+        public static bool EscKeyPressed()
+        {
+
+            ConsoleKeyInfo key;
+
+            key = Console.ReadKey(true);
+
+            if (key.Key == ConsoleKey.Escape)
+            {
+                return true;
+            }
+            else { return false; }
+
+        }
     }
 }

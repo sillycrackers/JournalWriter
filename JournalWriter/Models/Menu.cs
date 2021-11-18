@@ -10,14 +10,20 @@ namespace JournalWriter.Models
     public class Menu
     {
 
-        public Cursor cursor;
+        public Cursor Cursor { get; set; }
 
         public List<string> Selections { get; set;}
 
-        public Menu(List<string> _selections)
+        public Menu()
         {
-            Selections = new List<string>(_selections);
-            cursor = new Cursor(CalculateMenuSize());
+            Selections = new List<string>() {"Empty Menu"};
+            
+        }
+
+        public Menu(List<string> selections)
+        {
+            Selections = new List<string>(selections);
+            Cursor = new Cursor(CalculateMenuSize());
         }
 
         //Checks if the string is an integer value
@@ -60,7 +66,7 @@ namespace JournalWriter.Models
                 Console.WriteLine(s);
             }
 
-            cursor.PrintCursor();
+            Cursor.PrintCursor();
             Console.CursorVisible = false;
         }
 

@@ -9,32 +9,31 @@ namespace JournalWriter.Models
     public class Cursor 
     {
         public char Symbol { get; private set; } = '<';
+        public int CurrentSelection { get; private set; }
+        public CursorPos Pos { get; private set; }
+        public List<int> MenuSizes { get; private set; }
 
-        public CursorPos pos;
-
-        public List<int> menuSizes;
-
-        private ConsoleKeyInfo keyInfo;
+        private ConsoleKeyInfo _keyInfo;
 
 
-        public Cursor(List<int> _menuSizes)
+        public Cursor(List<int> menuSizes)
         {
-            pos = new CursorPos(_menuSizes);
+            Pos = new CursorPos(menuSizes);
             MoveCursorToHome();
                        
         }
 
         public void UpdatePosition()
         {
-            keyInfo = Console.ReadKey(true);
+            _keyInfo = Console.ReadKey(true);
             
-            if(keyInfo.Key == ConsoleKey.DownArrow)
+            if(_keyInfo.Key == ConsoleKey.DownArrow)
             {
-                pos.MoveDown();
+                Pos.MoveDown();
             }
-            else if (keyInfo.Key == ConsoleKey.UpArrow)
+            else if (_keyInfo.Key == ConsoleKey.UpArrow)
             {
-                pos.MoveUp();
+                Pos.MoveUp();
             }
 
             PrintCursor();
@@ -42,14 +41,14 @@ namespace JournalWriter.Models
 
         public void MoveCursorToHome()
         {
-            pos.LeftPos = pos.HomePos;
+            Pos.LeftPos = Pos.HomePos;
         }
 
         public void PrintCursor()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("\b \b");
-            Console.SetCursorPosition(pos.LeftPos, pos.TopPos);
+            Console.SetCursorPosition(Pos.LeftPos, Pos.TopPos);
             Console.Write(Symbol);
             Console.ForegroundColor = ConsoleColor.Green;
 

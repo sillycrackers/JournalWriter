@@ -17,12 +17,9 @@ namespace JournalWriter.Controllers
         }
 
         public static Menus MenuToDisplay;     
-
-        public static Menu CurrentMenu = new Menu(new List<string>() {"1 - Default Menu"});
-
+        public static Menu CurrentMenu = new Menu();
         public static Menu MainMenu = new Menu(new List<string>() {"1 - Login","2 - Create New Account","3 - Display Current Users","4 - Quit" });
         public static Menu LoginMenu = new Menu(new List<string>() { "1 - Create Entry", "2 - Load Entry", "3 - Go To Main Menu" });
-
         public static UI ui = new UI();
 
         static DisplayController()

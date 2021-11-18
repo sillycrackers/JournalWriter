@@ -14,11 +14,11 @@ namespace JournalWriter.Controllers
     public static class FileManagement
     {
 
-        public static string RootPath = Directory.GetCurrentDirectory();
-        public static string ObjectDataFolder = "ObjectData";
-        public static string EntryFolder = "Entries";
-        public static string EntryPath = Path.Combine(RootPath, EntryFolder);
-        public static string DataPath = Path.Combine(RootPath, ObjectDataFolder, "data.bin");
+        public static string RootPath { get; private set; } = Directory.GetCurrentDirectory();
+        public static string ObjectDataFolder { get; private set; } = "ObjectData";
+        public static string EntryFolder { get; private set; } = "Entries";
+        public static string EntryPath { get; private set; } = Path.Combine(RootPath, EntryFolder);
+        public static string DataPath { get; private set; } = Path.Combine(RootPath, ObjectDataFolder, "data.bin");
 
         public static void SaveUserData(List<User> u)
         {

@@ -13,6 +13,7 @@ namespace JournalWriter.Models
     {
         public string Name { get; set; }
         public int Id { get; set; }
+
         private byte[] _encryptedPassword;
         private byte[] _entropy = new byte[20];
 
@@ -20,7 +21,6 @@ namespace JournalWriter.Models
         {
             EncryptPassword(pass);
         }
-
 
         private void EncryptPassword(string pass)
         {
