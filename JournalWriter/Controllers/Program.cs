@@ -13,49 +13,14 @@ namespace JournalWriter.Controllers
         [STAThread]
         static void Main(string[] args)
         {
-            DataManagement.Initialize();
 
-            UserAccounts.Users = DataManagement.LoadData();
+            DisplayController.MenuToDisplay = DisplayController.Menus.MainMenu;
 
             while (true)
             {
-                //MainMenu.Open();
-
-                //if (UserAccounts.loggedIn)
-                //{
-                //    EntryMenu.Open();
-                //}
-
-                DisplayMenu();
-                
-
-                while (true)
-                {
-
-                }
-
+                DisplayController.DisplayMenu();
+                break;
             }
-           
         }
-
-        static void DisplayMenu()
-        {
-            UserInterface ui = new UserInterface();
-
-            ui.Menu.SelectionsDisplay.Add();
-
-
-
-            foreach (string s in selections)
-            {
-                Console.WriteLine(s);
-            }
-
-        }
-
-
-
-
-   
     }
 }

@@ -11,14 +11,24 @@ using JournalWriter.Models;
 
 namespace JournalWriter.Controllers
 {
-    public static class UserAccounts
+    public class UserAccounts
     {
-        public static List<User> Users = new List<User>();
-        public static User CurrentUser { get; private set; }
-        public static bool loggedIn { get; set; }
+        public List<User> Users { get; set; }
+        public User CurrentUser { get; set; }
+        public bool loggedIn { get; set; }
 
 
-        public static void Login()
+        public UserAccounts()
+        {
+            Users = new List<User>();
+
+            CurrentUser = new User("") { Name = "DefaultUser" };
+
+            loggedIn = false;
+
+        }
+
+        public void Login()
         {
             string input = "";
             string userName = "";
@@ -41,7 +51,7 @@ namespace JournalWriter.Controllers
                         while (loggedIn == false)
                         {
 
-                            input = Menu.GetHiddenConsoleInput();
+                            input = Display.GetHiddenConsoleInput();
 
                             if (CheckPasswordCorrect(userName, input))
                             {
@@ -67,7 +77,12 @@ namespace JournalWriter.Controllers
                 }
             }
         }
-        public static bool CheckPasswordCorrect(string userName, string password)
+
+        public void LoadUsers()
+        {
+            this.Users = FileManagement.LoadUserData();
+        }
+        public bool CheckPasswordCorrect(string userName, string password)
         {
             if (Users[Users.FindIndex(x => x.Name == userName)].DecryptPassword() == password)
             {
@@ -78,7 +93,7 @@ namespace JournalWriter.Controllers
                 return false;
             }
         }
-        public static void UserInputNewAccount()
+        public void UserInputNewAccount()
         {
             string input;
             string name = "";
@@ -115,7 +130,7 @@ namespace JournalWriter.Controllers
             //User sets password
             while (true)
             {
-                input = Menu.GetHiddenConsoleInput();
+                input = Display.GetHiddenConsoleInput();
 
                 if (!String.IsNullOrWhiteSpace(input))
                 {
@@ -138,7 +153,7 @@ namespace JournalWriter.Controllers
             Console.WriteLine("Account created.");
 
         }
-        public static bool CheckValidNameInput(string s)
+        public bool CheckValidNameInput(string s)
         {
             if (String.IsNullOrWhiteSpace(s))
             {
@@ -149,12 +164,12 @@ namespace JournalWriter.Controllers
                 return true;
             }
         }
-        public static void CreateUserAccount(string _name, string _password)
+        public void CreateUserAccount(string _name, string _password)
         {
             User user = new User(_password) { Name = _name, Id = Users.Count };
             Users.Add(user);
         }
-        public static bool CheckAccountExists(string _name)
+        public bool CheckAccountExists(string _name)
         {
             int index = Users.FindIndex(x => x.Name == _name);
 
@@ -167,7 +182,7 @@ namespace JournalWriter.Controllers
                 return false;
             }
         }
-        public static void PrintUsers()
+        public void PrintUsers()
         {
             foreach (User u in Users)
             {
@@ -175,7 +190,7 @@ namespace JournalWriter.Controllers
             }
         }
 
-        public static bool EscKeyPressed()
+        public bool EscKeyPressed()
         {
 
             ConsoleKeyInfo key;

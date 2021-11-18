@@ -12,11 +12,16 @@ namespace JournalWriter.Models
 
         public CursorPos pos;
 
+        public List<int> menuSizes;
+
         private ConsoleKeyInfo keyInfo;
 
-        public Cursor()
+
+        public Cursor(List<int> _menuSizes)
         {
-            pos = new CursorPos();
+            pos = new CursorPos(_menuSizes);
+            MoveCursorToHome();
+                       
         }
 
         public void UpdatePosition()
@@ -31,20 +36,21 @@ namespace JournalWriter.Models
             {
                 pos.MoveUp();
             }
+
+            PrintCursor();
         }
 
-        public List<int> CalculateMenuSize(List<string> selections)
+        public void MoveCursorToHome()
         {
-            List<int> sizes = new List<int>();
-            int i = 0;
-
-            foreach (string s in selections)
-            {
-                sizes.Add(s.Length);
-                Console.WriteLine(sizes[i]);
-                i++;
-            }
-            return sizes;
+            pos.LeftPos = pos.HomePos;
         }
+
+        public void PrintCursor()
+        {
+            Console.Write("\b \b");
+            Console.SetCursorPosition(pos.LeftPos, pos.TopPos);
+            Console.Write(Symbol);
+        }
+        
     }
 }

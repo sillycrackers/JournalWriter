@@ -10,13 +10,14 @@ namespace JournalWriter.Models
     public class Menu
     {
 
-        public Cursor Cursor = new Cursor();
+        public Cursor cursor;
 
-        public List<string> Selections;
+        public List<string> Selections { get; set;}
 
-        public Menu()
+        public Menu(List<string> _selections)
         {
-            Selections = new List<string>();
+            Selections = new List<string>(_selections);
+            cursor = new Cursor(CalculateMenuSize());
         }
 
         //Checks if the string is an integer value
@@ -39,42 +40,29 @@ namespace JournalWriter.Models
             }
         }
 
-        //Password entry displaying only ****
-        public string GetHiddenConsoleInput()
+        public List<int> CalculateMenuSize()
         {
-            StringBuilder input = new StringBuilder();
+            List<int> sizes = new List<int>();
+            int i = 0;
 
-            while (true)
+            foreach (string s in Selections)
             {
-                var key = Console.ReadKey(true);
-                if (key.Key == ConsoleKey.Enter)
-                {
-                    Console.WriteLine();
-                    break;
-                }
-                if (key.Key == ConsoleKey.Backspace && input.Length > 0)
-                {
-                    Console.Write("\b \b");
-                    input.Remove(input.Length - 1, 1);
-                }
-                else if (key.Key != ConsoleKey.Backspace)
-                {
-                    Console.Write("*");
-                    input.Append(key.KeyChar);
-                }
+                sizes.Add(s.Length);
+                i++;
             }
-            return input.ToString();
+            return sizes;
         }
 
-        //Display Menu
-        public void Display()
+        public void DisplayMenu()
         {
-            foreach(string s in Selections)
+            foreach (string s in Selections)
             {
                 Console.WriteLine(s);
             }
-        }
 
+            cursor.PrintCursor();
+            Console.CursorVisible = false;
+        }
 
     }
 }
