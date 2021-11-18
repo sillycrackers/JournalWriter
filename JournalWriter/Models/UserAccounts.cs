@@ -13,10 +13,14 @@ namespace JournalWriter.Controllers
 {
     public class UserAccounts
     {
+        //-------Properties-------//
+
         public List<User> Users { get; set; }
         public User CurrentUser { get; set; }
         public bool loggedIn { get; set; }
 
+
+        //-------Constructors-------//
 
         public UserAccounts()
         {
@@ -27,6 +31,9 @@ namespace JournalWriter.Controllers
             loggedIn = false;
 
         }
+
+
+        //-------Methods-------//
 
         public void Login()
         {
@@ -190,19 +197,5 @@ namespace JournalWriter.Controllers
             }
         }
 
-        public bool EscKeyPressed()
-        {
-
-            ConsoleKeyInfo key;
-
-            key = Console.ReadKey(true);
-
-            if (key.Key == ConsoleKey.Escape)
-            {
-                return true;
-            }
-            else { return false; }
-
-        }
     }
 }

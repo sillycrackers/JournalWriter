@@ -11,12 +11,24 @@ namespace JournalWriter.Models
 {
     public class Entry
     {
-        public  DateTime creationDate { get; set; }
-        public  string title { get; set; }
 
-        public  StringBuilder text = new StringBuilder();
+        //-------Properties-------//
+        public DateTime CreationDate { get; set; }
+        public  string Title { get; set; }
 
-        public  void CreateEntry()
+        public  StringBuilder EntryText = new StringBuilder();
+
+
+        //-------Constructors-------//
+        public Entry()
+        {
+
+        }
+
+
+
+        //-------Methods-------//
+        public void CreateEntry()
         {
             string input = "";
 
@@ -36,7 +48,7 @@ namespace JournalWriter.Models
                 }
             }
 
-            title = input;
+            Title = input;
 
             WriteEntry();
 
@@ -55,7 +67,7 @@ namespace JournalWriter.Models
 
                 if (input.ToLower() != "save")
                 {
-                    text.AppendLine(input);
+                    EntryText.AppendLine(input);
                 }
 
             }
@@ -65,7 +77,7 @@ namespace JournalWriter.Models
         public  void SaveEntry()
         {
             
-            FileManagement.CreateEntryFile(title, text);
+            FileManagement.CreateEntryFile(Title, EntryText);
             Console.Clear();
             Console.WriteLine("Entry Created");
 

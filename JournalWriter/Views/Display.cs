@@ -9,8 +9,8 @@ namespace JournalWriter.Views
 {
     public static class Display
     {
-
-        //Password entry displaying only ****
+        
+        //Method for password entry displaying only ****
         public static string GetHiddenConsoleInput()
         {
             StringBuilder input = new StringBuilder();
@@ -41,6 +41,21 @@ namespace JournalWriter.Views
         public static void SetupConsoleDefaults()
         {
             Console.ForegroundColor = ConsoleColor.Green;
+        }
+
+        public static bool EscKeyPressed()
+        {
+
+            ConsoleKeyInfo key;
+
+            key = Console.ReadKey(true);
+
+            if (key.Key == ConsoleKey.Escape)
+            {
+                return true;
+            }
+            else { return false; }
+
         }
     }
 }

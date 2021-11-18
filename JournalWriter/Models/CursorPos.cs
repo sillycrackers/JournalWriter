@@ -8,23 +8,31 @@ namespace JournalWriter.Models
 {
     public class CursorPos
     {
+
+        //-------Properties-------//
         public int TopPos { get; set; } = 0;
         public int LeftPos { get; set; }
         public int HomePos { get; set; }
 
-        public List<int> MenuSizes;
+        private List<int> _menuSizes;
 
-        public CursorPos(List<int> _menuSizes)
+
+        //-------Constructors-------//
+        public CursorPos(List<int> menuSizes)
         {
-            MenuSizes = new List<int>(_menuSizes);
-            HomePos = MenuSizes[0];
+            this._menuSizes = new List<int>(menuSizes);
+            HomePos = _menuSizes[0];
         }
+
+
+
+        //-------Methods-------//
         public void MoveDown()
         {
-            if (TopPos < MenuSizes.Count - 1)
+            if (TopPos < _menuSizes.Count - 1)
             {
                 TopPos++;
-                LeftPos = MenuSizes[TopPos];
+                LeftPos = _menuSizes[TopPos];
             }
         }
         public void MoveUp()
@@ -32,7 +40,7 @@ namespace JournalWriter.Models
             if (TopPos > 0)
             {
                 TopPos--;
-                LeftPos = MenuSizes[TopPos];
+                LeftPos = _menuSizes[TopPos];
             }
         }
 

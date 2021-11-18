@@ -9,18 +9,35 @@ namespace JournalWriter.Models
 {
     public class Menu
     {
+        //-------Enums---------//
+        public enum MenuNames
+        {
+            MainMenu = 0,
+            LoginMenu = 1
+        }
+        //-------Properties-------//
 
-        public Cursor cursor;
-
+        public static MenuNames MenuName { get; set; }
+        public Cursor Cursor { get; set; }
         public List<string> Selections { get; set;}
 
-        public Menu(List<string> _selections)
+
+        //-------Constructors-------//
+        public Menu(ConsoleColor defaultConsoleColor, MenuNames menuName)
         {
-            Selections = new List<string>(_selections);
-            cursor = new Cursor(CalculateMenuSize());
+            Selections = new List<string>() {"Empty Menu"};
+            Cursor = new Cursor(CalculateMenuSize(), defaultConsoleColor);
+            MenuName = menuName;
+        }
+        public Menu(List<string> selections, ConsoleColor defaultConsoleColor, MenuNames menuName)
+            : this(defaultConsoleColor, menuName)
+        {
+            Selections = new List<string>(selections);
+            Cursor = new Cursor(CalculateMenuSize(), defaultConsoleColor);
+            MenuName = menuName;
         }
 
-        //Checks if the string is an integer value
+        //-------Methods-------//
         private bool ValidNumber(string s)
         {
             if (String.IsNullOrWhiteSpace(s))
@@ -39,7 +56,6 @@ namespace JournalWriter.Models
                 return true;
             }
         }
-
         public List<int> CalculateMenuSize()
         {
             List<int> sizes = new List<int>();
@@ -47,22 +63,20 @@ namespace JournalWriter.Models
 
             foreach (string s in Selections)
             {
-                sizes.Add(s.Length);
+                sizes.Add(s.Length + 1);
                 i++;
             }
             return sizes;
         }
-
         public void DisplayMenu()
         {
             foreach (string s in Selections)
             {
-                Console.WriteLine(s);
+                Console.WriteLine(" " + s);
             }
 
-            cursor.PrintCursor();
+            Cursor.PrintCursor();
             Console.CursorVisible = false;
         }
-
     }
 }
