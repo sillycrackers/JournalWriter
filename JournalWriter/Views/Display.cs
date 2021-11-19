@@ -4,11 +4,19 @@ using System.Collections.Generic;
 using System.Text;
 using JournalWriter;
 using JournalWriter.Controllers;
+using JournalWriter.Models;
 
 namespace JournalWriter.Views
 {
-    public static class Display
+    public class Display
     {
+        public bool DisplayNewScreen = false;
+ 
+
+        public Display()
+        {
+            SetupConsoleDefaults();
+        }
         
         //Method for password entry displaying only ****
         public static string GetHiddenConsoleInput()
@@ -37,25 +45,51 @@ namespace JournalWriter.Views
             return input.ToString();
         }
 
-
         public static void SetupConsoleDefaults()
         {
+            int windowHeight = 30;
+            int windowWidth = 50;
+            int bufferHeight = 30;
+            int bufferWidth = 50;
+
             Console.ForegroundColor = ConsoleColor.Green;
+
+            Console.SetWindowSize(1, 1);
+            Console.SetBufferSize(bufferWidth, bufferHeight);
+            Console.SetWindowSize(windowWidth, windowHeight);
+
+            
+            Console.SetWindowPosition(0, 0);
         }
 
-        public static bool EscKeyPressed()
+
+
+        public void DisplayMenu(Menu currentMenu)
         {
+            currentMenu.DisplayMenu();
+        }
 
-            ConsoleKeyInfo key;
+        public void MenuItemSelection(Menu currentMenu, ConsoleKeyInfo keyInfo)
+        {
+            currentMenu.Cursor.UpdatePosition(keyInfo);
 
-            key = Console.ReadKey(true);
-
-            if (key.Key == ConsoleKey.Escape)
+            if (keyInfo.Key == ConsoleKey.Enter)
             {
-                return true;
+                DisplayNewScreen = true;
             }
-            else { return false; }
+        }
 
+        public int GetMenuItemSelected(Menu currentMenu)
+        {
+            return currentMenu.Cursor.Pos.TopPos;
+        }
+        public void DisplayUserSelectionValue(Menu currentMenu)
+        {
+            Console.SetCursorPosition(1, 8);
+
+            Console.WriteLine(currentMenu.Cursor.Pos.TopPos);
+
+            
         }
     }
 }

@@ -18,7 +18,7 @@ namespace JournalWriter.Controllers
 
             while (true)
             {
-                DisplayController.DisplayMenu();
+                DisplayController.Run();
                 break;
             }
         }
