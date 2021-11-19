@@ -43,9 +43,9 @@ namespace JournalWriter.Controllers
 
             Console.WriteLine("Please enter username or press ESC to go back.");
 
-            while (loggedIn == false )
+            while (loggedIn == false)
             {
-                  input = Console.ReadLine();
+                input = Console.ReadLine();
 
                 if (CheckValidNameInput(input))
                 {
@@ -197,5 +197,10 @@ namespace JournalWriter.Controllers
             }
         }
 
+        public void DisplayCurrentUser()
+        {
+            Console.SetCursorPosition(1, 9);
+            Console.WriteLine("Logged In: " + CurrentUser.Name);
+        }
     }
 }

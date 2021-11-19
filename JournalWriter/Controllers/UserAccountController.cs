@@ -6,9 +6,20 @@ namespace JournalWriter.Controllers
 {
     public static class UserAccountController
     {
-        public static UserAccounts Account { get; private set; } = new UserAccounts();
+        public static UserAccounts Account { get; private set; }
+        
 
+        static UserAccountController()
+        {
+            Account = new UserAccounts();
+            
+        }
 
+        public static void Run()
+        {
+            Account.DisplayCurrentUser();
+        }
 
+        
     }
 }

@@ -32,23 +32,24 @@ namespace JournalWriter.Controllers
     public static void Run()
         {
             display.DisplayMenu(CurrentMenu);
+            UserAccountController.Run();
 
             while (true)
             {
-
                 display.DisplayUserSelectionValue(CurrentMenu);
 
                 KeyInfo = Console.ReadKey(true);
 
-                if (display.DisplayNewScreen == true)
-                {
-                    CurrentMenu = MenuList[display.GetMenuItemSelected(CurrentMenu)];
-                    Console.Clear();
-                    display.DisplayMenu(CurrentMenu);
-                    display.DisplayNewScreen = false;
-                }
-                display.MenuItemSelection(CurrentMenu, KeyInfo);
+                //if (display.DisplayNewScreen == true)
+                //{
+                //    CurrentMenu = MenuList[display.GetMenuItemSelected(CurrentMenu)];
+                //    Console.Clear();
+                //    display.DisplayMenu(CurrentMenu);
+                //    display.DisplayNewScreen = false;
+                //}
 
+                display.MenuItemSelection(CurrentMenu, KeyInfo);
+                
             }
         }
     }
