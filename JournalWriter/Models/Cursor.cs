@@ -34,12 +34,12 @@ namespace JournalWriter.Models
 
 
         //-------Methods-------//
-        public void UpdatePosition()
+        public void UpdatePosition(ConsoleKeyInfo keyInfo)
         {
+            _keyInfo = keyInfo; 
+
 
             Console.SetCursorPosition(Pos.LeftPos , Pos.TopPos);
-
-            _keyInfo = Console.ReadKey(true);
 
             if (_keyInfo.Key == ConsoleKey.DownArrow)
             {

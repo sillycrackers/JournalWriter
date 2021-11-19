@@ -14,10 +14,11 @@ namespace JournalWriter.Controllers
         public static Menu.MenuNames MenuToDisplay { get; set; }
         public static Menu CurrentMenu {get; set;}
         public static List<Menu> MenuList { get; set; }
-
         public static Display display { get; set; }
 
-    public static ConsoleColor DefaultConsoleColor { get; set; } = ConsoleColor.Green;
+        public static ConsoleKeyInfo KeyInfo { get; set; }
+
+        public static ConsoleColor DefaultConsoleColor { get; set; } = ConsoleColor.Green;
 
         static DisplayController()
         {
@@ -34,20 +35,20 @@ namespace JournalWriter.Controllers
 
             while (true)
             {
+
                 display.DisplayUserSelectionValue(CurrentMenu);
+
+                KeyInfo = Console.ReadKey(true);
 
                 if (display.DisplayNewScreen == true)
                 {
-                    CurrentMenu = MenuList[display.GetUserSelection(CurrentMenu)];
+                    CurrentMenu = MenuList[display.GetMenuItemSelected(CurrentMenu)];
                     Console.Clear();
                     display.DisplayMenu(CurrentMenu);
-                    //display.DisplayNewScreen = false;
+                    display.DisplayNewScreen = false;
                 }
+                display.MenuItemSelection(CurrentMenu, KeyInfo);
 
-                display.UserSelection(CurrentMenu);
-                
-                
-                
             }
         }
     }

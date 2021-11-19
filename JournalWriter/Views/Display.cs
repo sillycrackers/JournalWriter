@@ -63,54 +63,24 @@ namespace JournalWriter.Views
         }
 
 
-        public static bool EscKeyPressed()
-        {
-
-            ConsoleKeyInfo key;
-
-            key = Console.ReadKey(true);
-
-            if (key.Key == ConsoleKey.Escape)
-            {
-                return true;
-            }
-            else { return false; }
-
-        }
-
-        public static bool EnterKeyPressed()
-        {
-
-            ///ConsoleKeyInfo key;
-
-            //key = Console.ReadKey(true);
-            
-
-            if (Console.ReadKey(true).Key == ConsoleKey.Enter)
-            {
-                return true;
-            }
-            else { return false; }
-
-        }
 
         public void DisplayMenu(Menu currentMenu)
         {
             currentMenu.DisplayMenu();
         }
 
-        public void UserSelection(Menu currentMenu)
+        public void MenuItemSelection(Menu currentMenu, ConsoleKeyInfo keyInfo)
         {
-            currentMenu.Cursor.UpdatePosition();
+            currentMenu.Cursor.UpdatePosition(keyInfo);
 
-            if (EnterKeyPressed())
+            if (keyInfo.Key == ConsoleKey.Enter)
             {
                 DisplayNewScreen = true;
             }
         }
-        public int GetUserSelection(Menu currentMenu)
-        {
 
+        public int GetMenuItemSelected(Menu currentMenu)
+        {
             return currentMenu.Cursor.Pos.TopPos;
         }
         public void DisplayUserSelectionValue(Menu currentMenu)
