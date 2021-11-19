@@ -77,6 +77,7 @@ namespace JournalWriter.Models
 
             Cursor.PrintCursor();
             Console.CursorVisible = false;
+            
         }
     }
 }
