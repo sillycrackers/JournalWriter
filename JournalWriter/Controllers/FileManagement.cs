@@ -22,18 +22,18 @@ namespace JournalWriter.Controllers
 
 
         //-------Methods-------//
-        public static void SaveUserData(List<User> u)
+        public static void SaveUserData(List<User> users)
         {
 
             IFormatter formatter = new BinaryFormatter();
 
             Stream stream = new FileStream(DataPath, FileMode.Create, FileAccess.Write, FileShare.None);
 
-            formatter.Serialize(stream, u);
+            formatter.Serialize(stream, users);
 
             stream.Close();
 
-            u = null;
+            users = null;
         }
         public static List<User> LoadUserData()
         {
@@ -62,13 +62,13 @@ namespace JournalWriter.Controllers
             fbd.ShowDialog();
 
         }
-        public static void Initialize()
+        public static void Initialize(List<User> users)
         {
             CreateDirectory();
 
             if (!File.Exists(DataPath))
             {
-                //SaveData(UserAccounts.Users);
+                SaveUserData(users);
             }
         }
         public static void CreateEntryFile(string name, StringBuilder sb)
