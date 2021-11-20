@@ -9,47 +9,77 @@ namespace JournalWriter.Controllers
 {
     public static class DisplayController
     {
-
-
         public static Menu.MenuNames MenuToDisplay { get; set; }
         public static Menu CurrentMenu {get; set;}
         public static List<Menu> MenuList { get; set; }
         public static Display display { get; set; }
-
         public static ConsoleKeyInfo KeyInfo { get; set; }
-
         public static ConsoleColor DefaultConsoleColor { get; set; } = ConsoleColor.Green;
+
+        public static string JournalEntryMainHeader = "╔═══════════════════════════════════════════════╗\n" +
+                                                      "║                                               ║\n" +
+                                                      "║           Welcome To JournalWriter!           ║\n" +
+                                                      "║                                               ║\n" +
+                                                      "╚═══════════════════════════════════════════════╝\n\n";
 
         static DisplayController()
         {
-            display = new Display();
+            display = new Display(JournalEntryMainHeader);
             MenuList = new List<Menu>();
-            MenuList.Add(new Menu(new List<string>() { "Login", "Create New Account", "Display Current Users", "Quit" }, DefaultConsoleColor, Menu.MenuNames.MainMenu));
-            MenuList.Add(new Menu(new List<string>() { "Create Entry", "Load Entry", "Go To Main Menu" }, DefaultConsoleColor, Menu.MenuNames.LoginMenu));
+            MenuList.Add(new Menu(new List<string>() { "Login", "Create New Account", "Display Current Users", "Quit" }, Menu.MenuNames.MainMenu));
+            MenuList.Add(new Menu(new List<string>() { "Create Entry", "Load Entry", "Go To Main Menu" }, Menu.MenuNames.LoginMenu));
             CurrentMenu = MenuList[0];
         }
 
     public static void Run()
         {
+
+            display.DisplayHeader(0);
             display.DisplayMenu(CurrentMenu);
-            UserAccountController.Run();
+            
+            
 
             while (true)
             {
-                display.DisplayUserSelectionValue(CurrentMenu);
+
+                display.DisplayUserMenuSelectionValue(CurrentMenu);
+
+                UserAccountController.DisplayCurrentUser(1,13);
 
                 KeyInfo = Console.ReadKey(true);
 
-                //if (display.DisplayNewScreen == true)
-                //{
-                //    CurrentMenu = MenuList[display.GetMenuItemSelected(CurrentMenu)];
-                //    Console.Clear();
-                //    display.DisplayMenu(CurrentMenu);
-                //    display.DisplayNewScreen = false;
-                //}
-
                 display.MenuItemSelection(CurrentMenu, KeyInfo);
+
+                if (KeyInfo.Key == ConsoleKey.Enter)
+                {
+                    MainMenuSelectionEnter();
+                }
+
                 
+
+            }
+        }
+
+        public static void MainMenuSelectionEnter()
+        {
+            switch (display.GetMenuItemSelectedValue(CurrentMenu))
+            {
+                case 0:
+                    Console.Clear();
+                    UserAccountController.Account.Login();
+                    break;
+                case 1:
+                    Console.Clear();
+                    UserAccountController.Account.UserInputNewAccount();
+                    break;
+                case 2:
+                    Console.Clear();
+                    UserAccountController.Account.PrintUsers();
+                    break;
+                case 3:
+                    Environment.Exit(0);
+                    break;
+
             }
         }
     }

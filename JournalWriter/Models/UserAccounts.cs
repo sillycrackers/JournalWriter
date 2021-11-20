@@ -30,6 +30,8 @@ namespace JournalWriter.Controllers
 
             loggedIn = false;
 
+            FileManagement.Initialize(Users);
+
         }
 
 
@@ -197,10 +199,11 @@ namespace JournalWriter.Controllers
             }
         }
 
-        public void DisplayCurrentUser()
+        public void DisplayCurrentUser(int leftPosition, int topPosition)
         {
-            Console.SetCursorPosition(1, 9);
+            Console.SetCursorPosition(leftPosition, topPosition);
             Console.WriteLine("Logged In: " + CurrentUser.Name);
+
         }
     }
 }

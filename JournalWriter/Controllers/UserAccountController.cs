@@ -6,20 +6,22 @@ namespace JournalWriter.Controllers
 {
     public static class UserAccountController
     {
+        //-------Properties-------//
         public static UserAccounts Account { get; private set; }
-        
 
+
+        //-------Constructors-------//
         static UserAccountController()
         {
             Account = new UserAccounts();
-            
         }
 
-        public static void Run()
+
+        //-------Methods-------//
+        public static void DisplayCurrentUser(int leftLocation, int topLocation)
         {
-            Account.DisplayCurrentUser();
+            Account.DisplayCurrentUser(leftLocation, topLocation);
         }
-
-        
+   
     }
 }

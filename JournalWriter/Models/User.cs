@@ -27,7 +27,6 @@ namespace JournalWriter.Models
             EncryptPassword(pass);
         }
 
-
         //-------Methods-------//
         private void EncryptPassword(string pass)
         {
