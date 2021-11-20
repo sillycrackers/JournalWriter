@@ -10,9 +10,10 @@ namespace JournalWriter.Models
     {
 
         //-------Properties-------//
-        public int TopPos { get; set; } = 0;
+        public int TopPos { get; set; }
         public int LeftPos { get; set; }
-        public int HomePos { get; set; }
+        public int HomePosLeft { get; set; }
+        public int HomePosTop { get; set; }
 
         private List<int> _menuSizes;
 
@@ -21,7 +22,7 @@ namespace JournalWriter.Models
         public CursorPos(List<int> menuSizes)
         {
             this._menuSizes = new List<int>(menuSizes);
-            HomePos = _menuSizes[0];
+            HomePosLeft = _menuSizes[0];
         }
 
 
