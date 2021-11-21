@@ -36,12 +36,10 @@ namespace JournalWriter.Controllers
 
             display.DisplayHeader(0);
             display.DisplayMenu(CurrentMenu);
-            
-            
+
 
             while (true)
             {
-
                 display.DisplayUserMenuSelectionValue(CurrentMenu);
 
                 UserAccountController.DisplayCurrentUser(1,13);
@@ -54,9 +52,6 @@ namespace JournalWriter.Controllers
                 {
                     MainMenuSelectionEnter();
                 }
-
-                
-
             }
         }
 

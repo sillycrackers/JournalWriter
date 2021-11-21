@@ -209,7 +209,8 @@ namespace JournalWriter.Controllers
         }
 
 
-        // returns null if user pressed Escape, or the contents of the line if they pressed Enter.
+        // Returns null if user pressed Escape, or the contents of the line when they pressed Enter.
+        // Does not accept Spaces.
         private string ReadLineOrEscape()
         {
             ConsoleKeyInfo keyInfo = new ConsoleKeyInfo();
@@ -237,17 +238,14 @@ namespace JournalWriter.Controllers
 
                         index--;
                     }
-                    
                 }
-
+                //Makes sure value is inbetween Unicode values for symbols and letters only
                 if(keyInfo.KeyChar > 32 && keyInfo.KeyChar < 127)
                 {
                     index++;
                     Console.Write(keyInfo.KeyChar);
                     sb.Append(keyInfo.KeyChar);
                 }
-
-                
             }
             Console.Write('\n');
             return sb.ToString(); ;

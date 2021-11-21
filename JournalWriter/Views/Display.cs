@@ -60,8 +60,11 @@ namespace JournalWriter.Views
             Console.SetBufferSize(bufferWidth, bufferHeight);
             Console.SetWindowSize(windowWidth, windowHeight);
 
+            Console.Title = "Journal Reader";
+
 
             Console.SetWindowPosition(0, 0);
+            
         }
 
         //Method for password entry displaying only ****
