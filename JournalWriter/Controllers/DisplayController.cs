@@ -69,23 +69,35 @@ namespace JournalWriter.Controllers
                 case 1:
                     Console.Clear();
                     UserAccountController.Account.UserInputNewAccount();
-                    
                     Console.Clear();
                     break;
                 case 2:
                     Console.Clear();
                     UserAccountController.Account.PrintUsers();
+                    PressEnterToProceed("go back...");
+                    Console.Clear();
                     break;
                 case 3:
                     Environment.Exit(0);
                     break;
-
             }
         }
         public static void DisplayContents()
         {
             display.DisplayHeader(0);
             display.DisplayMenu(CurrentMenu);
+        }
+
+        public static void PressEnterToProceed(string message)
+        {
+            Console.WriteLine("\nPress Enter to " + message);
+
+            ConsoleKeyInfo keyInfo = new ConsoleKeyInfo();
+
+            while (keyInfo.Key != ConsoleKey.Enter)
+            {
+                keyInfo = Console.ReadKey(true);
+            }
         }
     }
 }
