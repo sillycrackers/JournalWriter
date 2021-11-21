@@ -16,13 +16,13 @@ namespace JournalWriter.Models
         public DateTime CreationDate { get; set; }
         public  string Title { get; set; }
 
-        public  StringBuilder EntryText = new StringBuilder();
+        public  StringBuilder EntryText; 
 
 
         //-------Constructors-------//
         public Entry()
         {
-
+            EntryText = new StringBuilder();
         }
 
 
