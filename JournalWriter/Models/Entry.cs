@@ -55,6 +55,7 @@ namespace JournalWriter.Models
             SaveEntry();
         }
         public  void WriteEntry()
+
         {
             string input = "";
 
