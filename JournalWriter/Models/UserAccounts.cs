@@ -48,11 +48,10 @@ namespace JournalWriter.Controllers
 
             while (loggedIn == false)
             {
-                keyInfo = Console.ReadKey(true);
 
-                if(keyInfo.Key == ConsoleKey.Escape) { break; }
+                input = ReadLineOrEscape();
 
-                input = Console.ReadLine();
+                if(input == null) { break; }
 
                 if (CheckValidNameInput(input))
                 {
@@ -64,7 +63,6 @@ namespace JournalWriter.Controllers
 
                         while (loggedIn == false)
                         {
-
                             input = Display.GetHiddenConsoleInput();
 
                             if (CheckPasswordCorrect(userName, input))
@@ -209,6 +207,51 @@ namespace JournalWriter.Controllers
             Console.SetCursorPosition(leftPosition, topPosition);
             Console.WriteLine("Logged In: " + CurrentUser.Name);
 
+        }
+
+        // returns null if user pressed Escape, or the contents of the line if they pressed Enter.
+        
+        private string ReadLineOrEscape()
+        {
+            ConsoleKeyInfo keyInfo = new ConsoleKeyInfo();
+            StringBuilder sb = new StringBuilder();
+            int index = 0;
+
+            while (keyInfo.Key != ConsoleKey.Enter)
+            {
+                keyInfo = Console.ReadKey(true);
+
+                if (keyInfo.Key == ConsoleKey.Escape)
+                {
+                    return null;
+                }
+
+                if(keyInfo.Key == ConsoleKey.Backspace)
+                {
+                    if (index > 0)
+                    {
+                        Console.CursorLeft = index - 1;
+
+                        sb.Remove(index - 1, 1);
+
+                        Console.Write(" \b");
+
+                        index--;
+                    }
+                    
+                }
+
+                if(keyInfo.KeyChar > 32 && keyInfo.KeyChar < 127)
+                {
+                    index++;
+                    Console.Write(keyInfo.KeyChar);
+                    sb.Append(keyInfo.KeyChar);
+
+                }
+
+                
+            }
+            return sb.ToString(); ;
         }
     }
 }
