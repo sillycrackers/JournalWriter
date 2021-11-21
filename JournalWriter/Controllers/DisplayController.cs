@@ -28,7 +28,7 @@ namespace JournalWriter.Controllers
             display = new Display(JournalEntryMainHeader);
             MenuList = new List<Menu>();
             MenuList.Add(new Menu(new List<string>() { "Login", "Create New Account", "Display Current Users", "Quit" }, Menu.MenuNames.MainMenu));
-            MenuList.Add(new Menu(new List<string>() { "Create Entry", "Load Entry", "Go To Main Menu" }, Menu.MenuNames.LoginMenu));
+            MenuList.Add(new Menu(new List<string>() { "Create New Entry", "Load Past Entry", "Log Out", "Quit" }, Menu.MenuNames.LoginMenu));
             CurrentMenu = MenuList[0];
         }
 
