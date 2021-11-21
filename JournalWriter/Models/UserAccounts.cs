@@ -48,7 +48,6 @@ namespace JournalWriter.Controllers
 
             while (loggedIn == false)
             {
-
                 input = ReadLineOrEscape();
 
                 if(input == null) { break; }
@@ -209,8 +208,8 @@ namespace JournalWriter.Controllers
 
         }
 
+
         // returns null if user pressed Escape, or the contents of the line if they pressed Enter.
-        
         private string ReadLineOrEscape()
         {
             ConsoleKeyInfo keyInfo = new ConsoleKeyInfo();
@@ -246,11 +245,11 @@ namespace JournalWriter.Controllers
                     index++;
                     Console.Write(keyInfo.KeyChar);
                     sb.Append(keyInfo.KeyChar);
-
                 }
 
                 
             }
+            Console.Write('\n');
             return sb.ToString(); ;
         }
     }
