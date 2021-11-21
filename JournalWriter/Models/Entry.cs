@@ -73,7 +73,6 @@ namespace JournalWriter.Models
             }
 
         }
-
         public  void SaveEntry()
         {
             
