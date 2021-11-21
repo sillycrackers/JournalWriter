@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using JournalWriter;
 using JournalWriter.Views;
 using JournalWriter.Models;
+
 
 namespace JournalWriter.Controllers
 {
@@ -67,6 +69,7 @@ namespace JournalWriter.Controllers
                 case 1:
                     Console.Clear();
                     UserAccountController.Account.UserInputNewAccount();
+                    
                     Console.Clear();
                     break;
                 case 2:

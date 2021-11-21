@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Threading;
 using JournalWriter;
 using JournalWriter.Views;
 using JournalWriter.Models;
@@ -168,6 +169,8 @@ namespace JournalWriter.Controllers
 
             Console.WriteLine("Account created.");
 
+            Thread.Sleep(2000);
+
         }
         public bool CheckValidNameInput(string s)
         {
@@ -184,6 +187,7 @@ namespace JournalWriter.Controllers
         {
             User user = new User(_password) { Name = _name, Id = Users.Count };
             Users.Add(user);
+            FileManagement.SaveUserData(Users);
         }
         public bool CheckAccountExists(string _name)
         {

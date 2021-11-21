@@ -14,6 +14,7 @@ namespace JournalWriter.Controllers
         static UserAccountController()
         {
             Account = new UserAccounts();
+            Account.LoadUsers();
         }
 
 
@@ -22,6 +23,8 @@ namespace JournalWriter.Controllers
         {
             Account.DisplayCurrentUser(leftLocation, topLocation);
         }
+
+       
    
     }
 }
