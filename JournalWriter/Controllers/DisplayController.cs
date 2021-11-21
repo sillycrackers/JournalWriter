@@ -74,7 +74,7 @@ namespace JournalWriter.Controllers
                 case 2:
                     Console.Clear();
                     UserAccountController.Account.PrintUsers();
-                    PressEnterToProceed("go back...");
+                    PressEnterTo("go back...");
                     Console.Clear();
                     break;
                 case 3:
@@ -88,7 +88,7 @@ namespace JournalWriter.Controllers
             display.DisplayMenu(CurrentMenu);
         }
 
-        public static void PressEnterToProceed(string message)
+        public static void PressEnterTo(string message)
         {
             Console.WriteLine("\nPress Enter to " + message);
 
