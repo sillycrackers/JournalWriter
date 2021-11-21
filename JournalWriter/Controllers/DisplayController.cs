@@ -33,24 +33,25 @@ namespace JournalWriter.Controllers
 
     public static void Run()
         {
-
-            display.DisplayHeader(0);
-            display.DisplayMenu(CurrentMenu);
-
-
             while (true)
             {
-                display.DisplayUserMenuSelectionValue(CurrentMenu);
+                DisplayContents();
 
-                UserAccountController.DisplayCurrentUser(1,13);
-
-                KeyInfo = Console.ReadKey(true);
-
-                display.MenuItemSelection(CurrentMenu, KeyInfo);
-
-                if (KeyInfo.Key == ConsoleKey.Enter)
+                while (true)
                 {
-                    MainMenuSelectionEnter();
+                    display.DisplayUserMenuSelectionValue(CurrentMenu);
+
+                    UserAccountController.DisplayCurrentUser(1, 13);
+
+                    KeyInfo = Console.ReadKey(true);
+
+                    display.MenuItemSelection(CurrentMenu, KeyInfo);
+
+                    if (KeyInfo.Key == ConsoleKey.Enter)
+                    {
+                        MainMenuSelectionEnter();
+                        break;
+                    }
                 }
             }
         }
@@ -62,10 +63,12 @@ namespace JournalWriter.Controllers
                 case 0:
                     Console.Clear();
                     UserAccountController.Account.Login();
+                    Console.Clear();
                     break;
                 case 1:
                     Console.Clear();
                     UserAccountController.Account.UserInputNewAccount();
+                    Console.Clear();
                     break;
                 case 2:
                     Console.Clear();
@@ -76,6 +79,11 @@ namespace JournalWriter.Controllers
                     break;
 
             }
+        }
+        public static void DisplayContents()
+        {
+            display.DisplayHeader(0);
+            display.DisplayMenu(CurrentMenu);
         }
     }
 }

@@ -110,12 +110,14 @@ namespace JournalWriter.Controllers
             string name = "";
             string password;
 
-            Console.WriteLine("Please enter user name...");
+            Console.WriteLine("Please enter user name or press Esc to go back");
 
             //User sets Name
             while (true)
             {
-                input = Console.ReadLine();
+                input = ReadLineOrEscape();
+
+                if(input == null) { break; }
 
                 if (CheckValidNameInput(input))
                 {
@@ -134,7 +136,10 @@ namespace JournalWriter.Controllers
                 {
                     Console.WriteLine("Invalid input, try again.");
                 }
+
+                
             }
+            if (input == null) { return; }
 
             Console.WriteLine("Please enter password");
 
@@ -151,7 +156,7 @@ namespace JournalWriter.Controllers
                 }
                 else
                 {
-                    Console.WriteLine("Invalid Input, type only numbers, try again");
+                    Console.WriteLine("Invalid Input, try again");
                 }
 
             }
