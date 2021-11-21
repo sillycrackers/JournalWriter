@@ -21,7 +21,6 @@ namespace JournalWriter.Controllers
                                                       "║           Welcome To JournalWriter!           ║\n" +
                                                       "║                                               ║\n" +
                                                       "╚═══════════════════════════════════════════════╝\n\n";
-
         static DisplayController()
         {
             display = new Display(JournalEntryMainHeader);
@@ -47,7 +46,7 @@ namespace JournalWriter.Controllers
 
                     display.MenuItemSelection(CurrentMenu, KeyInfo);
 
-                    if (KeyInfo.Key == ConsoleKey.Enter)
+                    if(KeyInfo.Key == ConsoleKey.Enter)
                     {
                         MainMenuSelectionEnter();
                         break;

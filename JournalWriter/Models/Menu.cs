@@ -78,8 +78,9 @@ namespace JournalWriter.Models
 
             this.Cursor.SetCursorHomeTop(location);
 
-            this.Cursor.DisplayCursorAtHome();
+            //this.Cursor.DisplayCursorAtHome();
 
+            this.Cursor.MoveCursor();
 
             Console.CursorVisible = false;
 
