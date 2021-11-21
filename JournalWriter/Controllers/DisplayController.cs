@@ -57,6 +57,18 @@ namespace JournalWriter.Controllers
 
         public static void MainMenuSelectionEnter()
         {
+            switch (CurrentMenu.MenuName)
+            {
+                case Menu.MenuNames.MainMenu:
+                    RunMainPage();
+                    break;
+                case Menu.MenuNames.LoginMenu:
+                    RunUserPage();
+                    break;
+            }
+        }
+        public static void RunMainPage()
+        {
             switch (display.GetMenuItemSelectedValue(CurrentMenu))
             {
                 case 0:
@@ -82,6 +94,21 @@ namespace JournalWriter.Controllers
                     break;
                 case 3:
                     Environment.Exit(0);
+                    break;
+            }
+        }
+
+        public static void RunUserPage()
+        {
+            switch (display.GetMenuItemSelectedValue(CurrentMenu))
+            {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
                     break;
             }
         }
