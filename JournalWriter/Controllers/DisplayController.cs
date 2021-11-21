@@ -42,8 +42,6 @@ namespace JournalWriter.Controllers
                 {
                     display.DisplayUserMenuSelectionValue(CurrentMenu);
 
-                    UserAccountController.DisplayCurrentUser(1, 13);
-
                     KeyInfo = Console.ReadKey(true);
 
                     display.MenuItemSelection(CurrentMenu, KeyInfo);
@@ -64,7 +62,12 @@ namespace JournalWriter.Controllers
                 case 0:
                     Console.Clear();
                     UserAccountController.Account.Login();
-                    Console.Clear();
+                    if (UserAccountController.Account.loggedIn)
+                    {
+                        CurrentMenu = MenuList[MenuList.FindIndex(x => x.MenuName == Menu.MenuNames.LoginMenu)];
+                        Console.Clear();
+                        UserAccountController.DisplayCurrentUser(1, CurrentMenu.MenuCount + display.headerSize + 3);
+                    }
                     break;
                 case 1:
                     Console.Clear();

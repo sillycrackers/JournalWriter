@@ -17,7 +17,7 @@ namespace JournalWriter.Models
         }
         //-------Properties-------//
 
-        public static MenuNames MenuName { get; set; }
+        public MenuNames MenuName { get; set; }
         public Cursor Cursor { get; set; }
         public List<string> Selections { get; set;}
         public int MenuCount { get; set; }
