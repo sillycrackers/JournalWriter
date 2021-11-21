@@ -42,11 +42,16 @@ namespace JournalWriter.Controllers
             string input = "";
             string userName = "";
             loggedIn = false;
+            ConsoleKeyInfo keyInfo = new ConsoleKeyInfo();
 
             Console.WriteLine("Please enter username or press ESC to go back.");
 
             while (loggedIn == false)
             {
+                keyInfo = Console.ReadKey(true);
+
+                if(keyInfo.Key == ConsoleKey.Escape) { break; }
+
                 input = Console.ReadLine();
 
                 if (CheckValidNameInput(input))
