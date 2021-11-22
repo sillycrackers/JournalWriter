@@ -73,7 +73,7 @@ namespace JournalWriter.Models
             {
                 input = Display.ReadLineOrEscape();
 
-                if (input == null) { break; }
+                if (input == null) { return; }
 
                 if (Display.ValidNumber(input))
                 {

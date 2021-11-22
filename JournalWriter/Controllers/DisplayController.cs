@@ -41,6 +41,7 @@ namespace JournalWriter.Controllers
                 while (true)
                 {
                     display.DisplayUserMenuSelectionValue(CurrentMenu);
+                    UserAccountController.DisplayCurrentUser(1, CurrentMenu.MenuCount + display.headerSize + 3);
 
                     KeyInfo = Console.ReadKey(true);
 
@@ -77,7 +78,8 @@ namespace JournalWriter.Controllers
                     UserAccountController.Account.Login();
                     if (UserAccountController.Account.loggedIn)
                     {
-                        CurrentMenu = MenuList[MenuList.FindIndex(x => x.MenuName == Menu.MenuNames.LoginMenu)];
+                        //CurrentMenu = MenuList[MenuList.FindIndex(x => x.MenuName == Menu.MenuNames.LoginMenu)];
+                        SwitchMenu(Menu.MenuNames.LoginMenu);
                         Console.Clear();
                         UserAccountController.DisplayCurrentUser(1, CurrentMenu.MenuCount + display.headerSize + 3);
                     }
@@ -123,8 +125,15 @@ namespace JournalWriter.Controllers
                 //Logout
                 case 2:
                     Console.Clear();
+
                     UserAccountController.Account.CurrentUser = UserAccountController.Account.DefaultUser;
+                    UserAccountController.Account.loggedIn = false;
+
+
+                    SwitchMenu(Menu.MenuNames.MainMenu);
+
                     UserAccountController.DisplayCurrentUser(1, CurrentMenu.MenuCount + display.headerSize + 3);
+
                     break;
                 //Quit
                 case 3:
@@ -136,6 +145,11 @@ namespace JournalWriter.Controllers
         {
             display.DisplayHeader(0);
             display.DisplayMenu(CurrentMenu);
+        }
+
+        public static void SwitchMenu(Menu.MenuNames menu)
+        {
+            CurrentMenu = MenuList[MenuList.FindIndex(x => x.MenuName == menu)];
         }
 
     }
