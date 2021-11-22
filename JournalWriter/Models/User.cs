@@ -35,7 +35,6 @@ namespace JournalWriter.Models
             Entries = new List<Entry>();
         }
 
-
         //-------Methods-------//
         private void EncryptPassword(string pass)
         {

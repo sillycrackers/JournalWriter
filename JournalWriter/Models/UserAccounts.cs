@@ -20,6 +20,8 @@ namespace JournalWriter.Controllers
         public User CurrentUser { get; set; }
         public bool loggedIn { get; set; }
 
+        public User DefaultUser { get; set; } = new User("") { Name = "Default User" };
+
 
         //-------Constructors-------//
 
@@ -27,7 +29,8 @@ namespace JournalWriter.Controllers
         {
             Users = new List<User>();
 
-            CurrentUser = new User("") { Name = "DefaultUser" };
+            CurrentUser = new User("");
+            CurrentUser = DefaultUser;
 
             Users.Add(CurrentUser);
 

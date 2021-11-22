@@ -71,6 +71,7 @@ namespace JournalWriter.Controllers
         {
             switch (display.GetMenuItemSelectedValue(CurrentMenu))
             {
+                //Login
                 case 0:
                     Console.Clear();
                     UserAccountController.Account.Login();
@@ -81,17 +82,20 @@ namespace JournalWriter.Controllers
                         UserAccountController.DisplayCurrentUser(1, CurrentMenu.MenuCount + display.headerSize + 3);
                     }
                     break;
+                //Create new account
                 case 1:
                     Console.Clear();
                     UserAccountController.Account.UserInputNewAccount();
                     Console.Clear();
                     break;
+                //Display current users
                 case 2:
                     Console.Clear();
                     UserAccountController.Account.PrintUsers();
                     Display.PressEnterTo("go back...");
                     Console.Clear();
                     break;
+                //Exit application
                 case 3:
                     Environment.Exit(0);
                     break;
@@ -119,7 +123,8 @@ namespace JournalWriter.Controllers
                 //Logout
                 case 2:
                     Console.Clear();
-                    UserAccountController.Account.CurrentUser = null;
+                    UserAccountController.Account.CurrentUser = UserAccountController.Account.DefaultUser;
+                    UserAccountController.DisplayCurrentUser(1, CurrentMenu.MenuCount + display.headerSize + 3);
                     break;
                 //Quit
                 case 3:
