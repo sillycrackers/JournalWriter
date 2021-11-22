@@ -12,23 +12,15 @@ namespace JournalWriter.Controllers
     public static class DisplayController
     {
         public static Menu.MenuNames MenuToDisplay { get; set; }
-        public static Menu CurrentMenu {get; set;}
-        public static List<Menu> MenuList { get; set; }
         public static Display display { get; set; }
         public static ConsoleKeyInfo KeyInfo { get; set; }
-        public static ConsoleColor DefaultConsoleColor { get; set; } = ConsoleColor.Green;
 
-        public static string MainHeader = "╔═══════════════════════════════════════════════╗\n" +
-                                          "║                                               ║\n" +
-                                          "║           Welcome To JournalWriter!           ║\n" +
-                                          "║                                               ║\n" +
-                                          "╚═══════════════════════════════════════════════╝\n\n";
         static DisplayController()
         {
             display = new Display(MainHeader);
-            MenuList = new List<Menu>();
-            MenuList.Add(new Menu(new List<string>() { "Login", "Create New Account", "Display Current Users", "Quit" }, Menu.MenuNames.MainMenu));
-            MenuList.Add(new Menu(new List<string>() { "Create New Entry", "Load Past Entry", "Log Out", "Quit" }, Menu.MenuNames.LoginMenu));
+            Display.MenuList = new List<Menu>();
+            Display.MenuList.Add(new Menu(new List<string>() { "Login", "Create New Account", "Display Current Users", "Quit" }, Menu.MenuNames.MainMenu));
+            Display.MenuList.Add(new Menu(new List<string>() { "Create New Entry", "Load Past Entry", "Log Out", "Quit" }, Menu.MenuNames.LoginMenu));
             CurrentMenu = MenuList[0];
         }
 

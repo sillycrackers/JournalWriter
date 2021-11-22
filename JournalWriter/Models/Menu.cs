@@ -7,7 +7,7 @@ using JournalWriter.Controllers;
 
 namespace JournalWriter.Models
 {
-    public class Menu
+    public class Menu : IDisplayElement
     {
         //-------Enums---------//
         public enum MenuNames
@@ -22,31 +22,62 @@ namespace JournalWriter.Models
         public List<string> Selections { get; set;}
         public int MenuCount { get; set; }
 
+        //Display Element Props
+        public int Height
+        {
+            get
+            {
+                return CalculateMenuSize().Count;
+            }
+            set
+            {
+                this.Height = value;
+            }
+        }
+        public int MaxWidth {
+            get
+            {
+                return this.CalculateMaxWidth();
+            }
+            set { this.MaxWidth = value; } 
+        }
+        public int TopPosition { get; set; } = 0;
+        public int LeftPosition { get; set; } = 0;
+
 
         //-------Constructors-------//
 
         //Default constructor, which sets menu to Empty Menu if no menu selections are passed in
-        public Menu(MenuNames menuName)
+        public Menu(MenuNames menuName, int topPosition)
         {
             Selections = new List<string>() {"Empty Menu"};
             Cursor = new Cursor(CalculateMenuSize());
             MenuName = menuName;
+
+            TopPosition = topPosition;
+
         }
         /*Default constructor, which recieves the list of strings of menu selections, the default 
             console font color for setting the font color back to what it was after setting cursor color,
             and the enum of menu name, so we now which menu we are working with.
         */
-        public Menu(List<string> selections,MenuNames menuName)
-            : this(menuName)
+        public Menu(List<string> selections,MenuNames menuName, int topPosition)
+            : this(menuName, topPosition)
         {
             Selections = new List<string>(selections);
             MenuCount = CalculateMenuSize().Count;
             Cursor = new Cursor(CalculateMenuSize());
         }
 
+        public Menu(List<string> selections, MenuNames menuName, int topPosition, int leftPosition)
+    : this(menuName, topPosition)
+        {
 
-
-
+            Selections = new List<string>(selections);
+            MenuCount = CalculateMenuSize().Count;
+            Cursor = new Cursor(CalculateMenuSize());
+            LeftPosition = leftPosition;
+        }
 
         //-------Methods-------//
 
@@ -57,12 +88,34 @@ namespace JournalWriter.Models
             List<int> sizes = new List<int>();
             int i = 0;
 
+
             foreach (string s in Selections)
             {
                 sizes.Add(s.Length + 1);
                 i++;
             }
             return sizes;
+        }
+
+        public int CalculateMaxWidth()
+        {
+            int longest = 0;
+
+            foreach (string s in Selections)
+            {
+                if(Convert.ToInt32(s) > longest)
+                {
+                    longest = Convert.ToInt32(s);
+                }
+            }
+
+            return longest;
+        }
+
+        //Move cursor on menu
+        public void MenuItemSelection(ConsoleKeyInfo keyInfo)
+        {
+            Cursor.UpdatePosition(keyInfo);
         }
 
         //Method for displaying menu in console, displays at location passed in
@@ -82,6 +135,11 @@ namespace JournalWriter.Models
 
             Console.CursorVisible = false;
 
+        }
+
+        public void Draw()
+        {
+            DisplayMenu(TopPosition);
         }
     }
 }

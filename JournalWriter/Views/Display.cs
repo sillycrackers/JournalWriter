@@ -16,10 +16,17 @@ namespace JournalWriter.Views
 
         public string Header { get; set; }
         public int HeaderLocation { get; set; } = 0;
-        public int headerSize { get;  private set; }
+        public int headerSize { get; private set; }
+        public Page CurrentPage {get; set;}
+        public List<Page> Pages { get; set; }
+        public List<Menu> MenuList { get; set; }
+        public Menu CurrentMenu { get; set; }
+
+
+
+
 
         private bool hasHeader = false;
-
 
 
         //-------Constructors-------//
@@ -27,6 +34,8 @@ namespace JournalWriter.Views
         public Display()
         {
             SetupConsoleDefaults();
+            CurrentPage = new Page();
+            Pages = new List<Page>();
         }
         public Display(string header)
         :this()
@@ -47,7 +56,7 @@ namespace JournalWriter.Views
 
 
 
-        private void SetupConsoleDefaults()
+        private static void SetupConsoleDefaults()
         {
             int windowHeight = 30;
             int windowWidth = 50;
@@ -93,7 +102,7 @@ namespace JournalWriter.Views
             }
             return input.ToString();
         }
-        public int GetMenuItemSelectedValue(Menu currentMenu)
+        public int GetMenuItemSelectedValue()
         {
             return currentMenu.Cursor.Pos.TopPos;
         }
@@ -114,10 +123,6 @@ namespace JournalWriter.Views
             }
 
             return size;
-        }
-        public void MenuItemSelection(Menu currentMenu, ConsoleKeyInfo keyInfo)
-        {
-            currentMenu.Cursor.UpdatePosition(keyInfo);
         }
 
         public static bool ValidNumber(string s)
