@@ -115,8 +115,15 @@ namespace JournalWriter.Views
 
             return size;
         }
+        public void MenuItemSelection(Menu currentMenu, ConsoleKeyInfo keyInfo)
+        {
+            currentMenu.Cursor.UpdatePosition(keyInfo);
+        }
+
         public static bool ValidNumber(string s)
         {
+
+
             if (String.IsNullOrWhiteSpace(s))
             {
                 return false;
@@ -133,11 +140,59 @@ namespace JournalWriter.Views
                 return true;
             }
         }
-        public void MenuItemSelection(Menu currentMenu, ConsoleKeyInfo keyInfo)
+        public static void PressEnterTo(string message)
         {
-            currentMenu.Cursor.UpdatePosition(keyInfo);
+            Console.WriteLine("\nPress Enter to " + message);
+
+            ConsoleKeyInfo keyInfo = new ConsoleKeyInfo();
+
+            while (keyInfo.Key != ConsoleKey.Enter)
+            {
+                keyInfo = Console.ReadKey(true);
+            }
         }
 
+        // Returns null if user pressed Escape, or the contents of the line when they pressed Enter.
+        // Does not accept Spaces.
+        public static string ReadLineOrEscape()
+        {
+            ConsoleKeyInfo keyInfo = new ConsoleKeyInfo();
+            StringBuilder sb = new StringBuilder();
+            int index = 0;
+
+            while (keyInfo.Key != ConsoleKey.Enter)
+            {
+                keyInfo = Console.ReadKey(true);
+
+                if (keyInfo.Key == ConsoleKey.Escape)
+                {
+                    return null;
+                }
+
+                if (keyInfo.Key == ConsoleKey.Backspace)
+                {
+                    if (index > 0)
+                    {
+                        Console.CursorLeft = index - 1;
+
+                        sb.Remove(index - 1, 1);
+
+                        Console.Write(" \b");
+
+                        index--;
+                    }
+                }
+                //Makes sure value is inbetween Unicode values for symbols and letters only
+                if (keyInfo.KeyChar > 32 && keyInfo.KeyChar < 127)
+                {
+                    index++;
+                    Console.Write(keyInfo.KeyChar);
+                    sb.Append(keyInfo.KeyChar);
+                }
+            }
+            Console.Write('\n');
+            return sb.ToString(); ;
+        }
 
 
         //-----------Display Methods-----------//

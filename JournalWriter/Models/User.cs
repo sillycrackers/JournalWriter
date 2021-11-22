@@ -4,6 +4,8 @@ using System.Text;
 using System.Security.Cryptography;
 using JournalWriter;
 using JournalWriter.Controllers;
+using JournalWriter.Views;
+
 
 
 namespace JournalWriter.Models
@@ -70,6 +72,41 @@ namespace JournalWriter.Models
                 Entries.Add(CurrentEntry);
             }
             Console.WriteLine(Entries[0].EntryText);
+        }
+
+
+        public void DisplayEntry()
+        {
+            Console.WriteLine("Please enter number of Entry to display...");
+
+            string input = "";
+
+            while (true)
+            {
+                input = Display.ReadLineOrEscape();
+
+                if (input == null) { break; }
+
+                if (Display.ValidNumber(input))
+                {
+                    if (Convert.ToInt32(input) > Entries.Count - 1)
+                    {
+                        Console.WriteLine("Not that many entries, try again...");
+                    }
+                    else { break; }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid number try again.");
+                }
+
+            }
+
+            int inputNum = Convert.ToInt32(input);
+
+            Console.Clear();
+
+            Console.WriteLine(Entries[inputNum].EntryText);
         }
 
     }

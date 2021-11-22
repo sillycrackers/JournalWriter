@@ -24,6 +24,7 @@ namespace JournalWriter.Controllers
             Account.DisplayCurrentUser(leftLocation, topLocation);
         }
 
+
        
    
     }

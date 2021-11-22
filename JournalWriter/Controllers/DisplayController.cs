@@ -89,7 +89,7 @@ namespace JournalWriter.Controllers
                 case 2:
                     Console.Clear();
                     UserAccountController.Account.PrintUsers();
-                    PressEnterTo("go back...");
+                    Display.PressEnterTo("go back...");
                     Console.Clear();
                     break;
                 case 3:
@@ -106,12 +106,15 @@ namespace JournalWriter.Controllers
                 case 0:
                     Console.Clear();
                     UserAccountController.Account.CurrentUser.NewEntry();
+                    FileManagement.SaveUserData(UserAccountController.Account.Users);
+                    Console.Clear();
                     break;
                 //Load Past Entry
                 case 1:
                     Console.Clear();
-                    UserAccountController.Account.CurrentUser.DisplayFirstEntry();
-                    PressEnterTo("go back...");
+                    UserAccountController.Account.CurrentUser.DisplayEntry();
+                    Display.PressEnterTo("go back...");
+                    Console.Clear();
                     break;
                 //Logout
                 case 2:
@@ -130,16 +133,5 @@ namespace JournalWriter.Controllers
             display.DisplayMenu(CurrentMenu);
         }
 
-        public static void PressEnterTo(string message)
-        {
-            Console.WriteLine("\nPress Enter to " + message);
-
-            ConsoleKeyInfo keyInfo = new ConsoleKeyInfo();
-
-            while (keyInfo.Key != ConsoleKey.Enter)
-            {
-                keyInfo = Console.ReadKey(true);
-            }
-        }
     }
 }
