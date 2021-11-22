@@ -17,6 +17,18 @@ namespace JournalWriter.Models
         public DateTime CreationDate { get; set; }
         public  string Title { get; set; }
 
+        public string EntryText
+        {
+            get
+            {
+                return this._entryText.ToString();
+            }
+            set
+            {
+                this._entryText.Append(value);
+            }
+        }
+
         private StringBuilder _entryText;
 
 
@@ -93,6 +105,7 @@ namespace JournalWriter.Models
             entries.Add(this);
         }
 
+        /*
         public string GetEntryTextString()
         {
             return _entryText.ToString();
@@ -101,6 +114,6 @@ namespace JournalWriter.Models
         {
             _entryText.Append(s);
         }
-
+        */
     }
 }

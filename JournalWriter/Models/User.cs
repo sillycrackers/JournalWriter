@@ -66,10 +66,10 @@ namespace JournalWriter.Models
             if (Entries.Count == 0)
             {
                 CurrentEntry.Title = "First Entry";
-                CurrentEntry.SetEntryTextString("First Entry Default Text");
+                CurrentEntry.EntryText = "First Entry Default Text";
                 Entries.Add(CurrentEntry);
             }
-            Console.WriteLine(Entries[0].GetEntryTextString());
+            Console.WriteLine(Entries[0].EntryText);
         }
 
     }
