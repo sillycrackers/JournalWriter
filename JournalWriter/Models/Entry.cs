@@ -66,7 +66,8 @@ namespace JournalWriter.Models
             WriteEntry();
 
             SaveEntry(entries);
-        }
+
+          }
         private void WriteEntry()
         {
             string input = "";
@@ -82,6 +83,7 @@ namespace JournalWriter.Models
                     _entryText.AppendLine(input);
                 }
             }
+  
         }
 
         private bool CheckEntryExists(string name, List<Entry> Entries)
@@ -99,6 +101,7 @@ namespace JournalWriter.Models
         public void SaveEntry(List<Entry> entries)
         {
             entries.Add(this);
+            
 
         }
 

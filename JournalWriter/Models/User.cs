@@ -31,7 +31,7 @@ namespace JournalWriter.Models
         public User(string pass)
         {
             EncryptPassword(pass);
-            CurrentEntry = new Entry(){};
+            CurrentEntry = new Entry();
             Entries = new List<Entry>();
         }
 
@@ -59,25 +59,14 @@ namespace JournalWriter.Models
 
         public void NewEntry()
         {
-
+            CurrentEntry = new Entry();
             CurrentEntry.NewEntry(Entries);
+            CurrentEntry = null;
         }
-
-        public void DisplayFirstEntry()
-        {
-            if (Entries.Count == 0)
-            {
-                CurrentEntry.Title = "First Entry";
-                CurrentEntry.EntryText = "First Entry Default Text";
-                Entries.Add(CurrentEntry);
-            }
-            Console.WriteLine(Entries[0].EntryText);
-        }
-
 
         public void DisplayEntry()
         {
-            Console.WriteLine("Please enter number of Entry to display...");
+            Console.WriteLine("Please enter Entry number to display...");
 
             string input = "";
 
