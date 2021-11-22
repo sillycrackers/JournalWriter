@@ -78,7 +78,6 @@ namespace JournalWriter.Controllers
                     UserAccountController.Account.Login();
                     if (UserAccountController.Account.loggedIn)
                     {
-                        //CurrentMenu = MenuList[MenuList.FindIndex(x => x.MenuName == Menu.MenuNames.LoginMenu)];
                         SwitchMenu(Menu.MenuNames.LoginMenu);
                         Console.Clear();
                         UserAccountController.DisplayCurrentUser(1, CurrentMenu.MenuCount + display.headerSize + 3);
@@ -127,8 +126,8 @@ namespace JournalWriter.Controllers
                     Console.Clear();
 
                     UserAccountController.Account.CurrentUser = UserAccountController.Account.DefaultUser;
-                    UserAccountController.Account.loggedIn = false;
 
+                    UserAccountController.Account.loggedIn = false;
 
                     SwitchMenu(Menu.MenuNames.MainMenu);
 
