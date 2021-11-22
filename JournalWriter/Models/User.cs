@@ -15,6 +15,10 @@ namespace JournalWriter.Models
         //-------Properties-------//
         public string Name { get; set; }
         public int Id { get; set; }
+        public Entry CurrentEntry { get; set; }
+        public List<Entry> Entries { get; set; }
+
+
 
         private byte[] _encryptedPassword;
         private byte[] _entropy = new byte[20];
@@ -25,7 +29,10 @@ namespace JournalWriter.Models
         public User(string pass)
         {
             EncryptPassword(pass);
+            CurrentEntry = new Entry(){};
+            Entries = new List<Entry>();
         }
+
 
         //-------Methods-------//
         private void EncryptPassword(string pass)
@@ -46,6 +53,23 @@ namespace JournalWriter.Models
             decryptedPassword = Encoding.UTF8.GetString(ProtectedData.Unprotect(_encryptedPassword, _entropy, DataProtectionScope.CurrentUser));
 
             return decryptedPassword;
+        }
+
+        public void NewEntry()
+        {
+
+            CurrentEntry.NewEntry(Entries);
+        }
+
+        public void DisplayFirstEntry()
+        {
+            if (Entries.Count == 0)
+            {
+                CurrentEntry.Title = "First Entry";
+                CurrentEntry.SetEntryTextString("First Entry Default Text");
+                Entries.Add(CurrentEntry);
+            }
+            Console.WriteLine(Entries[0].GetEntryTextString());
         }
 
     }

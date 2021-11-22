@@ -16,8 +16,6 @@ namespace JournalWriter.Controllers
         //-------Properties-------//
         public static string RootPath { get; private set; } = Directory.GetCurrentDirectory();
         public static string ObjectDataFolderName { get; private set; } = "ObjectData";
-        public static string EntryFolder { get; private set; } = "Entries";
-        public static string EntryPath { get; private set; } = Path.Combine(RootPath, EntryFolder);
         public static string DataPath { get; private set; } = Path.Combine(RootPath, ObjectDataFolderName, "data.bin");
 
 
@@ -70,20 +68,6 @@ namespace JournalWriter.Controllers
             {
                 SaveUserData(users);
             }
-        }
-        public static void CreateEntryFile(string name, StringBuilder sb)
-        {
-            string path = Path.Combine(EntryPath, name + ".txt");
-
-            File.WriteAllText(path, sb.ToString());
-
-        }
-        public static bool CheckForEntryFile(string name)
-        {
-            string path = Path.Combine(EntryPath, name + ".txt");
-
-            return File.Exists(path);
-
         }
 
     }

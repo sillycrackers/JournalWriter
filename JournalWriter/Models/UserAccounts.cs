@@ -29,6 +29,8 @@ namespace JournalWriter.Controllers
 
             CurrentUser = new User("") { Name = "DefaultUser" };
 
+            Users.Add(CurrentUser);
+
             loggedIn = false;
 
             FileManagement.Initialize(Users);

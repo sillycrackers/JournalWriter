@@ -102,13 +102,25 @@ namespace JournalWriter.Controllers
         {
             switch (display.GetMenuItemSelectedValue(CurrentMenu))
             {
+                //Write New Entry
                 case 0:
+                    Console.Clear();
+                    UserAccountController.Account.CurrentUser.NewEntry();
                     break;
+                //Load Past Entry
                 case 1:
+                    Console.Clear();
+                    UserAccountController.Account.CurrentUser.DisplayFirstEntry();
+                    PressEnterTo("go back...");
                     break;
+                //Logout
                 case 2:
+                    Console.Clear();
+                    UserAccountController.Account.CurrentUser = null;
                     break;
+                //Quit
                 case 3:
+                    Environment.Exit(0);
                     break;
             }
         }

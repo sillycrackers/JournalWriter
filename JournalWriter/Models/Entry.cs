@@ -9,6 +9,7 @@ using JournalWriter.Controllers;
 
 namespace JournalWriter.Models
 {
+    [Serializable()]
     public class Entry
     {
 
@@ -16,19 +17,19 @@ namespace JournalWriter.Models
         public DateTime CreationDate { get; set; }
         public  string Title { get; set; }
 
-        public  StringBuilder EntryText; 
+        private StringBuilder _entryText;
 
 
         //-------Constructors-------//
         public Entry()
         {
-            EntryText = new StringBuilder();
+            _entryText = new StringBuilder(2000);
         }
 
 
 
         //-------Methods-------//
-        public void CreateEntry()
+        public void NewEntry(List<Entry> entries)
         {
             string input = "";
 
@@ -38,7 +39,7 @@ namespace JournalWriter.Models
             {
                 input = Console.ReadLine();
 
-                if (FileManagement.CheckForEntryFile(input))
+                if (CheckEntryExists(input, entries))
                 {
                     Console.WriteLine("File already exists try another name...");
                 }
@@ -52,9 +53,9 @@ namespace JournalWriter.Models
 
             WriteEntry();
 
-            SaveEntry();
+            SaveEntry(entries);
         }
-        public  void WriteEntry()
+        private void WriteEntry()
 
         {
             string input = "";
@@ -68,24 +69,38 @@ namespace JournalWriter.Models
 
                 if (input.ToLower() != "save")
                 {
-                    EntryText.AppendLine(input);
+                    _entryText.AppendLine(input);
                 }
 
             }
 
         }
-        public  void SaveEntry()
+
+        private bool CheckEntryExists(string name, List<Entry> Entries)
         {
-            
-            FileManagement.CreateEntryFile(Title, EntryText);
-            Console.Clear();
-            Console.WriteLine("Entry Created");
-
-
+            if(Entries.Contains(Entries.Find(x=> x.Title == name)))
+            {
+                return true;
+            }
+            else 
+            { 
+                return false; 
+            }
         }
 
+        public void SaveEntry(List<Entry> entries)
+        {
+            entries.Add(this);
+        }
 
-
+        public string GetEntryTextString()
+        {
+            return _entryText.ToString();
+        }
+        public void SetEntryTextString(string s)
+        {
+            _entryText.Append(s);
+        }
 
     }
 }
