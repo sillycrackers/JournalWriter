@@ -18,14 +18,14 @@ namespace JournalWriter.Controllers
         public static ConsoleKeyInfo KeyInfo { get; set; }
         public static ConsoleColor DefaultConsoleColor { get; set; } = ConsoleColor.Green;
 
-        public static string JournalEntryMainHeader = "╔═══════════════════════════════════════════════╗\n" +
-                                                      "║                                               ║\n" +
-                                                      "║           Welcome To JournalWriter!           ║\n" +
-                                                      "║                                               ║\n" +
-                                                      "╚═══════════════════════════════════════════════╝\n\n";
+        public static string MainHeader = "╔═══════════════════════════════════════════════╗\n" +
+                                          "║                                               ║\n" +
+                                          "║           Welcome To JournalWriter!           ║\n" +
+                                          "║                                               ║\n" +
+                                          "╚═══════════════════════════════════════════════╝\n\n";
         static DisplayController()
         {
-            display = new Display(JournalEntryMainHeader);
+            display = new Display(MainHeader);
             MenuList = new List<Menu>();
             MenuList.Add(new Menu(new List<string>() { "Login", "Create New Account", "Display Current Users", "Quit" }, Menu.MenuNames.MainMenu));
             MenuList.Add(new Menu(new List<string>() { "Create New Entry", "Load Past Entry", "Log Out", "Quit" }, Menu.MenuNames.LoginMenu));
