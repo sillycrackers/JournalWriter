@@ -17,17 +17,19 @@ namespace JournalWriter.Views
         public Page CurrentPage { get; set; }
         public List<Page> Pages { get; set; }
 
-        public int WindowHeight { get; set; }
-        public int WindowWidth { get; set; }
-        public int BufferHeight { get; set; }
-        public int BufferWidth { get; set; }
+        public int BufferHeight { 
+            get
+            {
+                return _bufferHeight;
+            } 
+        }
 
-        /*
-        public int windowHeight = 30;
-        public int windowWidth = 50;
-        public int bufferHeight = 30;
-        public int bufferWidth = 50;
-        */
+
+        private int _windowHeight = 30;
+        private int _windowWidth = 50;
+        private int _bufferHeight = 30;
+        private int _bufferWidth = 50;
+
 
 
         //-------Constructors-------//
@@ -35,7 +37,7 @@ namespace JournalWriter.Views
         public Display()
         {
             SetupConsoleDefaults();
-            CurrentPage = new Page("CurrentPage");
+            CurrentPage = new Page("CurrentPage", _bufferHeight);
             Pages = new List<Page>();
         }
 
@@ -46,7 +48,7 @@ namespace JournalWriter.Views
         //-----------Action Methods-----------//
         //-----Methods that perform some sort of action------//
 
-
+        
 
         private void SetupConsoleDefaults()
         {
@@ -54,8 +56,8 @@ namespace JournalWriter.Views
             Console.ForegroundColor = ConsoleColor.Green;
 
             Console.SetWindowSize(1, 1);
-            Console.SetBufferSize(BufferWidth, BufferHeight);
-            Console.SetWindowSize(WindowWidth, WindowHeight);
+            Console.SetBufferSize(_bufferWidth, _bufferHeight);
+            Console.SetWindowSize(_windowWidth, _windowHeight);
             Console.Title = "Journal Reader";
             Console.SetWindowPosition(0, 0);
             
@@ -172,7 +174,7 @@ namespace JournalWriter.Views
 
         public void DisplayUserMenuSelectionValue()
         {
-            Console.SetCursorPosition(1, headerSize + CurrentPage.CurrentMenu.MenuCount + 4);
+            Console.SetCursorPosition(1, CurrentPage.HeaderHeight + CurrentPage.CurrentMenu.MenuCount + 4);
 
             Console.WriteLine(CurrentPage.CurrentMenu.Cursor.Pos.TopPos);
         }

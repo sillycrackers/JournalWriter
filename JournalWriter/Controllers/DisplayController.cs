@@ -11,33 +11,31 @@ namespace JournalWriter.Controllers
 {
     public static class DisplayController
     {
-        public static Menu.MenuNames MenuToDisplay { get; set; }
         public static Display display { get; set; }
         public static ConsoleKeyInfo KeyInfo { get; set; }
 
         static DisplayController()
         {
-            display = new Display(MainHeader);
-            Display.MenuList = new List<Menu>();
-            Display.MenuList.Add(new Menu(new List<string>() { "Login", "Create New Account", "Display Current Users", "Quit" }, Menu.MenuNames.MainMenu));
-            Display.MenuList.Add(new Menu(new List<string>() { "Create New Entry", "Load Past Entry", "Log Out", "Quit" }, Menu.MenuNames.LoginMenu));
-            CurrentMenu = MenuList[0];
+            display = new Display();
+            SetupPages();
+
         }
 
     public static void Run()
         {
+            DrawPages();
+            Console.ReadLine();
             while (true)
             {
-                DisplayContents();
-
+                /*
                 while (true)
                 {
-                    display.DisplayUserMenuSelectionValue(CurrentMenu);
-                    UserAccountController.DisplayCurrentUser(1, CurrentMenu.MenuCount + display.headerSize + 3);
+                    //display.DisplayUserMenuSelectionValue();
+                    //UserAccountController.DisplayCurrentUser(1, display.CurrentPage.CurrentMenu.MenuCount + display.CurrentPage.HeaderHeight + 3);
 
                     KeyInfo = Console.ReadKey(true);
 
-                    display.MenuItemSelection(CurrentMenu, KeyInfo);
+                    display.CurrentPage.CurrentMenu.MenuItemSelection(KeyInfo);
 
                     if(KeyInfo.Key == ConsoleKey.Enter)
                     {
@@ -45,9 +43,38 @@ namespace JournalWriter.Controllers
                         break;
                     }
                 }
+                */
             }
         }
 
+        public static void SetupPages()
+        {
+
+            SetupMainPage();
+        }
+
+        public static void SetupMainPage()
+        {
+            //Setup Main page
+            display.Pages.Add(new Page("MainPage", display.BufferHeight));
+
+
+            var MainPage = display.Pages[0];
+
+            MainPage.MenuList.Add(new Menu("MainMenu", new List<string>() { "Login", "Create New Account", "Display Current Users", "Quit" }));
+            MainPage.CurrentMenu = MainPage.MenuList[0];
+
+            display.CurrentPage = display.Pages[0];
+
+            //var MainMenu = MainPage.MenuList[0];
+
+        }
+        public static void DrawPages()
+        {
+            display.CurrentPage.Draw();
+        }
+
+        /*
         public static void MainMenuSelectionEnter()
         {
             switch (display.CurrentPage.CurrentMenu.MenuName)
@@ -60,6 +87,7 @@ namespace JournalWriter.Controllers
                     break;
             }
         }
+        */
         public static void RunMainPage()
         {
             switch (display.GetMenuItemSelectedValue())
@@ -72,7 +100,7 @@ namespace JournalWriter.Controllers
                     {
                         //SwitchMenu(Menu.MenuNames.LoginMenu);
                         Console.Clear();
-                        UserAccountController.DisplayCurrentUser(1, display.CurrentPage.CurrentMenu.Height + display.headerSize + 3);
+                        //UserAccountController.DisplayCurrentUser(1, display.CurrentPage.CurrentMenu.Height + display.headerSize + 3);
                     }
                     break;
                 //Create new account

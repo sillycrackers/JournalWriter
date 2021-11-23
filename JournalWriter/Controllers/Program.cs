@@ -14,7 +14,6 @@ namespace JournalWriter.Controllers
         static void Main(string[] args)
         {
 
-            DisplayController.MenuToDisplay = Menu.MenuNames.MainMenu;
 
             while (true)
             {

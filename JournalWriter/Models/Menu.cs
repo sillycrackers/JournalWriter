@@ -9,15 +9,10 @@ namespace JournalWriter.Models
 {
     public class Menu : IDisplayElement
     {
-        //-------Enums---------//
-        public enum MenuNames
-        {
-            MainMenu = 0,
-            LoginMenu = 1
-        }
+
         //-------Properties-------//
 
-        public MenuNames MenuName { get; set; }
+        public string MenuName { get; set; }
         public Cursor Cursor { get; set; }
         public List<string> Selections { get; set;}
         public int MenuCount { get; set; }
@@ -48,29 +43,27 @@ namespace JournalWriter.Models
         //-------Constructors-------//
 
         //Default constructor, which sets menu to Empty Menu if no menu selections are passed in
-        public Menu(MenuNames menuName, int topPosition)
+        public Menu(string menuName)
         {
             Selections = new List<string>() {"Empty Menu"};
             Cursor = new Cursor(CalculateMenuSize());
             MenuName = menuName;
-
-            TopPosition = topPosition;
 
         }
         /*Default constructor, which recieves the list of strings of menu selections, the default 
             console font color for setting the font color back to what it was after setting cursor color,
             and the enum of menu name, so we now which menu we are working with.
         */
-        public Menu(List<string> selections,MenuNames menuName, int topPosition)
-            : this(menuName, topPosition)
+        public Menu(string menuName, List<string> selections)
+            : this(menuName)
         {
             Selections = new List<string>(selections);
             MenuCount = CalculateMenuSize().Count;
             Cursor = new Cursor(CalculateMenuSize());
         }
 
-        public Menu(List<string> selections, MenuNames menuName, int topPosition, int leftPosition)
-    : this(menuName, topPosition)
+        public Menu(string menuName, List<string> selections, int leftPosition)
+    : this(menuName)
         {
 
             Selections = new List<string>(selections);
