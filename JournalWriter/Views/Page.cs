@@ -11,7 +11,7 @@ namespace JournalWriter.Views
     public class Page : IDrawable
     {
 
-        public int HeaderWidth = 45;
+        public int HeaderWidth = 46;
         public List<Menu> MenuList { get; set; }
         public Menu CurrentMenu { get; set; }
         public List<IDisplayElement> DisplayElements{ get; set; }
@@ -74,14 +74,17 @@ namespace JournalWriter.Views
         private void GenerateHeader()
         {
             _header = _pageName;
-            _header = _header.PadLeft((HeaderWidth - _pageName.Length) / 2);
-            _header = _header.PadRight((HeaderWidth - _pageName.Length) / 2);
+            int originalLength = _header.Length;
+            int leftPadNum = (HeaderWidth / 2) + originalLength / 2;
 
-            _header = "╔═══════════════════════════════════════════════╗\n" +
-                      "║                                               ║\n"
-                                    + "║" + _header + "║" +
-                      "║                                               ║\n" +
-                      "╚═══════════════════════════════════════════════╝\n\n";
+            _header = _header.PadLeft(leftPadNum);
+            _header = _header.PadRight(HeaderWidth);
+
+            _header = "╔══════════════════════════════════════════════╗\n" +
+                      "║                                              ║\n"
+                                    + "║" + _header + "║\n" +
+                      "║                                              ║\n" +
+                      "╚══════════════════════════════════════════════╝\n\n";
         }
         private int CalculateNewBufferHeight()
         {
@@ -103,13 +106,13 @@ namespace JournalWriter.Views
             }
 
             Console.WriteLine(_header);
+
             DisplayElements[0].TopPosition = HeaderHeight + 1;
 
             foreach (IDisplayElement d in DisplayElements)
             {
                 d.Draw();
             }
-
         }
     }
 }

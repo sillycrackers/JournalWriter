@@ -47,7 +47,16 @@ namespace JournalWriter.Models
             }
             set { this.MaxWidth = value; } 
         }
-        public int TopPosition { get; set; } = 0;
+        public int TopPosition {
+            get
+            {
+                return _topPosition;
+            }
+            set
+            {
+                _topPosition = value;
+            } 
+        }
         public int LeftPosition { get; set; } = 0;
 
         private int _height;
@@ -63,8 +72,9 @@ namespace JournalWriter.Models
             Selections = new List<string>() {"Empty Menu"};
             Cursor = new Cursor(CalculateMenuSize());
             MenuName = menuName;
-            //_height = CalculateMenuSize().Count;
-            //_maxWidth = CalculateMaxWidth();
+            _height = CalculateMenuSize().Count;
+            _maxWidth = CalculateMaxWidth();
+            _topPosition = 0;
 
         }
         public Menu(string menuName, List<string> selections)
@@ -77,7 +87,6 @@ namespace JournalWriter.Models
         public Menu(string menuName, List<string> selections, int leftPosition)
     : this(menuName)
         {
-
             Selections = new List<string>(selections);
             MenuCount = CalculateMenuSize().Count;
             Cursor = new Cursor(CalculateMenuSize());
@@ -107,9 +116,9 @@ namespace JournalWriter.Models
 
             foreach (string s in Selections)
             {
-                if(Convert.ToInt32(s) > longest)
+                if(s.Length > longest)
                 {
-                    longest = Convert.ToInt32(s);
+                    longest = s.Length;
                 }
             }
 

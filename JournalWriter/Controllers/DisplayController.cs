@@ -56,7 +56,7 @@ namespace JournalWriter.Controllers
         public static void SetupMainPage()
         {
             //Setup Main page
-            display.Pages.Add(new Page("MainPage", display.BufferHeight));
+            display.Pages.Add(new Page("Testinggggggggggggggggggggggggggggggggggggggggggggg", display.BufferHeight));
 
             var MainPage = display.Pages[0];
 
