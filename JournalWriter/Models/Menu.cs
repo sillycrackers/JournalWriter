@@ -24,10 +24,7 @@ namespace JournalWriter.Models
             {
                 return CalculateMenuSize().Count;
             }
-            set
-            {
-                this.Height = value;
-            }
+            private set { }
         }
         public int MaxWidth {
             get

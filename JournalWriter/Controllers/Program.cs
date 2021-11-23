@@ -14,7 +14,6 @@ namespace JournalWriter.Controllers
         static void Main(string[] args)
         {
 
-
             while (true)
             {
                 DisplayController.Run();

@@ -102,7 +102,7 @@ namespace JournalWriter.Views
             }
 
             Console.WriteLine(_header);
-            DisplayElements[0].Height = HeaderHeight + 1;
+            DisplayElements[0].TopPosition = HeaderHeight + 1;
 
             foreach (IDisplayElement d in DisplayElements)
             {
