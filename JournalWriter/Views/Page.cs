@@ -45,6 +45,7 @@ namespace JournalWriter.Views
         public Page(string pageName,int initialBufferHeight)
         {
             DisplayElements = new List<IDisplayElement>();
+
             CurrentMenu = new Menu("Default Menu");
             MenuList = new List<Menu>();
             _initialBufferHeight = initialBufferHeight;

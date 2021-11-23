@@ -26,6 +26,9 @@ namespace JournalWriter.Models
             }
             set
             {
+
+                _height = value;
+                /*
                 if (value > CalculateMenuSize().Count)
                 {
                     _height = value;
@@ -34,6 +37,7 @@ namespace JournalWriter.Models
                 {
                     throw new Exception("New height value smaller than size of menu.");
                 }
+                */
             }
         }
         public int MaxWidth {
@@ -59,8 +63,8 @@ namespace JournalWriter.Models
             Selections = new List<string>() {"Empty Menu"};
             Cursor = new Cursor(CalculateMenuSize());
             MenuName = menuName;
-            _height = CalculateMenuSize().Count;
-            _maxWidth = CalculateMaxWidth();
+            //_height = CalculateMenuSize().Count;
+            //_maxWidth = CalculateMaxWidth();
 
         }
         public Menu(string menuName, List<string> selections)
