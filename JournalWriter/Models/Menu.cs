@@ -24,7 +24,6 @@ namespace JournalWriter.Models
             {
                 return CalculateMenuSize().Count;
             }
-            private set { }
         }
         public int MaxWidth {
             get
@@ -36,21 +35,23 @@ namespace JournalWriter.Models
         public int TopPosition { get; set; } = 0;
         public int LeftPosition { get; set; } = 0;
 
+        private int _height;
+        private int _maxWidth;
+        private int _topPosition;
+        private int _leftPosition;
+
 
         //-------Constructors-------//
 
-        //Default constructor, which sets menu to Empty Menu if no menu selections are passed in
         public Menu(string menuName)
         {
             Selections = new List<string>() {"Empty Menu"};
             Cursor = new Cursor(CalculateMenuSize());
             MenuName = menuName;
+            _height = CalculateMenuSize().Count;
+            _maxWidth = CalculateMaxWidth();
 
         }
-        /*Default constructor, which recieves the list of strings of menu selections, the default 
-            console font color for setting the font color back to what it was after setting cursor color,
-            and the enum of menu name, so we now which menu we are working with.
-        */
         public Menu(string menuName, List<string> selections)
             : this(menuName)
         {
@@ -58,7 +59,6 @@ namespace JournalWriter.Models
             MenuCount = CalculateMenuSize().Count;
             Cursor = new Cursor(CalculateMenuSize());
         }
-
         public Menu(string menuName, List<string> selections, int leftPosition)
     : this(menuName)
         {
@@ -86,7 +86,6 @@ namespace JournalWriter.Models
             }
             return sizes;
         }
-
         public int CalculateMaxWidth()
         {
             int longest = 0;
@@ -101,7 +100,6 @@ namespace JournalWriter.Models
 
             return longest;
         }
-
         //Move cursor on menu
         public void MenuItemSelection(ConsoleKeyInfo keyInfo)
         {
@@ -129,7 +127,7 @@ namespace JournalWriter.Models
 
         public void Draw()
         {
-            DisplayMenu(TopPosition);
+            DisplayMenu(_topPosition);
         }
     }
 }
