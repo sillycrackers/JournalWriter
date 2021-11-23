@@ -58,11 +58,12 @@ namespace JournalWriter.Controllers
             //Setup Main page
             display.Pages.Add(new Page("MainPage", display.BufferHeight));
 
-
             var MainPage = display.Pages[0];
 
             MainPage.MenuList.Add(new Menu("MainMenu", new List<string>() { "Login", "Create New Account", "Display Current Users", "Quit" }));
             MainPage.CurrentMenu = MainPage.MenuList[0];
+            MainPage.DisplayElements.Add(MainPage.CurrentMenu);
+
 
             display.CurrentPage = display.Pages[0];
 
@@ -71,7 +72,7 @@ namespace JournalWriter.Controllers
         }
         public static void DrawPages()
         {
-            display.CurrentPage.Draw();
+            display.CurrentPage.DrawElements();
         }
 
         /*

@@ -14,6 +14,7 @@ namespace JournalWriter.Views
         public int HeaderWidth = 45;
         public List<Menu> MenuList { get; set; }
         public Menu CurrentMenu { get; set; }
+        public List<IDisplayElement> DisplayElements{ get; set; }
         public string PageName { 
             get 
             {
@@ -38,11 +39,12 @@ namespace JournalWriter.Views
         private StringBuilder _headerBuilder;
         private int _initialBufferHeight = 0;
         private int _pageBufferHeight = 0;
-        private List<IDisplayElement> _displayElements = new List<IDisplayElement>();
+
 
         //Constructor
         public Page(string pageName,int initialBufferHeight)
         {
+            DisplayElements = new List<IDisplayElement>();
             CurrentMenu = new Menu("Default Menu");
             MenuList = new List<Menu>();
             _initialBufferHeight = initialBufferHeight;
@@ -84,7 +86,7 @@ namespace JournalWriter.Views
         {
             int height = 0;
 
-            foreach(IDisplayElement d in _displayElements)
+            foreach(IDisplayElement d in DisplayElements)
             {
                 height += d.Height;
             }
@@ -92,7 +94,7 @@ namespace JournalWriter.Views
             return height;
         }
 
-        public void Draw()
+        public void DrawElements()
         {
             if(CalculateNewBufferHeight() > _initialBufferHeight)
             {
@@ -100,8 +102,13 @@ namespace JournalWriter.Views
             }
 
             Console.WriteLine(_header);
-            CurrentMenu.TopPosition = HeaderHeight + 1;
-            CurrentMenu.Draw();
+            DisplayElements[0].Height = HeaderHeight + 1;
+
+            foreach (IDisplayElement d in DisplayElements)
+            {
+                d.Draw();
+            }
+
         }
     }
 }
