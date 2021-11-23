@@ -6,10 +6,10 @@ namespace JournalWriter.Models
 {
     public interface IDisplayElement
     {
-        int Height { get; }
-        int MaxWidth { get; }
-        int TopPosition { get; }
-        int LeftPosition { get; }
+        int Height { get; set; }
+        int MaxWidth { get; set; }
+        int TopPosition { get; set; }
+        int LeftPosition { get; set; }
 
         void Draw() 
         { 
