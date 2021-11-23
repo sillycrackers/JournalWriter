@@ -14,19 +14,20 @@ namespace JournalWriter.Views
 
         //-------Properties-------//
 
-        public string Header { get; set; }
-        public int HeaderLocation { get; set; } = 0;
-        public int headerSize { get; private set; }
-        public Page CurrentPage {get; set;}
+        public Page CurrentPage { get; set; }
         public List<Page> Pages { get; set; }
-        public List<Menu> MenuList { get; set; }
-        public Menu CurrentMenu { get; set; }
 
+        public int WindowHeight { get; set; }
+        public int WindowWidth { get; set; }
+        public int BufferHeight { get; set; }
+        public int BufferWidth { get; set; }
 
-
-
-
-        private bool hasHeader = false;
+        /*
+        public int windowHeight = 30;
+        public int windowWidth = 50;
+        public int bufferHeight = 30;
+        public int bufferWidth = 50;
+        */
 
 
         //-------Constructors-------//
@@ -34,44 +35,28 @@ namespace JournalWriter.Views
         public Display()
         {
             SetupConsoleDefaults();
-            CurrentPage = new Page();
+            CurrentPage = new Page("CurrentPage");
             Pages = new List<Page>();
-        }
-        public Display(string header)
-        :this()
-        {
-            Header = header;
-            hasHeader = true;
-            headerSize = CalculateHeaderSize() + HeaderLocation;
         }
 
 
 
         //-------Methods-------//
 
-
-
         //-----------Action Methods-----------//
         //-----Methods that perform some sort of action------//
 
 
 
-        private static void SetupConsoleDefaults()
+        private void SetupConsoleDefaults()
         {
-            int windowHeight = 30;
-            int windowWidth = 50;
-            int bufferHeight = 30;
-            int bufferWidth = 50;
-
+           
             Console.ForegroundColor = ConsoleColor.Green;
 
             Console.SetWindowSize(1, 1);
-            Console.SetBufferSize(bufferWidth, bufferHeight);
-            Console.SetWindowSize(windowWidth, windowHeight);
-
+            Console.SetBufferSize(BufferWidth, BufferHeight);
+            Console.SetWindowSize(WindowWidth, WindowHeight);
             Console.Title = "Journal Reader";
-
-
             Console.SetWindowPosition(0, 0);
             
         }
@@ -104,25 +89,7 @@ namespace JournalWriter.Views
         }
         public int GetMenuItemSelectedValue()
         {
-            return currentMenu.Cursor.Pos.TopPos;
-        }
-        private int CalculateHeaderSize()
-        {
-            int index = 0;
-            int size = 0;
-
-            if (hasHeader == true)
-            {
-                foreach (char c in Header)
-                {
-                    if (c == '\n')
-                    {
-                        size++;
-                    }
-                }
-            }
-
-            return size;
+            return CurrentPage.CurrentMenu.Cursor.Pos.TopPos;
         }
 
         public static bool ValidNumber(string s)
@@ -203,22 +170,12 @@ namespace JournalWriter.Views
         //-----------Display Methods-----------//
         //-----Methods that just display information on Console------//
 
+        public void DisplayUserMenuSelectionValue()
+        {
+            Console.SetCursorPosition(1, headerSize + CurrentPage.CurrentMenu.MenuCount + 4);
 
-        public void DisplayMenu(Menu currentMenu)
-        {
-            currentMenu.DisplayMenu(HeaderLocation + headerSize);
+            Console.WriteLine(CurrentPage.CurrentMenu.Cursor.Pos.TopPos);
         }
-        public void DisplayUserMenuSelectionValue(Menu currentMenu)
-        {
-            Console.SetCursorPosition(1, headerSize + currentMenu.MenuCount + 4);
 
-            Console.WriteLine(currentMenu.Cursor.Pos.TopPos);
-        }
-        public void DisplayHeader(int location)
-        {
-            Console.SetCursorPosition(0, location);
-            Console.WriteLine(Header);
-            HeaderLocation = location;
-        }
     }
 }

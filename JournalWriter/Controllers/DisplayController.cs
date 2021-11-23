@@ -50,7 +50,7 @@ namespace JournalWriter.Controllers
 
         public static void MainMenuSelectionEnter()
         {
-            switch (CurrentMenu.MenuName)
+            switch (display.CurrentPage.CurrentMenu.MenuName)
             {
                 case Menu.MenuNames.MainMenu:
                     RunMainPage();
@@ -62,7 +62,7 @@ namespace JournalWriter.Controllers
         }
         public static void RunMainPage()
         {
-            switch (display.GetMenuItemSelectedValue(CurrentMenu))
+            switch (display.GetMenuItemSelectedValue())
             {
                 //Login
                 case 0:
@@ -70,9 +70,9 @@ namespace JournalWriter.Controllers
                     UserAccountController.Account.Login();
                     if (UserAccountController.Account.loggedIn)
                     {
-                        SwitchMenu(Menu.MenuNames.LoginMenu);
+                        //SwitchMenu(Menu.MenuNames.LoginMenu);
                         Console.Clear();
-                        UserAccountController.DisplayCurrentUser(1, CurrentMenu.MenuCount + display.headerSize + 3);
+                        UserAccountController.DisplayCurrentUser(1, display.CurrentPage.CurrentMenu.Height + display.headerSize + 3);
                     }
                     break;
                 //Create new account
@@ -97,7 +97,7 @@ namespace JournalWriter.Controllers
 
         public static void RunUserPage()
         {
-            switch (display.GetMenuItemSelectedValue(CurrentMenu))
+            switch (display.GetMenuItemSelectedValue())
             {
                 //Write New Entry
                 case 0:
@@ -121,9 +121,9 @@ namespace JournalWriter.Controllers
 
                     UserAccountController.Account.loggedIn = false;
 
-                    SwitchMenu(Menu.MenuNames.MainMenu);
+                    //SwitchMenu(Menu.MenuNames.MainMenu);
 
-                    UserAccountController.DisplayCurrentUser(1, CurrentMenu.MenuCount + display.headerSize + 3);
+                    //UserAccountController.DisplayCurrentUser(1, CurrentMenu.MenuCount + display.headerSize + 3);
 
                     break;
                 //Quit
@@ -132,16 +132,7 @@ namespace JournalWriter.Controllers
                     break;
             }
         }
-        public static void DisplayContents()
-        {
-            display.DisplayHeader(0);
-            display.DisplayMenu(CurrentMenu);
-        }
 
-        public static void SwitchMenu(Menu.MenuNames menu)
-        {
-            CurrentMenu = MenuList[MenuList.FindIndex(x => x.MenuName == menu)];
-        }
 
     }
 }
