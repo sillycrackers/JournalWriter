@@ -38,8 +38,6 @@ namespace JournalWriter.Models
             _entryText = new StringBuilder(2000);
         }
 
-
-
         //-------Methods-------//
         public void NewEntry(List<Entry> entries)
         {
