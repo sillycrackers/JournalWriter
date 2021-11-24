@@ -7,46 +7,91 @@ using JournalWriter.Controllers;
 
 namespace JournalWriter.Models
 {
-    public class Menu
+    public class Menu : IDisplayElement, IDrawable
     {
-        //-------Enums---------//
-        public enum MenuNames
-        {
-            MainMenu = 0,
-            LoginMenu = 1
-        }
+
         //-------Properties-------//
 
-        public MenuNames MenuName { get; set; }
+        public string MenuName { get; set; }
         public Cursor Cursor { get; set; }
         public List<string> Selections { get; set;}
         public int MenuCount { get; set; }
 
+        //Display Element Props
+        public int Height
+        {
+            get
+            {
+                return CalculateMenuSize().Count;
+            }
+            set
+            {
+
+                _height = value;
+                /*
+                if (value > CalculateMenuSize().Count)
+                {
+                    _height = value;
+                }
+                else
+                {
+                    throw new Exception("New height value smaller than size of menu.");
+                }
+                */
+            }
+        }
+        public int MaxWidth {
+            get
+            {
+                return this.CalculateMaxWidth();
+            }
+            set { this.MaxWidth = value; } 
+        }
+        public int TopPosition {
+            get
+            {
+                return _topPosition;
+            }
+            set
+            {
+                _topPosition = value;
+            } 
+        }
+        public int LeftPosition { get; set; } = 0;
+
+        private int _height;
+        private int _maxWidth;
+        private int _topPosition;
+        private int _leftPosition;
+
 
         //-------Constructors-------//
 
-        //Default constructor, which sets menu to Empty Menu if no menu selections are passed in
-        public Menu(MenuNames menuName)
+        public Menu(string menuName)
         {
             Selections = new List<string>() {"Empty Menu"};
             Cursor = new Cursor(CalculateMenuSize());
             MenuName = menuName;
+            _height = CalculateMenuSize().Count;
+            _maxWidth = CalculateMaxWidth();
+            _topPosition = 0;
+
         }
-        /*Default constructor, which recieves the list of strings of menu selections, the default 
-            console font color for setting the font color back to what it was after setting cursor color,
-            and the enum of menu name, so we now which menu we are working with.
-        */
-        public Menu(List<string> selections,MenuNames menuName)
+        public Menu(string menuName, List<string> selections)
             : this(menuName)
         {
             Selections = new List<string>(selections);
             MenuCount = CalculateMenuSize().Count;
             Cursor = new Cursor(CalculateMenuSize());
         }
-
-
-
-
+        public Menu(string menuName, List<string> selections, int leftPosition)
+    : this(menuName)
+        {
+            Selections = new List<string>(selections);
+            MenuCount = CalculateMenuSize().Count;
+            Cursor = new Cursor(CalculateMenuSize());
+            LeftPosition = leftPosition;
+        }
 
         //-------Methods-------//
 
@@ -57,12 +102,32 @@ namespace JournalWriter.Models
             List<int> sizes = new List<int>();
             int i = 0;
 
+
             foreach (string s in Selections)
             {
                 sizes.Add(s.Length + 1);
                 i++;
             }
             return sizes;
+        }
+        public int CalculateMaxWidth()
+        {
+            int longest = 0;
+
+            foreach (string s in Selections)
+            {
+                if(s.Length > longest)
+                {
+                    longest = s.Length;
+                }
+            }
+
+            return longest;
+        }
+        //Move cursor on menu
+        public void MenuItemSelection(ConsoleKeyInfo keyInfo)
+        {
+            Cursor.UpdatePosition(keyInfo);
         }
 
         //Method for displaying menu in console, displays at location passed in
@@ -76,12 +141,16 @@ namespace JournalWriter.Models
                 Console.WriteLine(" " + s);
             }
 
-            this.Cursor.SetCursorHomeTop(location);
+            Cursor.SetCursorHomeTop(location);
 
-            this.Cursor.MoveCursor();
+            Cursor.MoveCursor();
 
             Console.CursorVisible = false;
+        }
 
+        public void Draw()
+        {
+            DisplayMenu(_topPosition);
         }
     }
 }

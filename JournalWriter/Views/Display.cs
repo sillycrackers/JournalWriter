@@ -14,11 +14,21 @@ namespace JournalWriter.Views
 
         //-------Properties-------//
 
-        public string Header { get; set; }
-        public int HeaderLocation { get; set; } = 0;
-        public int headerSize { get;  private set; }
+        public Page CurrentPage { get; set; }
+        public List<Page> Pages { get; set; }
 
-        private bool hasHeader = false;
+        public int BufferHeight { 
+            get
+            {
+                return _bufferHeight;
+            } 
+        }
+
+
+        private int _windowHeight = 30;
+        private int _windowWidth = 50;
+        private int _bufferHeight = 30;
+        private int _bufferWidth = 50;
 
 
 
@@ -27,42 +37,28 @@ namespace JournalWriter.Views
         public Display()
         {
             SetupConsoleDefaults();
-        }
-        public Display(string header)
-        :this()
-        {
-            Header = header;
-            hasHeader = true;
-            headerSize = CalculateHeaderSize() + HeaderLocation;
+            CurrentPage = new Page("CurrentPage", _bufferHeight);
+            Pages = new List<Page>();
         }
 
 
 
         //-------Methods-------//
 
-
-
         //-----------Action Methods-----------//
         //-----Methods that perform some sort of action------//
 
-
+        
 
         private void SetupConsoleDefaults()
         {
-            int windowHeight = 30;
-            int windowWidth = 50;
-            int bufferHeight = 30;
-            int bufferWidth = 50;
-
+           
             Console.ForegroundColor = ConsoleColor.Green;
 
             Console.SetWindowSize(1, 1);
-            Console.SetBufferSize(bufferWidth, bufferHeight);
-            Console.SetWindowSize(windowWidth, windowHeight);
-
+            Console.SetBufferSize(_bufferWidth, _bufferHeight);
+            Console.SetWindowSize(_windowWidth, _windowHeight);
             Console.Title = "Journal Reader";
-
-
             Console.SetWindowPosition(0, 0);
             
         }
@@ -92,32 +88,6 @@ namespace JournalWriter.Views
                 }
             }
             return input.ToString();
-        }
-        public int GetMenuItemSelectedValue(Menu currentMenu)
-        {
-            return currentMenu.Cursor.Pos.TopPos;
-        }
-        private int CalculateHeaderSize()
-        {
-            int index = 0;
-            int size = 0;
-
-            if (hasHeader == true)
-            {
-                foreach (char c in Header)
-                {
-                    if (c == '\n')
-                    {
-                        size++;
-                    }
-                }
-            }
-
-            return size;
-        }
-        public void MenuItemSelection(Menu currentMenu, ConsoleKeyInfo keyInfo)
-        {
-            currentMenu.Cursor.UpdatePosition(keyInfo);
         }
 
         public static bool ValidNumber(string s)
@@ -198,22 +168,12 @@ namespace JournalWriter.Views
         //-----------Display Methods-----------//
         //-----Methods that just display information on Console------//
 
+        public void DisplayUserMenuSelectionValue()
+        {
+            Console.SetCursorPosition(1, CurrentPage.HeaderHeight + CurrentPage.CurrentMenu.MenuCount + 4);
 
-        public void DisplayMenu(Menu currentMenu)
-        {
-            currentMenu.DisplayMenu(HeaderLocation + headerSize);
+            Console.WriteLine(CurrentPage.CurrentMenu.Cursor.TopPos);
         }
-        public void DisplayUserMenuSelectionValue(Menu currentMenu)
-        {
-            Console.SetCursorPosition(1, headerSize + currentMenu.MenuCount + 4);
 
-            Console.WriteLine(currentMenu.Cursor.Pos.TopPos);
-        }
-        public void DisplayHeader(int location)
-        {
-            Console.SetCursorPosition(0, location);
-            Console.WriteLine(Header);
-            HeaderLocation = location;
-        }
     }
 }

@@ -11,66 +11,120 @@ namespace JournalWriter.Controllers
 {
     public static class DisplayController
     {
-        public static Menu.MenuNames MenuToDisplay { get; set; }
-        public static Menu CurrentMenu {get; set;}
-        public static List<Menu> MenuList { get; set; }
         public static Display display { get; set; }
         public static ConsoleKeyInfo KeyInfo { get; set; }
-        public static ConsoleColor DefaultConsoleColor { get; set; } = ConsoleColor.Green;
 
-        public static string MainHeader = "╔═══════════════════════════════════════════════╗\n" +
-                                          "║                                               ║\n" +
-                                          "║           Welcome To JournalWriter!           ║\n" +
-                                          "║                                               ║\n" +
-                                          "╚═══════════════════════════════════════════════╝\n\n";
         static DisplayController()
         {
-            display = new Display(MainHeader);
-            MenuList = new List<Menu>();
-            MenuList.Add(new Menu(new List<string>() { "Login", "Create New Account", "Display Current Users", "Quit" }, Menu.MenuNames.MainMenu));
-            MenuList.Add(new Menu(new List<string>() { "Create New Entry", "Load Past Entry", "Log Out", "Quit" }, Menu.MenuNames.LoginMenu));
-            CurrentMenu = MenuList[0];
+            display = new Display();
+            SetupPages();
+            display.CurrentPage = display.Pages[0];
+
         }
 
     public static void Run()
         {
             while (true)
             {
-                DisplayContents();
+                DrawPage();
+
 
                 while (true)
                 {
-                    display.DisplayUserMenuSelectionValue(CurrentMenu);
-                    UserAccountController.DisplayCurrentUser(1, CurrentMenu.MenuCount + display.headerSize + 3);
+                    display.DisplayUserMenuSelectionValue();
+                    //UserAccountController.DisplayCurrentUser(1, display.CurrentPage.CurrentMenu.MenuCount + display.CurrentPage.HeaderHeight + 3);
 
                     KeyInfo = Console.ReadKey(true);
 
-                    display.MenuItemSelection(CurrentMenu, KeyInfo);
+                    display.CurrentPage.CurrentMenu.MenuItemSelection(KeyInfo);
 
-                    if(KeyInfo.Key == ConsoleKey.Enter)
+                    if (KeyInfo.Key == ConsoleKey.Enter)
                     {
                         MainMenuSelectionEnter();
                         break;
                     }
                 }
             }
+            
         }
 
+        public static void SetupPages()
+        {
+            SetupMainPage();
+            SetupLoginPage();
+        }
+        public static void SetupMainPage()
+        {
+            //Setup Main page
+
+            try
+            {
+                display.Pages.Add(new Page("Journal Writer", display.BufferHeight));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+
+                Console.ReadLine();
+                throw;
+            }
+
+            var MainPage = display.Pages[0];
+
+            MainPage.MenuList.Add(new Menu("MainMenu", new List<string>() { "Login", "Create New Account", "Display Current Users", "Quit" }));
+            MainPage.CurrentMenu = MainPage.MenuList[0];
+            MainPage.DisplayElements.Add(MainPage.CurrentMenu);
+
+
+            
+
+
+        }
+        public static void SetupLoginPage()
+        {
+            //Setup Login page
+
+            try
+            {
+                display.Pages.Add(new Page("Login Page", display.BufferHeight));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+
+                Console.ReadLine();
+                throw;
+            }
+
+            var LoginPage = display.Pages[1];
+
+            LoginPage.MenuList.Add(new Menu("LoginMenu", new List<string>() { "Write New Entry", "Display Past Entry", "Logout", "Quit" }));
+            LoginPage.CurrentMenu = LoginPage.MenuList[0];
+            LoginPage.DisplayElements.Add(LoginPage.CurrentMenu);
+
+        }
+        public static void DrawPage()
+        {
+            display.CurrentPage.DrawElements();
+        }
+
+       
         public static void MainMenuSelectionEnter()
         {
-            switch (CurrentMenu.MenuName)
+            switch (display.CurrentPage.CurrentMenu.MenuName)
             {
-                case Menu.MenuNames.MainMenu:
+                case "MainMenu":
                     RunMainPage();
                     break;
-                case Menu.MenuNames.LoginMenu:
+                case "LoginMenu":
                     RunUserPage();
                     break;
             }
         }
+        
         public static void RunMainPage()
         {
-            switch (display.GetMenuItemSelectedValue(CurrentMenu))
+            switch (display.CurrentPage.GetMenuItemSelectedValue())
             {
                 //Login
                 case 0:
@@ -78,9 +132,9 @@ namespace JournalWriter.Controllers
                     UserAccountController.Account.Login();
                     if (UserAccountController.Account.loggedIn)
                     {
-                        SwitchMenu(Menu.MenuNames.LoginMenu);
+                        display.CurrentPage = display.Pages[1];
                         Console.Clear();
-                        UserAccountController.DisplayCurrentUser(1, CurrentMenu.MenuCount + display.headerSize + 3);
+                        UserAccountController.DisplayCurrentUser(1, display.CurrentPage.CurrentMenu.Height + display.CurrentPage.HeaderHeight + 3);
                     }
                     break;
                 //Create new account
@@ -105,7 +159,7 @@ namespace JournalWriter.Controllers
 
         public static void RunUserPage()
         {
-            switch (display.GetMenuItemSelectedValue(CurrentMenu))
+            switch (display.CurrentPage.GetMenuItemSelectedValue())
             {
                 //Write New Entry
                 case 0:
@@ -129,9 +183,7 @@ namespace JournalWriter.Controllers
 
                     UserAccountController.Account.loggedIn = false;
 
-                    SwitchMenu(Menu.MenuNames.MainMenu);
-
-                    UserAccountController.DisplayCurrentUser(1, CurrentMenu.MenuCount + display.headerSize + 3);
+                    display.CurrentPage = display.Pages[0];
 
                     break;
                 //Quit
@@ -140,16 +192,7 @@ namespace JournalWriter.Controllers
                     break;
             }
         }
-        public static void DisplayContents()
-        {
-            display.DisplayHeader(0);
-            display.DisplayMenu(CurrentMenu);
-        }
 
-        public static void SwitchMenu(Menu.MenuNames menu)
-        {
-            CurrentMenu = MenuList[MenuList.FindIndex(x => x.MenuName == menu)];
-        }
 
     }
 }
