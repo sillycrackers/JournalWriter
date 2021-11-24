@@ -8,7 +8,7 @@ using System.Text;
 namespace JournalWriter.Views
 {
 
-    public class Page : IDrawable
+    public class Page
     {
 
         public int HeaderWidth = 46;
@@ -20,7 +20,7 @@ namespace JournalWriter.Views
             {
                 return _pageName;
             }
-            set 
+            private set 
             {
                 if(value.Length > HeaderWidth)
                 {
@@ -71,6 +71,10 @@ namespace JournalWriter.Views
                 }
             return size;
         }
+        public int GetMenuItemSelectedValue()
+        {
+            return CurrentMenu.Cursor.TopPos;
+        }
         private void GenerateHeader()
         {
             _header = _pageName;
@@ -105,11 +109,13 @@ namespace JournalWriter.Views
                 Console.BufferHeight = CalculateNewBufferHeight();
             }
 
+            Console.SetCursorPosition(0, 0);
+
             Console.WriteLine(_header);
 
             DisplayElements[0].TopPosition = HeaderHeight + 1;
 
-            foreach (IDisplayElement d in DisplayElements)
+            foreach (IDrawable d in DisplayElements)
             {
                 d.Draw();
             }

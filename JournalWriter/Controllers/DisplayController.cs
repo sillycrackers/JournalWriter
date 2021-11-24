@@ -18,45 +18,56 @@ namespace JournalWriter.Controllers
         {
             display = new Display();
             SetupPages();
+            display.CurrentPage = display.Pages[0];
 
         }
 
     public static void Run()
         {
-            DrawPages();
-            Console.ReadLine();
             while (true)
             {
-                /*
+                DrawPage();
+
+
                 while (true)
                 {
-                    //display.DisplayUserMenuSelectionValue();
+                    display.DisplayUserMenuSelectionValue();
                     //UserAccountController.DisplayCurrentUser(1, display.CurrentPage.CurrentMenu.MenuCount + display.CurrentPage.HeaderHeight + 3);
 
                     KeyInfo = Console.ReadKey(true);
 
                     display.CurrentPage.CurrentMenu.MenuItemSelection(KeyInfo);
 
-                    if(KeyInfo.Key == ConsoleKey.Enter)
+                    if (KeyInfo.Key == ConsoleKey.Enter)
                     {
                         MainMenuSelectionEnter();
                         break;
                     }
                 }
-                */
             }
+            
         }
 
         public static void SetupPages()
         {
-
             SetupMainPage();
+            SetupLoginPage();
         }
-
         public static void SetupMainPage()
         {
             //Setup Main page
-            display.Pages.Add(new Page("Testinggggggggggggggggggggggggggggggggggggggggggggg", display.BufferHeight));
+
+            try
+            {
+                display.Pages.Add(new Page("Journal Writer", display.BufferHeight));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+
+                Console.ReadLine();
+                throw;
+            }
 
             var MainPage = display.Pages[0];
 
@@ -65,33 +76,55 @@ namespace JournalWriter.Controllers
             MainPage.DisplayElements.Add(MainPage.CurrentMenu);
 
 
-            display.CurrentPage = display.Pages[0];
+            
 
-            //var MainMenu = MainPage.MenuList[0];
 
         }
-        public static void DrawPages()
+        public static void SetupLoginPage()
+        {
+            //Setup Login page
+
+            try
+            {
+                display.Pages.Add(new Page("Login Page", display.BufferHeight));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+
+                Console.ReadLine();
+                throw;
+            }
+
+            var LoginPage = display.Pages[1];
+
+            LoginPage.MenuList.Add(new Menu("LoginMenu", new List<string>() { "Write New Entry", "Display Past Entry", "Logout", "Quit" }));
+            LoginPage.CurrentMenu = LoginPage.MenuList[0];
+            LoginPage.DisplayElements.Add(LoginPage.CurrentMenu);
+
+        }
+        public static void DrawPage()
         {
             display.CurrentPage.DrawElements();
         }
 
-        /*
+       
         public static void MainMenuSelectionEnter()
         {
             switch (display.CurrentPage.CurrentMenu.MenuName)
             {
-                case Menu.MenuNames.MainMenu:
+                case "MainMenu":
                     RunMainPage();
                     break;
-                case Menu.MenuNames.LoginMenu:
+                case "LoginMenu":
                     RunUserPage();
                     break;
             }
         }
-        */
+        
         public static void RunMainPage()
         {
-            switch (display.GetMenuItemSelectedValue())
+            switch (display.CurrentPage.GetMenuItemSelectedValue())
             {
                 //Login
                 case 0:
@@ -99,9 +132,9 @@ namespace JournalWriter.Controllers
                     UserAccountController.Account.Login();
                     if (UserAccountController.Account.loggedIn)
                     {
-                        //SwitchMenu(Menu.MenuNames.LoginMenu);
+                        display.CurrentPage = display.Pages[1];
                         Console.Clear();
-                        //UserAccountController.DisplayCurrentUser(1, display.CurrentPage.CurrentMenu.Height + display.headerSize + 3);
+                        UserAccountController.DisplayCurrentUser(1, display.CurrentPage.CurrentMenu.Height + display.CurrentPage.HeaderHeight + 3);
                     }
                     break;
                 //Create new account
@@ -126,7 +159,7 @@ namespace JournalWriter.Controllers
 
         public static void RunUserPage()
         {
-            switch (display.GetMenuItemSelectedValue())
+            switch (display.CurrentPage.GetMenuItemSelectedValue())
             {
                 //Write New Entry
                 case 0:
@@ -150,9 +183,7 @@ namespace JournalWriter.Controllers
 
                     UserAccountController.Account.loggedIn = false;
 
-                    //SwitchMenu(Menu.MenuNames.MainMenu);
-
-                    //UserAccountController.DisplayCurrentUser(1, CurrentMenu.MenuCount + display.headerSize + 3);
+                    display.CurrentPage = display.Pages[0];
 
                     break;
                 //Quit

@@ -7,7 +7,7 @@ using JournalWriter.Controllers;
 
 namespace JournalWriter.Models
 {
-    public class Menu : IDisplayElement
+    public class Menu : IDisplayElement, IDrawable
     {
 
         //-------Properties-------//
@@ -141,12 +141,11 @@ namespace JournalWriter.Models
                 Console.WriteLine(" " + s);
             }
 
-            this.Cursor.SetCursorHomeTop(location);
+            Cursor.SetCursorHomeTop(location);
 
-            this.Cursor.MoveCursor();
+            Cursor.MoveCursor();
 
             Console.CursorVisible = false;
-
         }
 
         public void Draw()

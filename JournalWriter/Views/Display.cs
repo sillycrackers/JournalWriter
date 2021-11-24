@@ -89,10 +89,6 @@ namespace JournalWriter.Views
             }
             return input.ToString();
         }
-        public int GetMenuItemSelectedValue()
-        {
-            return CurrentPage.CurrentMenu.Cursor.Pos.TopPos;
-        }
 
         public static bool ValidNumber(string s)
         {
@@ -176,7 +172,7 @@ namespace JournalWriter.Views
         {
             Console.SetCursorPosition(1, CurrentPage.HeaderHeight + CurrentPage.CurrentMenu.MenuCount + 4);
 
-            Console.WriteLine(CurrentPage.CurrentMenu.Cursor.Pos.TopPos);
+            Console.WriteLine(CurrentPage.CurrentMenu.Cursor.TopPos);
         }
 
     }

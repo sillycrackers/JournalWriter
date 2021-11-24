@@ -11,7 +11,7 @@ using JournalWriter.Controllers;
 namespace JournalWriter.Models
 {
     [Serializable()]
-    public class Entry : IDisplayElement
+    public class Entry : IDisplayElement, IDrawable
     {
 
         //-------Properties-------//
@@ -21,29 +21,20 @@ namespace JournalWriter.Models
         {
             get
             {
-                return this._entryText.ToString();
+                return _entryText.ToString();
             }
-            set
-            {
-                this._entryText.Append(value);
-            }
+            set{}
         }
 
         public int Height 
         { 
             get { return _height; }
-            set 
-            {
-                _height = value; 
-            } 
+            set{} 
         }
         public int MaxWidth 
         { 
             get { return _maxWidth; } 
-            set 
-            { 
-                _maxWidth = value; 
-            } 
+            set{} 
         }
         public int TopPosition 
         {
@@ -104,19 +95,18 @@ namespace JournalWriter.Models
         public void SaveEntry(List<Entry> entries)
         {
             entries.Add(this);
-
-
         }
-
         private void WriteEntry()
         {
             string input = "";
+            int bufferHeight = Console.BufferHeight;
 
             Console.WriteLine("Please create entry, type \"save\" to save and quit.");
 
             while (input.ToLower() != "save")
             {
                 input = Console.ReadLine();
+
 
                 if (input.ToLower() != "save")
                 {
@@ -125,7 +115,6 @@ namespace JournalWriter.Models
                 }
             }
         }
-
         private bool CheckEntryExists(string name, List<Entry> Entries)
         {
             if(Entries.Contains(Entries.Find(x=> x.Title == name)))
@@ -138,5 +127,9 @@ namespace JournalWriter.Models
             }
         }
 
+        public void Draw()
+        {
+
+        }
     }
 }

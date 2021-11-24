@@ -6,7 +6,6 @@ namespace JournalWriter.Models
 {
     public interface IDrawable
     {
-
-       public void DrawElements();
+        void Draw();
     }
 }

@@ -11,10 +11,6 @@ namespace JournalWriter.Models
         int TopPosition { get; set; }
         int LeftPosition { get; set; }
 
-        void Draw() 
-        { 
-
-        }
 
     }
 }
