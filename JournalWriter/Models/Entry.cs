@@ -87,6 +87,8 @@ namespace JournalWriter.Models
 
             WriteEntry();
 
+            CreationDate = DateTime.Now;
+
             SaveEntry(entries);
 
           }
@@ -112,6 +114,7 @@ namespace JournalWriter.Models
                     _height++;
                 }
             }
+
         }
         private bool CheckEntryExists(string name, List<Entry> Entries)
         {

@@ -36,6 +36,8 @@ namespace JournalWriter.Views
 
         private string _pageName;
         private string _header;
+        private string _headerSubstring1;
+        private string _headerSubstring2;
         private StringBuilder _headerBuilder;
         private int _initialBufferHeight = 0;
         private int _pageBufferHeight = 0;
@@ -75,6 +77,7 @@ namespace JournalWriter.Views
         {
             return CurrentMenu.Cursor.TopPos;
         }
+
         private void GenerateHeader()
         {
             _header = _pageName;
@@ -111,7 +114,11 @@ namespace JournalWriter.Views
 
             Console.SetCursorPosition(0, 0);
 
+            Console.ForegroundColor = ConsoleColor.Cyan;
+
             Console.WriteLine(_header);
+
+            Console.ResetColor();
 
             DisplayElements[0].TopPosition = HeaderHeight + 1;
 
