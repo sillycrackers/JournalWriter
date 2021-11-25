@@ -130,7 +130,13 @@ namespace JournalWriter.Models
 
         public void Draw()
         {
-
+            if (_height > Console.BufferHeight)
+            {
+                Console.BufferHeight = _height + 3;
+            }
+            Console.WriteLine(this);
         }
+
+
     }
 }

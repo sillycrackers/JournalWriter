@@ -55,14 +55,12 @@ namespace JournalWriter.Models
 
             return decryptedPassword;
         }
-
         public void NewEntry()
         {
             CurrentEntry = new Entry();
             CurrentEntry.NewEntry(Entries);
             CurrentEntry = null;
         }
-
         public void DisplayEntry()
         {
             Console.WriteLine("Please enter Entry number to display...");

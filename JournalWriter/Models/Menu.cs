@@ -93,7 +93,6 @@ namespace JournalWriter.Models
             List<int> sizes = new List<int>();
             int i = 0;
 
-
             foreach (string s in Selections)
             {
                 sizes.Add(s.Length + 1);

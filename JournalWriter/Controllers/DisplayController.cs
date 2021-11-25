@@ -137,6 +137,8 @@ namespace JournalWriter.Controllers
             PastEntries.CurrentMenu = PastEntries.MenuList[0];
 
             PastEntries.DisplayElements.Add(PastEntries.CurrentMenu);
+
+            
         }
         public static List<string> PopulatePastEntriesMenu(Page pastEntries)
         {
@@ -263,13 +265,11 @@ namespace JournalWriter.Controllers
 
             selectedValue = display.CurrentPage.GetMenuItemSelectedValue();
 
-            Console.WriteLine(UserAccountController.Account.CurrentUser.Entries[selectedValue].EntryText);
+            UserAccountController.Account.CurrentUser.Entries[selectedValue].Draw();
 
             Display.PressEnterTo("go back...");
 
             Console.Clear();
-
         }
-
     }
 }
