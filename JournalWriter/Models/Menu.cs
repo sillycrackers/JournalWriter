@@ -28,16 +28,7 @@ namespace JournalWriter.Models
             {
 
                 _height = value;
-                /*
-                if (value > CalculateMenuSize().Count)
-                {
-                    _height = value;
-                }
-                else
-                {
-                    throw new Exception("New height value smaller than size of menu.");
-                }
-                */
+
             }
         }
         public int MaxWidth {

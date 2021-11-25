@@ -32,7 +32,7 @@ namespace JournalWriter.Controllers
                 while (true)
                 {
                     display.DisplayUserMenuSelectionValue();
-                    //UserAccountController.DisplayCurrentUser(1, display.CurrentPage.CurrentMenu.MenuCount + display.CurrentPage.HeaderHeight + 3);
+                    UserAccountController.DisplayCurrentUser(1, display.CurrentPage.CurrentMenu.MenuCount + display.CurrentPage.HeaderHeight + 3);
 
                     KeyInfo = Console.ReadKey(true);
 
@@ -40,7 +40,13 @@ namespace JournalWriter.Controllers
 
                     if (KeyInfo.Key == ConsoleKey.Enter)
                     {
-                        MainMenuSelectionEnter();
+                        display.PreviousPage = display.CurrentPage;
+                        MenuSelectionEnter();
+                        break;
+                    }else if(KeyInfo.Key == ConsoleKey.Escape)
+                    {
+                        Console.Clear();
+                        display.CurrentPage = display.PreviousPage;
                         break;
                     }
                 }
@@ -48,10 +54,14 @@ namespace JournalWriter.Controllers
             
         }
 
+
+        //-----------Setup Pages and Menus---------------//
+
         public static void SetupPages()
         {
             SetupMainPage();
             SetupLoginPage();
+            SetupPastEntriesPage();
         }
         public static void SetupMainPage()
         {
@@ -103,11 +113,9 @@ namespace JournalWriter.Controllers
             LoginPage.DisplayElements.Add(LoginPage.CurrentMenu);
 
         }
-
         public static void SetupPastEntriesPage()
         {
             //Setup Past Entries page
-
             try
             {
                 display.Pages.Add(new Page("Past Entries", display.BufferHeight));
@@ -119,21 +127,37 @@ namespace JournalWriter.Controllers
                 Console.ReadLine();
                 throw;
             }
-
-            var PastEntries = display.Pages[1];
-
-            LoginPage.MenuList.Add(new Menu("LoginMenu", new List<string>() { "Write New Entry", "Display Past Entry", "Logout", "Quit" }));
-            LoginPage.CurrentMenu = LoginPage.MenuList[0];
-            LoginPage.DisplayElements.Add(LoginPage.CurrentMenu);
-
         }
+        public static void SetupPastEntriesMenu()
+        {
+            var PastEntries = display.Pages[2];
+
+            PastEntries.MenuList.Add(new Menu("PastEntriesMenu",PopulatePastEntriesMenu(PastEntries)));
+
+            PastEntries.CurrentMenu = PastEntries.MenuList[0];
+
+            PastEntries.DisplayElements.Add(PastEntries.CurrentMenu);
+        }
+        public static List<string> PopulatePastEntriesMenu(Page pastEntries)
+        {
+            List<string> s = new List<string>();
+
+            foreach (Entry e in UserAccountController.Account.CurrentUser.Entries)
+            {
+                s.Add(e.Title);
+            }
+            return s;
+        }
+
+
+        //Draw out all elements of that page
         public static void DrawPage()
         {
             display.CurrentPage.DrawElements();
         }
 
        
-        public static void MainMenuSelectionEnter()
+        public static void MenuSelectionEnter()
         {
             switch (display.CurrentPage.CurrentMenu.MenuName)
             {
@@ -142,6 +166,9 @@ namespace JournalWriter.Controllers
                     break;
                 case "LoginMenu":
                     RunUserPage();
+                    break;
+                case "PastEntriesMenu":
+                    RunPastEntriesPage();
                     break;
             }
         }
@@ -180,7 +207,6 @@ namespace JournalWriter.Controllers
                     break;
             }
         }
-
         public static void RunUserPage()
         {
             switch (display.CurrentPage.GetMenuItemSelectedValue())
@@ -195,9 +221,22 @@ namespace JournalWriter.Controllers
                 //Load Past Entry
                 case 1:
                     Console.Clear();
-                    UserAccountController.Account.CurrentUser.DisplayEntry();
+
+                    if(UserAccountController.Account.CurrentUser.Entries.Count == 0)
+                    {
+                        Console.WriteLine("You have no entries yet.");
+                    }
+                    else
+                    {
+                        SetupPastEntriesMenu();
+                        display.CurrentPage = display.Pages[display.Pages.FindIndex(x=> x.PageName == "Past Entries")];
+                        break;
+                    }
+
                     Display.PressEnterTo("go back...");
+                    
                     Console.Clear();
+                    
                     break;
                 //Logout
                 case 2:
@@ -216,7 +255,21 @@ namespace JournalWriter.Controllers
                     break;
             }
         }
+        public static void RunPastEntriesPage()
+        {
+            Console.Clear();
 
+            int selectedValue;
+
+            selectedValue = display.CurrentPage.GetMenuItemSelectedValue();
+
+            Console.WriteLine(UserAccountController.Account.CurrentUser.Entries[selectedValue].EntryText);
+
+            Display.PressEnterTo("go back...");
+
+            Console.Clear();
+
+        }
 
     }
 }

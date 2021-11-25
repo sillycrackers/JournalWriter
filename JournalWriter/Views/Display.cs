@@ -15,6 +15,7 @@ namespace JournalWriter.Views
         //-------Properties-------//
 
         public Page CurrentPage { get; set; }
+        public Page PreviousPage { get; set; }
         public List<Page> Pages { get; set; }
 
         public int BufferHeight { 
@@ -38,6 +39,7 @@ namespace JournalWriter.Views
         {
             SetupConsoleDefaults();
             CurrentPage = new Page("CurrentPage", _bufferHeight);
+            PreviousPage = new Page("PreviousPage", _bufferHeight);
             Pages = new List<Page>();
         }
 
@@ -47,8 +49,6 @@ namespace JournalWriter.Views
 
         //-----------Action Methods-----------//
         //-----Methods that perform some sort of action------//
-
-        
 
         private void SetupConsoleDefaults()
         {
@@ -168,6 +168,7 @@ namespace JournalWriter.Views
         //-----------Display Methods-----------//
         //-----Methods that just display information on Console------//
 
+        //This method just display value of current item selected for debugging purposes
         public void DisplayUserMenuSelectionValue()
         {
             Console.SetCursorPosition(1, CurrentPage.HeaderHeight + CurrentPage.CurrentMenu.MenuCount + 4);
