@@ -39,6 +39,7 @@ namespace JournalWriter.Controllers
 
                 while (true)
                 {
+                    //Erik sdofajiasdof
                     display.DisplayUserMenuSelectionValue();
                     UserAccountController.DisplayCurrentUser(1, display.CurrentPage.CurrentMenu.MenuCount + display.CurrentPage.HeaderHeight + 3);
 

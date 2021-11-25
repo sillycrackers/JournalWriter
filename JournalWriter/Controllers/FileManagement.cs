@@ -20,6 +20,7 @@ namespace JournalWriter.Controllers
 
 
         //-------Methods-------//
+
         public static void SaveUserData(List<User> users)
         {
 
