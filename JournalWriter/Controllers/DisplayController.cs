@@ -132,7 +132,7 @@ namespace JournalWriter.Controllers
         {
             var PastEntries = display.Pages[2];
 
-            PastEntries.MenuList.Add(new Menu("PastEntriesMenu",PopulatePastEntriesMenu(PastEntries)));
+            PastEntries.MenuList.Add(new Menu("PastEntriesMenu", PopulatePastEntriesMenu(PastEntries)));
 
             PastEntries.CurrentMenu = PastEntries.MenuList[0];
 
@@ -156,7 +156,6 @@ namespace JournalWriter.Controllers
             display.CurrentPage.DrawElements();
         }
 
-       
         public static void MenuSelectionEnter()
         {
             switch (display.CurrentPage.CurrentMenu.MenuName)
