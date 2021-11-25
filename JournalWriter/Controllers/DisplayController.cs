@@ -115,7 +115,6 @@ namespace JournalWriter.Controllers
         public static void SetupLoginPage()
         {
             //Setup Login page
-
             try
             {
                 display.Pages.Add(new Page("Login Page", display.BufferHeight));
@@ -123,7 +122,6 @@ namespace JournalWriter.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine(ex.StackTrace);
-
                 Console.ReadLine();
                 throw;
             }

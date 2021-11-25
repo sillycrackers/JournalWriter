@@ -28,8 +28,8 @@ namespace JournalWriter.Models
 
         public int Height 
         { 
-            get { return _height; }
-            set{} 
+            get { return CalculateHeight(); }
+            set{ Height = value; } 
         }
         public int MaxWidth 
         { 
@@ -47,7 +47,6 @@ namespace JournalWriter.Models
         public int LeftPosition { get { return _leftPosition; } set { _leftPosition = value; } } 
 
         private StringBuilder _entryText;
-        private int _height = 0;
         private int _maxWidth = 0;
         private int _topPosition = 0;
         private int _leftPosition = 0;
@@ -111,10 +110,23 @@ namespace JournalWriter.Models
                 if (input.ToLower() != "save")
                 {
                     _entryText.AppendLine(input);
-                    _height++;
+                   
                 }
             }
 
+        }
+        private int CalculateHeight()
+        {
+            int newHeight = 0;
+            int bufferWidth = Console.BufferWidth;
+            int entryLength = _entryText.ToString().Length;
+
+            if (bufferWidth > 0)
+            {
+                newHeight = entryLength / bufferWidth;
+            }
+
+            return newHeight;
         }
         private bool CheckEntryExists(string name, List<Entry> Entries)
         {
@@ -130,11 +142,11 @@ namespace JournalWriter.Models
 
         public void Draw()
         {
-            if (_height > Console.BufferHeight)
+            if (Height > Console.BufferHeight)
             {
-                Console.BufferHeight = _height + 3;
+                Console.BufferHeight = Height + 3;
             }
-            Console.WriteLine(this);
+            Console.WriteLine(_entryText);
         }
 
 
