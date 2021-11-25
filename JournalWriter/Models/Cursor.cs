@@ -74,7 +74,7 @@ namespace JournalWriter.Models
             Console.ForegroundColor = ConsoleColor.White;
             Console.SetCursorPosition(HomePosLeft, HomePosTop);
             Console.Write(Symbol);
-            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Green;
         }
 
         public void SetCursorHomeTop(int topPos)

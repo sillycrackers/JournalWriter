@@ -14,6 +14,7 @@ namespace JournalWriter.Views
 
         public Page CurrentPage { get; set; }
         public Page PreviousPage { get; set; }
+        public PageQueue PagesQueue { get; set; }
         public List<Page> Pages { get; set; }
 
         public int BufferHeight { 
@@ -36,8 +37,7 @@ namespace JournalWriter.Views
             CurrentPage = new Page("CurrentPage", _bufferHeight);
             PreviousPage = new Page("PreviousPage", _bufferHeight);
             Pages = new List<Page>();
-        }
-
+        } 
         //-------Methods-------//
 
         //-----------Action Methods-----------//
@@ -55,7 +55,6 @@ namespace JournalWriter.Views
             Console.SetWindowPosition(0, 0);
             
         }
-
         //Method for password entry displaying only ****
         public static string GetHiddenConsoleInput()
         {
@@ -85,8 +84,6 @@ namespace JournalWriter.Views
 
         public static bool ValidNumber(string s)
         {
-
-
             if (String.IsNullOrWhiteSpace(s))
             {
                 return false;
@@ -156,7 +153,6 @@ namespace JournalWriter.Views
             Console.Write('\n');
             return sb.ToString(); ;
         }
-
 
         //-----------Display Methods-----------//
         //-----Methods that just display information on Console------//

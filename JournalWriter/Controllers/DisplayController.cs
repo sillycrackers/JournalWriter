@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using JournalWriter;
 using JournalWriter.Views;
 using JournalWriter.Models;
+using JournalWriter.Structs;
 
 
 namespace JournalWriter.Controllers
@@ -13,9 +14,16 @@ namespace JournalWriter.Controllers
     {
         public static Display display { get; set; }
         public static ConsoleKeyInfo KeyInfo { get; set; }
+        public static PageNames pageNames { get; set; }
+        public static MenuNames menuNames { get; set; }
 
         static DisplayController()
         {
+
+            SetupPageNames();
+            SetupMenuNames();
+
+
             display = new Display();
             SetupPages();
             display.CurrentPage = display.Pages[0];
@@ -45,6 +53,7 @@ namespace JournalWriter.Controllers
                         break;
                     }else if(KeyInfo.Key == ConsoleKey.Escape)
                     {
+                        if(display.CurrentPage != display.Pages[display.Pages.FindIndex(x => x.PageName == pageNames.MainPage)])
                         Console.Clear();
                         display.CurrentPage = display.PreviousPage;
                         break;
@@ -56,7 +65,24 @@ namespace JournalWriter.Controllers
 
 
         //-----------Setup Pages and Menus---------------//
-
+        private static void SetupPageNames()
+        {
+            pageNames = new PageNames()
+            {
+                MainPage = "Journal Writer",
+                LoginPage = "Login Page",
+                PastEntriesPage = "Past Entries"
+            };
+        }
+        private static void SetupMenuNames()
+        {
+            menuNames = new MenuNames()
+            {
+                MainMenu = "MainMenu",
+                LoginMenu = "LoginMenu",
+                PastEntriesMenu = "PastEntriesMenu"
+            };
+        }
         public static void SetupPages()
         {
             SetupMainPage();
@@ -69,7 +95,7 @@ namespace JournalWriter.Controllers
 
             try
             {
-                display.Pages.Add(new Page("Journal Writer", display.BufferHeight));
+                display.Pages.Add(new Page(pageNames.MainPage, display.BufferHeight));
             }
             catch (Exception ex)
             {
@@ -84,10 +110,6 @@ namespace JournalWriter.Controllers
             MainPage.MenuList.Add(new Menu("MainMenu", new List<string>() { "Login", "Create New Account", "Display Current Users", "Quit" }));
             MainPage.CurrentMenu = MainPage.MenuList[0];
             MainPage.DisplayElements.Add(MainPage.CurrentMenu);
-
-
-            
-
 
         }
         public static void SetupLoginPage()
@@ -118,7 +140,7 @@ namespace JournalWriter.Controllers
             //Setup Past Entries page
             try
             {
-                display.Pages.Add(new Page("Past Entries", display.BufferHeight));
+                display.Pages.Add(new Page(pageNames.PastEntriesPage, display.BufferHeight));
             }
             catch (Exception ex)
             {
@@ -151,13 +173,11 @@ namespace JournalWriter.Controllers
             return s;
         }
 
-
         //Draw out all elements of that page
         public static void DrawPage()
         {
             display.CurrentPage.DrawElements();
         }
-
         public static void MenuSelectionEnter()
         {
             switch (display.CurrentPage.CurrentMenu.MenuName)
