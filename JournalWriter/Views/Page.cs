@@ -42,7 +42,6 @@ namespace JournalWriter.Views
         private int _initialBufferHeight = 0;
         private int _pageBufferHeight = 0;
 
-
         //Constructor
         public Page(string pageName,int initialBufferHeight)
         {

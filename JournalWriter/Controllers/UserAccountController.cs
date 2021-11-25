@@ -9,7 +9,6 @@ namespace JournalWriter.Controllers
         //-------Properties-------//
         public static UserAccounts Account { get; private set; }
 
-
         //-------Constructors-------//
         static UserAccountController()
         {
@@ -17,15 +16,11 @@ namespace JournalWriter.Controllers
             Account.LoadUsers();
         }
 
-
         //-------Methods-------//
         public static void DisplayCurrentUser(int leftLocation, int topLocation)
         {
             Account.DisplayCurrentUser(leftLocation, topLocation);
         }
 
-
-       
-   
     }
 }

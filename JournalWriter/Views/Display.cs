@@ -10,8 +10,6 @@ namespace JournalWriter.Views
 {
     public class Display
     {
-
-
         //-------Properties-------//
 
         public Page CurrentPage { get; set; }
@@ -25,13 +23,10 @@ namespace JournalWriter.Views
             } 
         }
 
-
         private int _windowHeight = 30;
         private int _windowWidth = 50;
         private int _bufferHeight = 30;
         private int _bufferWidth = 50;
-
-
 
         //-------Constructors-------//
 
@@ -42,8 +37,6 @@ namespace JournalWriter.Views
             PreviousPage = new Page("PreviousPage", _bufferHeight);
             Pages = new List<Page>();
         }
-
-
 
         //-------Methods-------//
 
