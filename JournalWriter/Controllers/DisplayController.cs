@@ -103,6 +103,30 @@ namespace JournalWriter.Controllers
             LoginPage.DisplayElements.Add(LoginPage.CurrentMenu);
 
         }
+
+        public static void SetupPastEntriesPage()
+        {
+            //Setup Past Entries page
+
+            try
+            {
+                display.Pages.Add(new Page("Past Entries", display.BufferHeight));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+
+                Console.ReadLine();
+                throw;
+            }
+
+            var PastEntries = display.Pages[1];
+
+            LoginPage.MenuList.Add(new Menu("LoginMenu", new List<string>() { "Write New Entry", "Display Past Entry", "Logout", "Quit" }));
+            LoginPage.CurrentMenu = LoginPage.MenuList[0];
+            LoginPage.DisplayElements.Add(LoginPage.CurrentMenu);
+
+        }
         public static void DrawPage()
         {
             display.CurrentPage.DrawElements();
