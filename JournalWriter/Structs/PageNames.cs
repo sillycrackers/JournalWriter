@@ -6,10 +6,8 @@ namespace JournalWriter.Structs
 {
     public struct PageNames
     {
-        public string MainPage { get; set; }
-
-        public string LoginPage { get; set; }
-
-        public string PastEntriesPage { get; set; }
+        public const string MainPage = "Journal Writer";
+        public const string LoginPage = "Login Page";
+        public const string PastEntriesPage = "Past Entries Page";
     }
 }

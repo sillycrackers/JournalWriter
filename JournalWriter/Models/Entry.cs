@@ -62,6 +62,8 @@ namespace JournalWriter.Models
         //-------Methods-------//
         public void NewEntry(List<Entry> entries)
         {
+            Console.CursorVisible = true;
+
             _entryText.Clear();
 
             string input = "";

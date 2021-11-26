@@ -10,7 +10,6 @@ namespace JournalWriter.Views
 
     public class Page
     {
-
         public int HeaderWidth = 46;
         public List<Menu> MenuList { get; set; }
         public Menu CurrentMenu { get; set; }
@@ -36,20 +35,15 @@ namespace JournalWriter.Views
 
         private string _pageName;
         private string _header;
-        private string _headerSubstring1;
-        private string _headerSubstring2;
-        private StringBuilder _headerBuilder;
-        private int _initialBufferHeight = 0;
-        private int _pageBufferHeight = 0;
+
 
         //Constructor
-        public Page(string pageName,int initialBufferHeight)
+        public Page(string pageName)
         {
             DisplayElements = new List<IDisplayElement>();
 
             CurrentMenu = new Menu("Default Menu");
             MenuList = new List<Menu>();
-            _initialBufferHeight = initialBufferHeight;
             PageName = pageName;
             GenerateHeader();
             HeaderHeight = CalculateHeaderSize();
@@ -92,7 +86,7 @@ namespace JournalWriter.Views
                       "║                                              ║\n" +
                       "╚══════════════════════════════════════════════╝\n\n";
         }
-        private int CalculateNewBufferHeight()
+        public int CalculateElementsHeight()
         {
             int height = 0;
 
@@ -106,9 +100,9 @@ namespace JournalWriter.Views
 
         public void DrawElements()
         {
-            if(CalculateNewBufferHeight() > _initialBufferHeight)
+            if(CalculateElementsHeight() > Console.BufferHeight)
             {
-                Console.BufferHeight = CalculateNewBufferHeight();
+                Console.BufferHeight = CalculateElementsHeight();
             }
 
             Console.SetCursorPosition(0, 0);

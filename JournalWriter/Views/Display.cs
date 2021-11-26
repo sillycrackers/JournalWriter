@@ -13,16 +13,9 @@ namespace JournalWriter.Views
         //-------Properties-------//
 
         public Page CurrentPage { get; set; }
-        public Page PreviousPage { get; set; }
         public PageQueue PagesQueue { get; set; }
         public List<Page> Pages { get; set; }
 
-        public int BufferHeight { 
-            get
-            {
-                return _bufferHeight;
-            } 
-        }
 
         private int _windowHeight = 30;
         private int _windowWidth = 50;
@@ -33,13 +26,13 @@ namespace JournalWriter.Views
 
         public Display()
         {
+            PagesQueue = new PageQueue();
             SetupConsoleDefaults();
-            CurrentPage = new Page("CurrentPage", _bufferHeight);
-            PreviousPage = new Page("PreviousPage", _bufferHeight);
+            CurrentPage = new Page("CurrentPage");
             Pages = new List<Page>();
         } 
         //-------Methods-------//
-
+    
         //-----------Action Methods-----------//
         //-----Methods that perform some sort of action------//
 
