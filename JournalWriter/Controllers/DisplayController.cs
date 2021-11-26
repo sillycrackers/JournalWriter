@@ -21,8 +21,10 @@ namespace JournalWriter.Controllers
         {
             PageNames pageNames = new PageNames();
             MenuNames menuNames = new MenuNames();
-            SetupPages();
+            
+
             display = new Display();
+            SetupPages();
             display.CurrentPage = display.Pages[0];
         }
 
@@ -75,11 +77,18 @@ namespace JournalWriter.Controllers
         }
         public static void SetupMainPage()
         {
+
             //Setup Main page
 
             try
             {
-                display.Pages.Add(new Page("test"));
+                display.Pages.Add(new Page(PageNames.MainPage));
+
+                var MainPage = display.Pages[0];
+
+                MainPage.MenuList.Add(new Menu(MenuNames.MainMenu, new List<string>(MenuNames.MainMenuItems)));
+                MainPage.CurrentMenu = MainPage.MenuList[0];
+                MainPage.DisplayElements.Add(MainPage.CurrentMenu);
             }
             catch (Exception ex)
             {
@@ -88,12 +97,6 @@ namespace JournalWriter.Controllers
                 Console.ReadLine();
                 throw;
             }
-
-            var MainPage = display.Pages[0];
-
-            MainPage.MenuList.Add(new Menu(MenuNames.MainMenu, new List<string>(MenuNames.MainMenuItems)));
-            MainPage.CurrentMenu = MainPage.MenuList[0];
-            MainPage.DisplayElements.Add(MainPage.CurrentMenu);
 
         }
         public static void SetupLoginPage()
@@ -102,6 +105,12 @@ namespace JournalWriter.Controllers
             try
             {
                 display.Pages.Add(new Page(PageNames.LoginPage));
+
+                var LoginPage = display.Pages[1];
+
+                LoginPage.MenuList.Add(new Menu(MenuNames.LoginMenu, new List<string>(MenuNames.LoginMenuItems)));
+                LoginPage.CurrentMenu = LoginPage.MenuList[0];
+                LoginPage.DisplayElements.Add(LoginPage.CurrentMenu);
             }
             catch (Exception ex)
             {
@@ -110,11 +119,6 @@ namespace JournalWriter.Controllers
                 throw;
             }
 
-            var LoginPage = display.Pages[1];
-
-            LoginPage.MenuList.Add(new Menu(MenuNames.LoginMenu, new List<string>(MenuNames.LoginMenuItems)));
-            LoginPage.CurrentMenu = LoginPage.MenuList[0];
-            LoginPage.DisplayElements.Add(LoginPage.CurrentMenu);
 
         }
         public static void SetupPastEntriesPage()
@@ -134,15 +138,24 @@ namespace JournalWriter.Controllers
         }
         public static void SetupPastEntriesMenu()
         {
-            var PastEntries = display.Pages[2];
+            try
+            {
+                var PastEntries = display.Pages[2];
 
-            PastEntries.MenuList.Add(new Menu(MenuNames.PastEntriesMenu, PopulatePastEntriesMenu(PastEntries)));
+                PastEntries.MenuList.Add(new Menu(MenuNames.PastEntriesMenu, PopulatePastEntriesMenu(PastEntries)));
 
-            PastEntries.CurrentMenu = PastEntries.MenuList[0];
+                PastEntries.CurrentMenu = PastEntries.MenuList[0];
 
-            PastEntries.DisplayElements.Add(PastEntries.CurrentMenu);
+                PastEntries.DisplayElements.Add(PastEntries.CurrentMenu);
 
-            
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+
+                Console.ReadLine();
+                throw;
+            }
         }
         public static List<string> PopulatePastEntriesMenu(Page pastEntries)
         {
