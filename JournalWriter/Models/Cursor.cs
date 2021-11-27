@@ -42,8 +42,6 @@ namespace JournalWriter.Models
 
             Console.SetCursorPosition(LeftPos + 1, TopPos + HomePosTop);
 
-            int x = 0;
-
             if (_keyInfo.Key == ConsoleKey.DownArrow)
             {
                 MoveDown();
