@@ -12,6 +12,7 @@ namespace JournalWriter.Models
         public PageQueue()
         {
             stack = new List<Page>();
+            stack.Add(new Page("EmptyPage"));
         }
 
         public void Push(Page p)
@@ -20,11 +21,14 @@ namespace JournalWriter.Models
         }
         public Page Pop()
         {
-            Page _p = stack[stack.Count - 1];
 
             stack.RemoveAt(stack.Count - 1);
 
-            return _p;
+            return stack[stack.Count - 1];
+        }
+        public Page GetTop()
+        {
+            return stack[stack.Count - 1];
         }
     }
 }

@@ -48,7 +48,10 @@ namespace JournalWriter.Controllers
 
                     if (KeyInfo.Key == ConsoleKey.Enter)
                     {
-                        display.PagesQueue.Push(display.CurrentPage);
+                        if (display.CurrentPage != display.PagesQueue.GetTop())
+                        {
+                            display.PagesQueue.Push(display.CurrentPage);
+                        }
 
                         MenuSelectionEnter();
 
@@ -202,9 +205,11 @@ namespace JournalWriter.Controllers
                     UserAccountController.Account.Login();
                     if (UserAccountController.Account.loggedIn)
                     {
-                        display.CurrentPage = display.Pages[1];
+                        if (UserAccountController.Account.CurrentUser.Name != UserAccountController.Account.DefaultUser.Name)
+                        {
+                            display.CurrentPage = display.Pages[display.Pages.FindIndex(x => x.PageName == PageNames.LoginPage)];
+                        }
                         Console.Clear();
-                        //UserAccountController.DisplayCurrentUser(1, display.CurrentPage.CurrentMenu.Height + display.CurrentPage.HeaderHeight + 3);
                     }
                     break;
                 //Create new account
@@ -254,7 +259,7 @@ namespace JournalWriter.Controllers
                     }
 
                     Display.PressEnterTo("go back...");
-                    
+                    display.CurrentPage = display.PagesQueue.Pop();
                     Console.Clear();
                     
                     break;
@@ -265,8 +270,6 @@ namespace JournalWriter.Controllers
                     UserAccountController.Account.CurrentUser = UserAccountController.Account.DefaultUser;
 
                     UserAccountController.Account.loggedIn = false;
-
-                    display.CurrentPage = display.Pages[0];
 
                     break;
                 //Quit
