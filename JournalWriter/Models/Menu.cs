@@ -26,9 +26,7 @@ namespace JournalWriter.Models
             }
             set
             {
-
                 _height = value;
-
             }
         }
         public int MaxWidth {

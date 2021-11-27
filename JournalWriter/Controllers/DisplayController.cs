@@ -191,6 +191,7 @@ namespace JournalWriter.Controllers
             }
         }
         
+
         public static void RunMainPage()
         {
             switch (display.CurrentPage.GetMenuItemSelectedValue())

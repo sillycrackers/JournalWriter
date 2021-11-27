@@ -4,7 +4,8 @@ using System.Text;
 
 namespace JournalWriter.Models
 {
-    class IntroAnimation
+    public static class IntroAnimation
     {
+
     }
 }
