@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Timer.cs" />
     <Compile Include="WPMUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

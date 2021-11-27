@@ -56,7 +56,7 @@ namespace JournalWriter.Models
                
             }
 
-            Thread.Sleep(1500);
+            Thread.Sleep(2500);
 
             //Console.ReadLine();
 
