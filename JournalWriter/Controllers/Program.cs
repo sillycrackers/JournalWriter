@@ -13,12 +13,17 @@ namespace JournalWriter.Controllers
         [STAThread]
         static void Main(string[] args)
         {
-            //Console.WriteLine("HI world");
+            
+            IntroAnimation.Run();
+
             while (true)
             {
                 DisplayController.Run();
+                Console.ReadLine();
                 break;
             }
         }
+
+
     }
 }

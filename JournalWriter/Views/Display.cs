@@ -16,6 +16,10 @@ namespace JournalWriter.Views
         public PageQueue PagesQueue { get; set; }
         public List<Page> Pages { get; set; }
 
+        public static int WindowHeight;
+        public static int WindowWidth;
+        public static int BufferHeight;
+        public static int BufferWidth;
 
         private int _windowHeight = 30;
         private int _windowWidth = 50;
@@ -30,6 +34,11 @@ namespace JournalWriter.Views
             SetupConsoleDefaults();
             CurrentPage = new Page("CurrentPage");
             Pages = new List<Page>();
+
+            WindowHeight = _windowHeight;
+            WindowWidth  = _windowWidth;
+            BufferHeight = _bufferHeight;
+            BufferWidth  = _bufferWidth;
         } 
         //-------Methods-------//
     
@@ -48,6 +57,7 @@ namespace JournalWriter.Views
             Console.SetWindowPosition(0, 0);
             
         }
+
         //Method for password entry displaying only ****
         public static string GetHiddenConsoleInput()
         {

@@ -19,9 +19,6 @@ namespace JournalWriter.Controllers
 
         static DisplayController()
         {
-            PageNames pageNames = new PageNames();
-            MenuNames menuNames = new MenuNames();
-            
 
             display = new Display();
             SetupPages();
@@ -271,6 +268,8 @@ namespace JournalWriter.Controllers
 
                     UserAccountController.Account.loggedIn = false;
 
+                    display.CurrentPage = display.PagesQueue.Pop();
+
                     break;
                 //Quit
                 case 3:
@@ -292,5 +291,7 @@ namespace JournalWriter.Controllers
 
             Console.Clear();
         }
+
+
     }
 }

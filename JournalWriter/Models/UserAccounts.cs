@@ -48,7 +48,6 @@ namespace JournalWriter.Controllers
             string input = "";
             string userName = "";
             loggedIn = false;
-            ConsoleKeyInfo keyInfo = new ConsoleKeyInfo();
 
             Console.WriteLine("Please enter username or press ESC to go back.");
 
@@ -209,9 +208,15 @@ namespace JournalWriter.Controllers
         }
         public void PrintUsers()
         {
+            bool skipFirst = false;
+
             foreach (User u in Users)
             {
-                Console.WriteLine($"Name: {u.Name} ID: {u.Id}");
+                if (skipFirst == true)
+                {
+                    Console.WriteLine(u.Name);
+                }
+                skipFirst = true;
             }
         }
         public void DisplayCurrentUser(int leftPosition, int topPosition)
