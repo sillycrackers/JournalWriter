@@ -6,6 +6,7 @@ using JournalWriter;
 using JournalWriter.Views;
 using JournalWriter.Models;
 using JournalWriter.Structs;
+using WordsPerMin;
 
 
 namespace JournalWriter.Controllers
