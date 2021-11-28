@@ -1,13 +1,27 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+	<OutputType>Exe</OutputType>
+	<TargetFramework>netcoreapp3.1</TargetFramework>
 	  <UseWindowsForms>true</UseWindowsForms>
+	  <StartupObject>JournalWriter.Controllers.Program</StartupObject>
+	  <ApplicationIcon>Icon.ico</ApplicationIcon>
+	  <SignAssembly>true</SignAssembly>
+	  <AssemblyOriginatorKeyFile>JournalWriter.snk</AssemblyOriginatorKeyFile>
+	  <DelaySign>false</DelaySign>
+	  <PackageIcon>Icon.ico</PackageIcon>
+	  <PackageIconUrl />
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WordsPerMinute\WordsPerMinute.csproj" />
+	<ProjectReference Include="..\WordsPerMinute\WordsPerMinute.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\Desktop\Icon.ico">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
