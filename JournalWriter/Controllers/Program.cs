@@ -19,12 +19,14 @@ namespace JournalWriter.Controllers
 
             while (true)
             {
-
+                //test();
                 DisplayController.Run();
                 Console.ReadLine();
                 break;
             }
         }
+
+
 
 
     }
