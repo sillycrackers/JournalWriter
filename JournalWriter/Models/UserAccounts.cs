@@ -206,27 +206,8 @@ namespace JournalWriter.Controllers
                 return false;
             }
         }
-        public void PrintUsers()
-        {
-            bool skipFirst = false;
 
-            foreach (User u in Users)
-            {
-                if (skipFirst == true)
-                {
-                    Console.WriteLine(u.Name);
-                }
-                skipFirst = true;
-            }
-        }
-        public void DisplayCurrentUser(int leftPosition, int topPosition)
-        {
-            Console.SetCursorPosition(leftPosition, topPosition);
-            Console.WriteLine("Logged In: " + CurrentUser.Name);
-            Console.CursorLeft = leftPosition;
-            Console.WriteLine("WPM Recored: " + CurrentUser.WPMRecord.ToString("0.0") + " WPM");
 
-        }
 
 
 

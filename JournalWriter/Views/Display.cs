@@ -84,7 +84,6 @@ namespace JournalWriter.Views
             }
             return input.ToString();
         }
-
         public static bool ValidNumber(string s)
         {
             if (String.IsNullOrWhiteSpace(s))
@@ -167,7 +166,27 @@ namespace JournalWriter.Views
 
             Console.WriteLine(CurrentPage.CurrentMenu.Cursor.TopPos);
         }
-        
+        public void DisplayCurrentUser(int leftPosition, int topPosition)
+        {
+            Console.SetCursorPosition(leftPosition, topPosition);
+            Console.WriteLine("Logged In: " + UserAccountController.Account.CurrentUser.Name);
+            Console.CursorLeft = leftPosition;
+            Console.WriteLine("WPM Record: " + UserAccountController.Account.CurrentUser.WPMRecord.ToString("0.0") + " WPM");
+
+        }
+        public void DisplayAllUsers()
+        {
+            bool skipFirst = false;
+
+            foreach (User u in UserAccountController.Account.Users)
+            {
+                if (skipFirst == true)
+                {
+                    Console.WriteLine(u.Name);
+                }
+                skipFirst = true;
+            }
+        }
 
     }
 }

@@ -173,7 +173,7 @@ namespace JournalWriter.Controllers
         {
             display.CurrentPage.DrawElements();
 
-            UserAccountController.DisplayCurrentUser(1, display.CurrentPage.CalculateElementsHeight() + display.CurrentPage.HeaderHeight + 3);
+            display.DisplayCurrentUser(1, display.CurrentPage.CalculateElementsHeight() + display.CurrentPage.HeaderHeight + 3);
         }
         public static void MenuSelectionEnter()
         {
@@ -218,12 +218,13 @@ namespace JournalWriter.Controllers
                 //Display current users
                 case 2:
                     Console.Clear();
-                    UserAccountController.Account.PrintUsers();
+                    display.DisplayAllUsers();
                     Display.PressEnterTo("go back...");
                     Console.Clear();
                     break;
                 //Exit application
                 case 3:
+                    FileManagement.SaveUserData(UserAccountController.Account.Users);
                     Environment.Exit(0);
                     break;
             }
@@ -269,16 +270,26 @@ namespace JournalWriter.Controllers
 
                     wpm.StartChallenge();
 
-                    UserAccountController.Account.CurrentUser.WPMRecord =  wpm.WordsPerMin;
+                    if (wpm.WordsPerMin > UserAccountController.Account.CurrentUser.WPMRecord)
+                    {
+                        Console.WriteLine("New Record!!!");
+                        UserAccountController.Account.CurrentUser.WPMRecord = wpm.WordsPerMin;
+                    }
 
                     Display.PressEnterTo("go back...");
                     display.CurrentPage = display.PagesQueue.Pop();
                     Console.Clear();
+                    FileManagement.SaveUserData(UserAccountController.Account.Users);
 
                     break;
-                    
-                //Logout
+
                 case 3:
+                    Console.Clear();
+                    UserAccountController.Account.CurrentUser.WPMRecord = 0;
+                    FileManagement.SaveUserData(UserAccountController.Account.Users);
+                    break;
+                //Logout
+                case 4:
                     Console.Clear();
 
                     UserAccountController.Account.CurrentUser = UserAccountController.Account.DefaultUser;
@@ -289,7 +300,7 @@ namespace JournalWriter.Controllers
 
                     break;
                 //Quit
-                case 4:
+                case 5:
                     Environment.Exit(0);
                     break;
             }

@@ -16,7 +16,7 @@ namespace JournalWriter.Controllers
         static void Main(string[] args)
         {
 
-            //IntroAnimation.Run();
+            IntroAnimation.Run();
 
             while (true)
             {
