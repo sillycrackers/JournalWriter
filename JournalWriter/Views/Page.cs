@@ -119,6 +119,7 @@ namespace JournalWriter.Views
             {
                 d.Draw();
             }
+
         }
     }
 }

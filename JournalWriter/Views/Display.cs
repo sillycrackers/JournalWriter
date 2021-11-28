@@ -163,10 +163,11 @@ namespace JournalWriter.Views
         //This method just display value of current item selected for debugging purposes
         public void DisplayUserMenuSelectionValue()
         {
-            Console.SetCursorPosition(1, CurrentPage.HeaderHeight + CurrentPage.CurrentMenu.MenuCount + 4);
+            Console.SetCursorPosition(1, CurrentPage.HeaderHeight + CurrentPage.CurrentMenu.MenuCount + 5);
 
             Console.WriteLine(CurrentPage.CurrentMenu.Cursor.TopPos);
         }
+        
 
     }
 }

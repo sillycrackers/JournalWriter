@@ -223,6 +223,8 @@ namespace JournalWriter.Controllers
         {
             Console.SetCursorPosition(leftPosition, topPosition);
             Console.WriteLine("Logged In: " + CurrentUser.Name);
+            Console.CursorLeft = leftPosition;
+            Console.WriteLine("WPM Recored: " + CurrentUser.WPMRecord.ToString("0.0") + " WPM");
 
         }
 

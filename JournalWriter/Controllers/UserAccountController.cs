@@ -20,6 +20,7 @@ namespace JournalWriter.Controllers
         public static void DisplayCurrentUser(int leftLocation, int topLocation)
         {
             Account.DisplayCurrentUser(leftLocation, topLocation);
+
         }
 
     }

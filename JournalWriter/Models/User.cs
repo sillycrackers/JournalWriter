@@ -19,7 +19,7 @@ namespace JournalWriter.Models
         public int Id { get; set; }
         public Entry CurrentEntry { get; set; }
         public List<Entry> Entries { get; set; }
-
+        public double WPMRecord { get; set; } = 0;
 
 
         private byte[] _encryptedPassword;

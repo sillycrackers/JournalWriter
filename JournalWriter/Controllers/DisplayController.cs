@@ -13,8 +13,8 @@ namespace JournalWriter.Controllers
 {
     public static class DisplayController
     {
-        public static Display display { get; set; }
-        public static ConsoleKeyInfo KeyInfo { get; set; }
+        public static Display display;
+        public static ConsoleKeyInfo KeyInfo;
         public static PageNames pageNames;
         public static MenuNames menuNames;
 
@@ -31,7 +31,6 @@ namespace JournalWriter.Controllers
             while (true)
             {
                 DrawPage();
-
 
                 while (true)
                 {
@@ -261,8 +260,25 @@ namespace JournalWriter.Controllers
                     Console.Clear();
                     
                     break;
-                //Logout
+
                 case 2:
+
+                    Console.Clear();
+
+                    WPMUI wpm = new WPMUI();
+
+                    wpm.StartChallenge();
+
+                    UserAccountController.Account.CurrentUser.WPMRecord =  wpm.WordsPerMin;
+
+                    Display.PressEnterTo("go back...");
+                    display.CurrentPage = display.PagesQueue.Pop();
+                    Console.Clear();
+
+                    break;
+                    
+                //Logout
+                case 3:
                     Console.Clear();
 
                     UserAccountController.Account.CurrentUser = UserAccountController.Account.DefaultUser;
@@ -273,7 +289,7 @@ namespace JournalWriter.Controllers
 
                     break;
                 //Quit
-                case 3:
+                case 4:
                     Environment.Exit(0);
                     break;
             }

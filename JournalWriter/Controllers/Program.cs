@@ -15,15 +15,13 @@ namespace JournalWriter.Controllers
         [STAThread]
         static void Main(string[] args)
         {
-            WPMUI wpm = new WPMUI();
 
             //IntroAnimation.Run();
 
             while (true)
             {
 
-                wpm.StartChallenge();
-                //DisplayController.Run();
+                DisplayController.Run();
                 Console.ReadLine();
                 break;
             }

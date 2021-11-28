@@ -8,11 +8,11 @@ namespace WordsPerMin
 {
     public class WPMUI
     {
-        public int WordsPerMin { get { return _wordsPerMin; } }
+        public double WordsPerMin { get { return _wordsPerMin; } }
         public TimeSpan TotalTimeTaken { get { return _totalTimeTaken; } }
         public string ChallengeText { get { return _challengeText; } set { _challengeText = value; } }
 
-        private int _wordsPerMin;
+        private double _wordsPerMin;
         private TimeSpan _totalTimeTaken;
         private string _challengeText;
         private string _challengeText2;
@@ -30,9 +30,9 @@ namespace WordsPerMin
             _wordsPerMin = 0;
             _totalTimeTaken = new TimeSpan();
 
-            _challengeText2 = "This is a test";
+            _challengeText = "This is a test";
 
-            _challengeText = "This is the first challenge. I would like you to type " + 
+            _challengeText2 = "This is the first challenge. I would like you to type " + 
                             "out these words. This will be fun just type them okay?";
         }
 
@@ -55,7 +55,7 @@ namespace WordsPerMin
             }
 
             timer.StopTimer();
-
+            _wordsPerMin = CaculateWPM();
             WriteResults();
 
             Console.ReadLine();
@@ -69,7 +69,7 @@ namespace WordsPerMin
             Console.WriteLine("Finished!");
             Console.WriteLine(timer.GetDuration().ToString("0.00") + " seconds");
             Console.WriteLine();
-            Console.WriteLine($"You typed {CaculateWPM().ToString("0.00")} words per minute");
+            Console.WriteLine($"You typed at a rate of {CaculateWPM().ToString("0.00")} words per minute");
         }
         public void WriteInstructions()
         {
