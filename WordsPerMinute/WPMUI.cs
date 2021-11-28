@@ -36,6 +36,10 @@ namespace WordsPerMinute
                             "out these words. This will be fun just type them okay?";
         }
 
+        public void test()
+        {
+            Console.WriteLine(WPMParagraphs.LongParagraphs[4]);
+        }
         public void StartChallenge()
         {
             

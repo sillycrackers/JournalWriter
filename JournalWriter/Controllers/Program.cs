@@ -14,13 +14,15 @@ namespace JournalWriter.Controllers
         static void Main(string[] args)
         {
             ConsoleHelper.SetCurrentFont("Lucida Console", 36);
+           
+            WPMUI wpm = new WPMUI();
 
-            IntroAnimation.Run();
+            //IntroAnimation.Run();
 
             while (true)
             {
-                //test();
-                DisplayController.Run();
+                wpm.test();
+                //DisplayController.Run();
                 Console.ReadLine();
                 break;
             }

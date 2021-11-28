@@ -136,6 +136,28 @@ namespace JournalWriter.Controllers
                 throw;
             }
         }
+        public static void SetupWPMPage()
+        {
+            //Setup WPM page
+            try
+            {
+                display.Pages.Add(new Page(PageNames.LoginPage));
+
+                var LoginPage = display.Pages[1];
+
+                LoginPage.MenuList.Add(new Menu(MenuNames.LoginMenu, new List<string>(MenuNames.LoginMenuItems)));
+                LoginPage.CurrentMenu = LoginPage.MenuList[0];
+                LoginPage.DisplayElements.Add(LoginPage.CurrentMenu);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+                Console.ReadLine();
+                throw;
+            }
+
+
+        }
         public static void SetupPastEntriesMenu()
         {
             try

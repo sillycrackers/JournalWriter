@@ -18,7 +18,6 @@ namespace JournalWriter.Controllers
         public static string ObjectDataFolderName { get; private set; } = "JournalWriter\\ObjectData";
         public static string DataPath { get; private set; } = Path.Combine(RootPath, ObjectDataFolderName, "data.bin");
 
-
         //-------Methods-------//
 
         public static void SaveUserData(List<User> users)
