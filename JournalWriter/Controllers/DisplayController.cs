@@ -141,13 +141,13 @@ namespace JournalWriter.Controllers
             //Setup WPM page
             try
             {
-                display.Pages.Add(new Page(PageNames.LoginPage));
+                display.Pages.Add(new Page(PageNames.WPMPage));
 
-                var LoginPage = display.Pages[1];
+                var WPMPage = display.Pages[display.Pages.FindIndex(x=> x.PageName == PageNames.WPMPage)];
 
-                LoginPage.MenuList.Add(new Menu(MenuNames.LoginMenu, new List<string>(MenuNames.LoginMenuItems)));
-                LoginPage.CurrentMenu = LoginPage.MenuList[0];
-                LoginPage.DisplayElements.Add(LoginPage.CurrentMenu);
+                WPMPage.MenuList.Add(new Menu(MenuNames.WPMMenu, new List<string>(MenuNames.WPMMenuItems)));
+                WPMPage.CurrentMenu = WPMPage.MenuList[0];
+                WPMPage.DisplayElements.Add(WPMPage.CurrentMenu);
             }
             catch (Exception ex)
             {
@@ -286,22 +286,11 @@ namespace JournalWriter.Controllers
                 //Words per minute test
                 case 2:
 
-                    Console.Clear();
-
-                    WPMUI wpm = new WPMUI();
-
-                    wpm.StartChallenge();
-
-                    if (wpm.WordsPerMin > UserAccountController.Account.CurrentUser.WPMRecord)
-                    {
-                        Console.WriteLine("New Record!!!");
-                        UserAccountController.Account.CurrentUser.WPMRecord = wpm.WordsPerMin;
-                    }
-
+                    RunWPMPage();
                     Display.PressEnterTo("go back...");
-                    //display.CurrentPage = display.PagesQueue.Pop();
+                    display.CurrentPage = display.PagesQueue.Pop();
                     Console.Clear();
-                    FileManagement.SaveUserData(UserAccountController.Account.Users);
+
 
                     break;
                 //Reset WPM Record
@@ -342,6 +331,46 @@ namespace JournalWriter.Controllers
             Console.Clear();
         }
 
+        public static void RunWPMPage()
+        {
+            switch (display.CurrentPage.GetMenuItemSelectedValue())
+            {
+                //Short
+                case 0:
+                    Console.Clear();
+                    RunWPM(WPMParagraphs.WPMLengthSelect.Short);
+                    break;
+                //Medium
+                case 1:
+                    Console.Clear();
+                    RunWPM(WPMParagraphs.WPMLengthSelect.Medium);
+                    break;
+                //Long
+                case 2:
+                    Console.Clear();
+                    RunWPM(WPMParagraphs.WPMLengthSelect.Long);
+                    break;
 
+            }
+        }
+
+
+        public static void RunWPM(WPMParagraphs.WPMLengthSelect length)
+        {
+            WPMUI wpm = new WPMUI();
+
+            wpm.StartChallenge(length);
+
+            if (wpm.WordsPerMin > UserAccountController.Account.CurrentUser.WPMRecord)
+            {
+                Console.WriteLine("New Record!!!");
+                UserAccountController.Account.CurrentUser.WPMRecord = wpm.WordsPerMin;
+            }
+
+            Display.PressEnterTo("go back...");
+            //display.CurrentPage = display.PagesQueue.Pop();
+            Console.Clear();
+            FileManagement.SaveUserData(UserAccountController.Account.Users);
+        }
     }
 }

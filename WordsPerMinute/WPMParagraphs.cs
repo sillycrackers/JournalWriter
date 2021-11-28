@@ -18,6 +18,13 @@ namespace WordsPerMinute
         public static string LongParaPath = Path.Combine(RootPath, ObjectDataFolderName, "LongParagraphs.csv");
         public static List<string> Paths = new List<string>();
 
+        public enum WPMLengthSelect
+        {
+            Short,
+            Medium,
+            Long
+        }
+
         static WPMParagraphs()
         {
             Paths.Add(ShortParaPath);
@@ -29,7 +36,6 @@ namespace WordsPerMinute
             Initialize();
 
             LoadParagraphs();
-
         }
 
         public static void LoadParagraphs()
@@ -40,7 +46,6 @@ namespace WordsPerMinute
         }
         public static void Initialize()
         {
-
             foreach(string s in Paths){
 
                 if (!File.Exists(s))

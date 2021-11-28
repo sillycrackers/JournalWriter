@@ -40,16 +40,18 @@ namespace WordsPerMinute
         {
             Console.WriteLine(WPMParagraphs.LongParagraphs[4]);
         }
-        public void StartChallenge()
+        public void StartChallenge(WPMParagraphs.WPMLengthSelect length)
         {
             
             SetupColors();
+
+            DisplayChallengeText(_challengeTextTopPos, length);
 
             WriteInstructions();
 
             _inputTextTopPos = Console.CursorTop;
 
-            while (!Console.KeyAvailable) { }
+            while (!Console.KeyAvailable) {}
 
             timer.StartTimer();
 
@@ -76,7 +78,7 @@ namespace WordsPerMinute
         }
         public void WriteInstructions()
         {
-            DisplayChallengeText(_challengeTextTopPos);
+            
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(info);
@@ -88,10 +90,43 @@ namespace WordsPerMinute
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
         }
-        public void DisplayChallengeText(int position)
+        public void DisplayChallengeText(int position, WPMParagraphs.WPMLengthSelect length)
         {
             Console.SetCursorPosition(0, position);
-            Console.WriteLine(ChallengeText);
+
+            switch (length) {
+
+                case WPMParagraphs.WPMLengthSelect.Short:
+                Console.WriteLine(ChallengeText);
+                    break;
+                case WPMParagraphs.WPMLengthSelect.Medium:
+                    Console.WriteLine(ChallengeText);
+                    break;
+                case WPMParagraphs.WPMLengthSelect.Long:
+                    Console.WriteLine(ChallengeText);
+                    break;
+            }
+        
+        }
+        public string GenerateParagraph(WPMParagraphs.WPMLengthSelect length)
+        {
+            var rand = new Random();
+            
+            switch (length)
+            {
+                case WPMParagraphs.WPMLengthSelect.Short:
+                    return WPMParagraphs.ShortParagraphs[rand.Next(0, WPMParagraphs.ShortParagraphs.Count - 1)];
+                    
+                case WPMParagraphs.WPMLengthSelect.Medium:
+                    Console.WriteLine(ChallengeText);
+                    return WPMParagraphs.ShortParagraphs[rand.Next(0, WPMParagraphs.ShortParagraphs.Count - 1)];
+                    
+                case WPMParagraphs.WPMLengthSelect.Long:
+                    Console.WriteLine(ChallengeText);
+                    return WPMParagraphs.ShortParagraphs[rand.Next(0, WPMParagraphs.ShortParagraphs.Count - 1)];
+                    
+            }
+            return "";
         }
         public int CalculateNumWords(string inText)
         {

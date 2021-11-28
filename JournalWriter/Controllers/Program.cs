@@ -17,12 +17,12 @@ namespace JournalWriter.Controllers
            
             WPMUI wpm = new WPMUI();
 
-            //IntroAnimation.Run();
+            IntroAnimation.Run();
 
             while (true)
             {
-                wpm.test();
-                //DisplayController.Run();
+                //wpm.test();
+                DisplayController.Run();
                 Console.ReadLine();
                 break;
             }
