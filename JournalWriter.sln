@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JournalWriter", "JournalWriter\JournalWriter.csproj", "{532C4350-E242-43DA-B0BC-83261A7EAFA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordsPerMin", "WordsPerMin\WordsPerMin.csproj", "{8275396E-878F-429E-A031-B4BEBB6ECA3C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordsPerMinute", "WordsPerMinute\WordsPerMinute.csproj", "{53F6C9E2-F656-4DE2-973D-7C7F1921607F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{532C4350-E242-43DA-B0BC-83261A7EAFA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{532C4350-E242-43DA-B0BC-83261A7EAFA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{532C4350-E242-43DA-B0BC-83261A7EAFA4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8275396E-878F-429E-A031-B4BEBB6ECA3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8275396E-878F-429E-A031-B4BEBB6ECA3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8275396E-878F-429E-A031-B4BEBB6ECA3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8275396E-878F-429E-A031-B4BEBB6ECA3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53F6C9E2-F656-4DE2-973D-7C7F1921607F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53F6C9E2-F656-4DE2-973D-7C7F1921607F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53F6C9E2-F656-4DE2-973D-7C7F1921607F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53F6C9E2-F656-4DE2-973D-7C7F1921607F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using JournalWriter;
 using JournalWriter.Views;
 using JournalWriter.Models;
-using WordsPerMin;
+using WordsPerMinute;
 
 namespace JournalWriter.Controllers
 {
     class Program
     {
       
-        
-
         [STAThread]
         static void Main(string[] args)
         {

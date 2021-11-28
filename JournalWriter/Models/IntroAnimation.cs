@@ -25,13 +25,14 @@ namespace JournalWriter.Models
 
         public static void Run()
         {
+            Console.CursorVisible = false;
             SetupIntroConsole();
 
             int y = 7;
             int x = 18;
-            int delay = 20;
+            int delay = 17;
 
-            Thread.Sleep(500);
+            Thread.Sleep(250);
 
             for (int z=IntroLogo.Length-1; z > -1 ;z--)
             {
@@ -47,18 +48,18 @@ namespace JournalWriter.Models
                         Console.SetCursorPosition(y, i - 1);
                     }
                     ClearCurrentConsoleLine();
+                    Thread.Sleep(2);
 
-                    
+
                     if (i < x-1) { }
                 }
+                
 
                 x--;
                
             }
 
-            Thread.Sleep(2500);
-
-            //Console.ReadLine();
+            Thread.Sleep(1500);
 
             Console.Clear();
         }

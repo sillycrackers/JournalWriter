@@ -6,7 +6,7 @@ using JournalWriter;
 using JournalWriter.Views;
 using JournalWriter.Models;
 using JournalWriter.Structs;
-using WordsPerMin;
+using WordsPerMinute;
 
 
 namespace JournalWriter.Controllers
@@ -261,7 +261,7 @@ namespace JournalWriter.Controllers
                     Console.Clear();
                     
                     break;
-
+                //Words per minute test
                 case 2:
 
                     Console.Clear();
@@ -277,12 +277,12 @@ namespace JournalWriter.Controllers
                     }
 
                     Display.PressEnterTo("go back...");
-                    display.CurrentPage = display.PagesQueue.Pop();
+                    //display.CurrentPage = display.PagesQueue.Pop();
                     Console.Clear();
                     FileManagement.SaveUserData(UserAccountController.Account.Users);
 
                     break;
-
+                //Reset WPM Record
                 case 3:
                     Console.Clear();
                     UserAccountController.Account.CurrentUser.WPMRecord = 0;
