@@ -13,6 +13,7 @@ namespace JournalWriter.Controllers
         [STAThread]
         static void Main(string[] args)
         {
+            ConsoleHelper.SetCurrentFont("Lucida Console", 36);
 
             IntroAnimation.Run();
 
