@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using JournalWriter;
 using JournalWriter.Views;
 using JournalWriter.Models;
-using JournalWriter.Structs;
 using WordsPerMinute;
 
 
@@ -15,9 +14,7 @@ namespace JournalWriter.Controllers
     {
         public static Display display;
         public static ConsoleKeyInfo KeyInfo;
-        public static PageNames pageNames;
-        public static MenuNames menuNames;
-
+        
         static DisplayController()
         {
 
@@ -52,12 +49,13 @@ namespace JournalWriter.Controllers
                             display.PagesQueue.Push(display.CurrentPage);
                         }
 
+                        //After selecting item on menu run a program
                         MenuSelectionEnter();
 
                         break;
                     }else if(KeyInfo.Key == ConsoleKey.Escape)
                     {
-                        if (display.CurrentPage != display.Pages[display.Pages.FindIndex(x => x.PageName == PageNames.MainPage)])
+                        if (display.CurrentPage != display.Pages[display.Pages.FindIndex(x => x.PageName == Names.MainPage)])
                         {
                             Console.Clear();
                             display.CurrentPage = display.PagesQueue.Pop();
@@ -74,79 +72,31 @@ namespace JournalWriter.Controllers
         //Setup Pages and menus and any other elements on page
         public static void SetupPages()
         {
-            SetupMainPage();
-            SetupLoginPage();
-            SetupWPMPage();
+            SetupPageWithMenu(Names.MainPage, Names.MainMenu, Names.MainMenuItems);
+            SetupPageWithMenu(Names.LoginPage, Names.LoginMenu, Names.LoginMenuItems);
+            SetupPageWithMenu(Names.WPMPage, Names.WPMMenu, Names.WPMMenuItems);
             SetupPastEntriesPage();
 
         }
-        public static void SetupMainPage()
+
+  
+        public static void SetupPageWithMenu(string pageName, string menuName, List<string> menuItemNames)
         {
-
-            //Setup Main page
-
-            try
+            //Setup new page
+            if (String.IsNullOrWhiteSpace(pageName) || String.IsNullOrWhiteSpace(menuName) || menuItemNames.Count == 0)
             {
-                display.Pages.Add(new Page(PageNames.MainPage));
-
-                var MainPage = display.Pages[display.Pages.FindIndex(x => x.PageName == PageNames.MainPage)];
-
-                MainPage.MenuList.Add(new Menu(MenuNames.MainMenu, new List<string>(MenuNames.MainMenuItems)));
-                MainPage.CurrentMenu = MainPage.MenuList[0];
-                MainPage.DisplayElements.Add(MainPage.CurrentMenu);
+                throw new Exception("Input paramenters cannot be null or empty");
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine(ex.StackTrace);
+                display.Pages.Add(new Page(pageName));
 
-                Console.ReadLine();
-                throw;
+                var page = display.Pages[display.Pages.FindIndex(x => x.PageName == pageName)];
+
+                page.MenuList.Add(new Menu(menuName, new List<string>(menuItemNames)));
+                page.CurrentMenu = page.MenuList[0];
+                page.DisplayElements.Add(page.CurrentMenu);
             }
-
-        }
-        public static void SetupLoginPage()
-        {
-            //Setup Login page
-            try
-            {
-                display.Pages.Add(new Page(PageNames.LoginPage));
-
-                var LoginPage = display.Pages[1];
-
-                LoginPage.MenuList.Add(new Menu(MenuNames.LoginMenu, new List<string>(MenuNames.LoginMenuItems)));
-                LoginPage.CurrentMenu = LoginPage.MenuList[0];
-                LoginPage.DisplayElements.Add(LoginPage.CurrentMenu);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.StackTrace);
-                Console.ReadLine();
-                throw;
-            }
-
-
-        }
-        public static void SetupWPMPage()
-        {
-            //Setup WPM page
-            try
-            {
-                display.Pages.Add(new Page(PageNames.WPMPage));
-
-                //var WPMPage = display.Pages[3];
-                var WPMPage = display.Pages[display.Pages.FindIndex(x=> x.PageName == PageNames.WPMPage)];
-
-                WPMPage.MenuList.Add(new Menu(MenuNames.WPMMenu, new List<string>(MenuNames.WPMMenuItems)));
-                WPMPage.CurrentMenu = WPMPage.MenuList[0];
-                WPMPage.DisplayElements.Add(WPMPage.CurrentMenu);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.StackTrace);
-                Console.ReadLine();
-                throw;
-            }
-
 
         }
         public static void SetupPastEntriesPage()
@@ -154,7 +104,7 @@ namespace JournalWriter.Controllers
             //Setup Past Entries page
             try
             {
-                display.Pages.Add(new Page(PageNames.PastEntriesPage));
+                display.Pages.Add(new Page(Names.PastEntriesPage));
                 
             }
             catch (Exception ex)
@@ -169,9 +119,9 @@ namespace JournalWriter.Controllers
         {
             try
             {
-                var PastEntries = display.Pages[display.Pages.FindIndex(x => x.PageName == PageNames.PastEntriesPage)];
+                var PastEntries = display.Pages[display.Pages.FindIndex(x => x.PageName == Names.PastEntriesPage)];
 
-                PastEntries.MenuList.Add(new Menu(MenuNames.PastEntriesMenu, PopulatePastEntriesMenu(PastEntries)));
+                PastEntries.MenuList.Add(new Menu(Names.PastEntriesMenu, PopulatePastEntriesMenu(PastEntries)));
 
                 PastEntries.CurrentMenu = PastEntries.MenuList[0];
 
@@ -213,16 +163,16 @@ namespace JournalWriter.Controllers
         {
             switch (display.CurrentPage.CurrentMenu.MenuName)
             {
-                case MenuNames.MainMenu:
+                case Names.MainMenu:
                     RunMainPage();
                     break;
-                case MenuNames.LoginMenu:
+                case Names.LoginMenu:
                     RunUserPage();
                     break;
-                case MenuNames.PastEntriesMenu:
+                case Names.PastEntriesMenu:
                     RunPastEntriesPage();
                     break;
-                case MenuNames.WPMMenu:
+                case Names.WPMMenu:
                     RunWPMPage(); 
                     break;
             }
@@ -240,7 +190,7 @@ namespace JournalWriter.Controllers
                     {
                         if (UserAccountController.Account.CurrentUser.Name != UserAccountController.Account.DefaultUser.Name)
                         {
-                            display.CurrentPage = display.Pages[display.Pages.FindIndex(x => x.PageName == PageNames.LoginPage)];
+                            display.CurrentPage = display.Pages[display.Pages.FindIndex(x => x.PageName == Names.LoginPage)];
                         }
                         Console.Clear();
                     }
@@ -288,7 +238,7 @@ namespace JournalWriter.Controllers
                     {
                         //Navigate to list of Past entries page
                         SetupPastEntriesMenu();
-                        display.CurrentPage = display.Pages[display.Pages.FindIndex(x=> x.PageName == PageNames.PastEntriesPage)];
+                        display.CurrentPage = display.Pages[display.Pages.FindIndex(x=> x.PageName == Names.PastEntriesPage)];
                         break;
                     }
 
@@ -300,7 +250,7 @@ namespace JournalWriter.Controllers
                 //Words per minute test
                 case 2:
 
-                    display.CurrentPage = display.Pages[display.Pages.FindIndex(x => x.PageName == PageNames.WPMPage)];
+                    display.CurrentPage = display.Pages[display.Pages.FindIndex(x => x.PageName == Names.WPMPage)];
 
                     //display.CurrentPage = display.PagesQueue.Pop();
                     Console.Clear();
