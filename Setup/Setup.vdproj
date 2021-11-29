@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_20F166387AD94E53BCDC332793752027"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_83448A169CC64ABAA917F8B8434B3CB7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -22,6 +28,18 @@
         "Entry"
         {
         "MsmKey" = "8:_CAA60D9BF3754EA1939E7F6D75FC8342"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D843577796754DF88E3F4D5EBE6AE401"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FF980BE1EC2B4DB0A529F41B6C2D9CF8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -43,6 +61,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -106,12 +132,72 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_20F166387AD94E53BCDC332793752027"
+            {
+            "SourcePath" = "8:..\\WordsPerMinute\\ParagraphText\\MediumParagraphs.csv"
+            "TargetName" = "8:MediumParagraphs.csv"
+            "Tag" = "8:"
+            "Folder" = "8:_3590DF2598C44BF09D25C36E714D8BE5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_83448A169CC64ABAA917F8B8434B3CB7"
             {
             "SourcePath" = "8:..\\..\\..\\..\\Desktop\\Icon.ico"
             "TargetName" = "8:Icon.ico"
             "Tag" = "8:"
             "Folder" = "8:_68706F71029A4743BD6ABD4B82FD47CD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D843577796754DF88E3F4D5EBE6AE401"
+            {
+            "SourcePath" = "8:..\\WordsPerMinute\\ParagraphText\\ShortParagraphs.csv"
+            "TargetName" = "8:ShortParagraphs.csv"
+            "Tag" = "8:"
+            "Folder" = "8:_3590DF2598C44BF09D25C36E714D8BE5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FF980BE1EC2B4DB0A529F41B6C2D9CF8"
+            {
+            "SourcePath" = "8:..\\WordsPerMinute\\ParagraphText\\LongParagraphs.csv"
+            "TargetName" = "8:LongParagraphs.csv"
+            "Tag" = "8:"
+            "Folder" = "8:_3590DF2598C44BF09D25C36E714D8BE5"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -142,6 +228,50 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                }
+            }
+            "{1525181F-901A-416C-8A58-119130FE478E}:_A38B0AB9365542838986E2A39C7ED093"
+            {
+            "Name" = "8:#1915"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:AppDataFolder"
+                "Folders"
+                {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_5B1A926524CB4CA494178CB2A7D4DD21"
+                    {
+                    "Name" = "8:Westerveld Apps"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_86A5AC52FEB446FD9F49A04635E071BC"
+                        "Folders"
+                        {
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_58EAE735AE994AEF8D02E5CF3E5AC06E"
+                            {
+                            "Name" = "8:Journal Writer"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_FFB8F2603B444CE784DA1A56F20CD7EB"
+                                "Folders"
+                                {
+                                    "{9EF0B969-E518-4E46-987F-47570745A589}:_3590DF2598C44BF09D25C36E714D8BE5"
+                                    {
+                                    "Name" = "8:Paragraphs"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "Condition" = "8:"
+                                    "Transitive" = "11:FALSE"
+                                    "Property" = "8:_10AB6B1767934512B545C16B1252ACFC"
+                                        "Folders"
+                                        {
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
             "{1525181F-901A-416C-8A58-119130FE478E}:_C969412E1B294588B5A365B127F9475D"
@@ -194,7 +324,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Journal Writer"
         "ProductCode" = "8:{88B473B8-7CFD-4439-ACB1-F74C77D0BB42}"
-        "PackageCode" = "8:{3746AC64-CBAB-4C96-9BD4-22E54E6DA6BD}"
+        "PackageCode" = "8:{226C866E-B6EB-4207-904A-72473F453AA1}"
         "UpgradeCode" = "8:{A3B01FCA-F9F8-466F-8F08-463437B788DA}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -743,7 +873,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_CAA60D9BF3754EA1939E7F6D75FC8342"
             {
-            "SourcePath" = "8:..\\JournalWriter\\obj\\Release\\netcoreapp3.1\\apphost.exe"
+            "SourcePath" = "8:..\\JournalWriter\\obj\\Debug\\netcoreapp3.1\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_68706F71029A4743BD6ABD4B82FD47CD"

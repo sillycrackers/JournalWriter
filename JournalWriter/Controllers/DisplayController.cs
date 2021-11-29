@@ -30,8 +30,10 @@ namespace JournalWriter.Controllers
         {
             while (true)
             {
+                //Will display new page based on new selection
                 DrawPage();
 
+                //Loop once everytime key is pressed
                 while (true)
                 {
                     
@@ -68,10 +70,13 @@ namespace JournalWriter.Controllers
         }
 
 
+
+        //Setup Pages and menus and any other elements on page
         public static void SetupPages()
         {
             SetupMainPage();
             SetupLoginPage();
+            SetupWPMPage();
             SetupPastEntriesPage();
 
         }
@@ -84,7 +89,7 @@ namespace JournalWriter.Controllers
             {
                 display.Pages.Add(new Page(PageNames.MainPage));
 
-                var MainPage = display.Pages[0];
+                var MainPage = display.Pages[display.Pages.FindIndex(x => x.PageName == PageNames.MainPage)];
 
                 MainPage.MenuList.Add(new Menu(MenuNames.MainMenu, new List<string>(MenuNames.MainMenuItems)));
                 MainPage.CurrentMenu = MainPage.MenuList[0];
@@ -121,21 +126,6 @@ namespace JournalWriter.Controllers
 
 
         }
-        public static void SetupPastEntriesPage()
-        {
-            //Setup Past Entries page
-            try
-            {
-                display.Pages.Add(new Page(PageNames.PastEntriesPage));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.StackTrace);
-
-                Console.ReadLine();
-                throw;
-            }
-        }
         public static void SetupWPMPage()
         {
             //Setup WPM page
@@ -143,6 +133,7 @@ namespace JournalWriter.Controllers
             {
                 display.Pages.Add(new Page(PageNames.WPMPage));
 
+                //var WPMPage = display.Pages[3];
                 var WPMPage = display.Pages[display.Pages.FindIndex(x=> x.PageName == PageNames.WPMPage)];
 
                 WPMPage.MenuList.Add(new Menu(MenuNames.WPMMenu, new List<string>(MenuNames.WPMMenuItems)));
@@ -158,11 +149,27 @@ namespace JournalWriter.Controllers
 
 
         }
+        public static void SetupPastEntriesPage()
+        {
+            //Setup Past Entries page
+            try
+            {
+                display.Pages.Add(new Page(PageNames.PastEntriesPage));
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+
+                Console.ReadLine();
+                throw;
+            }
+        }
         public static void SetupPastEntriesMenu()
         {
             try
             {
-                var PastEntries = display.Pages[2];
+                var PastEntries = display.Pages[display.Pages.FindIndex(x => x.PageName == PageNames.PastEntriesPage)];
 
                 PastEntries.MenuList.Add(new Menu(MenuNames.PastEntriesMenu, PopulatePastEntriesMenu(PastEntries)));
 
@@ -190,6 +197,9 @@ namespace JournalWriter.Controllers
             return s;
         }
 
+
+
+
         //Draw out all elements of that page
         public static void DrawPage()
         {
@@ -197,6 +207,8 @@ namespace JournalWriter.Controllers
 
             display.DisplayCurrentUser(1, display.CurrentPage.CalculateElementsHeight() + display.CurrentPage.HeaderHeight + 3);
         }
+
+
         public static void MenuSelectionEnter()
         {
             switch (display.CurrentPage.CurrentMenu.MenuName)
@@ -210,9 +222,11 @@ namespace JournalWriter.Controllers
                 case MenuNames.PastEntriesMenu:
                     RunPastEntriesPage();
                     break;
+                case MenuNames.WPMMenu:
+                    RunWPMPage(); 
+                    break;
             }
         }
-        
 
         public static void RunMainPage()
         {
@@ -286,9 +300,9 @@ namespace JournalWriter.Controllers
                 //Words per minute test
                 case 2:
 
-                    RunWPMPage();
-                    Display.PressEnterTo("go back...");
-                    display.CurrentPage = display.PagesQueue.Pop();
+                    display.CurrentPage = display.Pages[display.Pages.FindIndex(x => x.PageName == PageNames.WPMPage)];
+
+                    //display.CurrentPage = display.PagesQueue.Pop();
                     Console.Clear();
 
 

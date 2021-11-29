@@ -30,10 +30,6 @@ namespace WordsPerMinute
             _wordsPerMin = 0;
             _totalTimeTaken = new TimeSpan();
 
-            _challengeText = "There are different types of secrets. She had held onto plenty of them during her life, but this one was different. She found herself holding onto the worst type. It was the type of secret that could gnaw away at your insides if you didn't tell someone about it, but it could end up getting you killed if you did.";
-
-            _challengeText2 = "This is the first challenge. I would like you to type " + 
-                            "out these words. This will be fun just type them okay?";
         }
 
         public void test()
@@ -94,18 +90,9 @@ namespace WordsPerMinute
         {
             Console.SetCursorPosition(0, position);
 
-            switch (length) {
+            _challengeText = GenerateParagraph(length);
 
-                case WPMParagraphs.WPMLengthSelect.Short:
-                Console.WriteLine(ChallengeText);
-                    break;
-                case WPMParagraphs.WPMLengthSelect.Medium:
-                    Console.WriteLine(ChallengeText);
-                    break;
-                case WPMParagraphs.WPMLengthSelect.Long:
-                    Console.WriteLine(ChallengeText);
-                    break;
-            }
+            Console.WriteLine(_challengeText);
         
         }
         public string GenerateParagraph(WPMParagraphs.WPMLengthSelect length)
@@ -116,14 +103,12 @@ namespace WordsPerMinute
             {
                 case WPMParagraphs.WPMLengthSelect.Short:
                     return WPMParagraphs.ShortParagraphs[rand.Next(0, WPMParagraphs.ShortParagraphs.Count - 1)];
-                    
+
                 case WPMParagraphs.WPMLengthSelect.Medium:
-                    Console.WriteLine(ChallengeText);
-                    return WPMParagraphs.ShortParagraphs[rand.Next(0, WPMParagraphs.ShortParagraphs.Count - 1)];
+                    return WPMParagraphs.MediumParagraphs[rand.Next(0, WPMParagraphs.MediumParagraphs.Count - 1)];
                     
                 case WPMParagraphs.WPMLengthSelect.Long:
-                    Console.WriteLine(ChallengeText);
-                    return WPMParagraphs.ShortParagraphs[rand.Next(0, WPMParagraphs.ShortParagraphs.Count - 1)];
+                    return WPMParagraphs.LongParagraphs[rand.Next(0, WPMParagraphs.LongParagraphs.Count - 1)];
                     
             }
             return "";

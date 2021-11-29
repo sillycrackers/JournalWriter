@@ -12,7 +12,7 @@ namespace WordsPerMinute
         public static List<string> LongParagraphs = new List<string>();
 
         public static string RootPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        public static string ObjectDataFolderName = "JournalWriter\\Paragraphs";
+        public static string ObjectDataFolderName = "Westerveld Apps\\Journal Writer\\Paragraphs";
         public static string ShortParaPath = Path.Combine(RootPath, ObjectDataFolderName, "ShortParagraphs.csv");
         public static string MediumParaPath = Path.Combine(RootPath, ObjectDataFolderName, "MediumParagraphs.csv");
         public static string LongParaPath = Path.Combine(RootPath, ObjectDataFolderName, "LongParagraphs.csv");

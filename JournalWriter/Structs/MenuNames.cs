@@ -22,7 +22,7 @@ namespace JournalWriter.Structs
         public static readonly IList<string> WPMMenuItems = new ReadOnlyCollection<string>(new List<string> {
             "Short Test", "Medium Test", "Long Test"});
 
-        public const string WPMMenu = "PastEntriesMenu";
+        public const string WPMMenu = "WPMMenu";
 
     }
 }

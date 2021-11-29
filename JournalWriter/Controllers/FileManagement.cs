@@ -15,7 +15,7 @@ namespace JournalWriter.Controllers
     {
         //-------Properties-------//
         public static string RootPath { get; private set; } = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        public static string ObjectDataFolderName { get; private set; } = "JournalWriter\\ObjectData";
+        public static string ObjectDataFolderName { get; private set; } = "Westerveld Apps\\Journal Writer\\ObjectData";
         public static string DataPath { get; private set; } = Path.Combine(RootPath, ObjectDataFolderName, "data.bin");
 
         //-------Methods-------//
