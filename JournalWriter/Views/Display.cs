@@ -166,19 +166,19 @@ namespace JournalWriter.Views
 
             Console.WriteLine(CurrentPage.CurrentMenu.Cursor.TopPos);
         }
-        public void DisplayCurrentUser(int leftPosition, int topPosition)
+        public void DisplayCurrentUser(int leftPosition, int topPosition, UserAccounts account)
         {
             Console.SetCursorPosition(leftPosition, topPosition);
-            Console.WriteLine("Logged In: " + UserAccountController.Account.CurrentUser.Name);
+            Console.WriteLine("Logged In: " + account.CurrentUser.Name);
             Console.CursorLeft = leftPosition;
-            Console.WriteLine("WPM Record: " + UserAccountController.Account.CurrentUser.WPMRecord.ToString("0.0") + " WPM");
+            Console.WriteLine("WPM Record: " + account.CurrentUser.WPMRecord.ToString("0.0") + " WPM");
 
         }
-        public void DisplayAllUsers()
+        public void DisplayAllUsers(UserAccounts account)
         {
             bool skipFirst = false;
 
-            foreach (User u in UserAccountController.Account.Users)
+            foreach (User u in account.Users)
             {
                 if (skipFirst == true)
                 {

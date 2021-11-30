@@ -96,7 +96,7 @@ namespace JournalWriter.Controllers
 
         public void LoadUsers()
         {
-            this.Users = FileManagement.LoadUserData();
+            Users = FileManagement.LoadUserData();
         }
         public bool CheckPasswordCorrect(string userName, string password)
         {

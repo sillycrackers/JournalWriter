@@ -14,13 +14,15 @@ namespace JournalWriter.Controllers
     {
         public static Display display;
         public static ConsoleKeyInfo KeyInfo;
-        
+        public static UserAccounts Account;
         static DisplayController()
         {
-
+            Account = new UserAccounts();
             display = new Display();
             SetupPages();
             display.CurrentPage = display.Pages[0];
+
+            Account.LoadUsers();
         }
 
     public static void Run()
@@ -72,14 +74,21 @@ namespace JournalWriter.Controllers
         //Setup Pages and menus and any other elements on page
         public static void SetupPages()
         {
-            SetupPageWithMenu(Names.MainPage, Names.MainMenu, Names.MainMenuItems);
-            SetupPageWithMenu(Names.LoginPage, Names.LoginMenu, Names.LoginMenuItems);
-            SetupPageWithMenu(Names.WPMPage, Names.WPMMenu, Names.WPMMenuItems);
-            SetupPastEntriesPage();
 
+            try
+            {
+                SetupPageWithMenu(Names.MainPage, Names.MainMenu, Names.MainMenuItems);
+                SetupPageWithMenu(Names.LoginPage, Names.LoginMenu, Names.LoginMenuItems);
+                SetupPageWithMenu(Names.WPMPage, Names.WPMMenu, Names.WPMMenuItems);
+                SetupPastEntriesPage();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-  
         public static void SetupPageWithMenu(string pageName, string menuName, List<string> menuItemNames)
         {
             //Setup new page
@@ -140,7 +149,7 @@ namespace JournalWriter.Controllers
         {
             List<string> s = new List<string>();
 
-            foreach (Entry e in UserAccountController.Account.CurrentUser.Entries)
+            foreach (Entry e in Account.CurrentUser.Entries)
             {
                 s.Add(e.Title);
             }
@@ -155,9 +164,8 @@ namespace JournalWriter.Controllers
         {
             display.CurrentPage.DrawElements();
 
-            display.DisplayCurrentUser(1, display.CurrentPage.CalculateElementsHeight() + display.CurrentPage.HeaderHeight + 3);
+            display.DisplayCurrentUser(1, display.CurrentPage.CalculateElementsHeight() + display.CurrentPage.HeaderHeight + 3, Account);
         }
-
 
         public static void MenuSelectionEnter()
         {
@@ -177,7 +185,6 @@ namespace JournalWriter.Controllers
                     break;
             }
         }
-
         public static void RunMainPage()
         {
             switch (display.CurrentPage.GetMenuItemSelectedValue())
@@ -185,10 +192,10 @@ namespace JournalWriter.Controllers
                 //Login
                 case 0:
                     Console.Clear();
-                    UserAccountController.Account.Login();
-                    if (UserAccountController.Account.loggedIn)
+                    Account.Login();
+                    if (Account.loggedIn)
                     {
-                        if (UserAccountController.Account.CurrentUser.Name != UserAccountController.Account.DefaultUser.Name)
+                        if (Account.CurrentUser.Name != Account.DefaultUser.Name)
                         {
                             display.CurrentPage = display.Pages[display.Pages.FindIndex(x => x.PageName == Names.LoginPage)];
                         }
@@ -198,19 +205,20 @@ namespace JournalWriter.Controllers
                 //Create new account
                 case 1:
                     Console.Clear();
-                    UserAccountController.Account.UserInputNewAccount();
+                    Account.UserInputNewAccount();
+                    display.CurrentPage = display.Pages[display.Pages.FindIndex(x => x.PageName == Names.LoginPage)];
                     Console.Clear();
                     break;
                 //Display current users
                 case 2:
                     Console.Clear();
-                    display.DisplayAllUsers();
+                    display.DisplayAllUsers(Account);
                     Display.PressEnterTo("go back...");
                     Console.Clear();
                     break;
                 //Exit application
                 case 3:
-                    FileManagement.SaveUserData(UserAccountController.Account.Users);
+                    FileManagement.SaveUserData(Account.Users);
                     Environment.Exit(0);
                     break;
             }
@@ -222,15 +230,15 @@ namespace JournalWriter.Controllers
                 //Write New Entry
                 case 0:
                     Console.Clear();
-                    UserAccountController.Account.CurrentUser.NewEntry();
-                    FileManagement.SaveUserData(UserAccountController.Account.Users);
+                    Account.CurrentUser.NewEntry();
+                    FileManagement.SaveUserData(Account.Users);
                     Console.Clear();
                     break;
                 //Load Past Entry
                 case 1:
                     Console.Clear();
 
-                    if(UserAccountController.Account.CurrentUser.Entries.Count == 0)
+                    if(Account.CurrentUser.Entries.Count == 0)
                     {
                         Console.WriteLine("You have no entries yet.");
                     }
@@ -260,16 +268,16 @@ namespace JournalWriter.Controllers
                 //Reset WPM Record
                 case 3:
                     Console.Clear();
-                    UserAccountController.Account.CurrentUser.WPMRecord = 0;
-                    FileManagement.SaveUserData(UserAccountController.Account.Users);
+                    Account.CurrentUser.WPMRecord = 0;
+                    FileManagement.SaveUserData(Account.Users);
                     break;
                 //Logout
                 case 4:
                     Console.Clear();
 
-                    UserAccountController.Account.CurrentUser = UserAccountController.Account.DefaultUser;
+                    Account.CurrentUser = Account.DefaultUser;
 
-                    UserAccountController.Account.loggedIn = false;
+                    Account.loggedIn = false;
 
                     display.CurrentPage = display.PagesQueue.Pop();
 
@@ -288,13 +296,12 @@ namespace JournalWriter.Controllers
 
             selectedValue = display.CurrentPage.GetMenuItemSelectedValue();
 
-            UserAccountController.Account.CurrentUser.Entries[selectedValue].Draw();
+            Account.CurrentUser.Entries[selectedValue].Draw();
 
             Display.PressEnterTo("go back...");
 
             Console.Clear();
         }
-
         public static void RunWPMPage()
         {
             switch (display.CurrentPage.GetMenuItemSelectedValue())
@@ -317,24 +324,22 @@ namespace JournalWriter.Controllers
 
             }
         }
-
-
         public static void RunWPM(WPMParagraphs.WPMLengthSelect length)
         {
             WPMUI wpm = new WPMUI();
 
             wpm.StartChallenge(length);
 
-            if (wpm.WordsPerMin > UserAccountController.Account.CurrentUser.WPMRecord)
+            if (wpm.WordsPerMin > Account.CurrentUser.WPMRecord)
             {
                 Console.WriteLine("New Record!!!");
-                UserAccountController.Account.CurrentUser.WPMRecord = wpm.WordsPerMin;
+                Account.CurrentUser.WPMRecord = wpm.WordsPerMin;
             }
 
             Display.PressEnterTo("go back...");
             //display.CurrentPage = display.PagesQueue.Pop();
             Console.Clear();
-            FileManagement.SaveUserData(UserAccountController.Account.Users);
+            FileManagement.SaveUserData(Account.Users);
         }
     }
 }
