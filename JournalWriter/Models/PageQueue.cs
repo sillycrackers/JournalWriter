@@ -6,14 +6,17 @@ using JournalWriter.Controllers;
 
 namespace JournalWriter.Models
 {
+
     public class PageQueue
     {
+        public int StackCount { get { return stack.Count; } }
+
         private List<Page> stack;
 
         public PageQueue()
         {
             stack = new List<Page>();
-            stack.Add(new Page("EmptyPage", InitializeDisplay.ForegroundColor));
+            //stack.Add(new Page("EmptyPage", InitializeDisplay.ForegroundColor));
         }
 
         public void Push(Page p)
@@ -22,14 +25,22 @@ namespace JournalWriter.Models
         }
         public Page Pop()
         {
+            Page page = stack[stack.Count - 1]; ;
 
             stack.RemoveAt(stack.Count - 1);
 
-            return stack[stack.Count - 1];
+            return page;
         }
         public Page GetTop()
         {
-            return stack[stack.Count - 1];
+            if (stack.Count > 0)
+            {
+                return stack[stack.Count - 1];
+            }
+            else
+            {
+                return null; 
+            }
         }
     }
 }

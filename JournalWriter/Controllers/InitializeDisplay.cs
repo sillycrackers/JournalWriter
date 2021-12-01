@@ -14,7 +14,8 @@ namespace JournalWriter.Controllers
         {
             const int fontRatio = 49;
             const float windowHeightRatio = 0.66f;
-            const float windowWidthRatio = 0.35f;
+            //0.34 seems to work best for width
+            const float windowWidthRatio = 0.34f;
 
             int consoleMaxWidth = Console.LargestWindowWidth;
             int consoleMaxHeight = Console.LargestWindowHeight;
@@ -23,15 +24,15 @@ namespace JournalWriter.Controllers
             int windowHeight = (int)(consoleMaxHeight * windowHeightRatio);
             int windowWidth = (int)(consoleMaxWidth * windowWidthRatio);
 
-            //Set font size
-            ConsoleHelper.SetCurrentFont("Lucida Console", fontSize);
+
 
             Console.ForegroundColor = ForegroundColor;
             
             Console.SetWindowSize(windowWidth, windowHeight);
             Console.SetBufferSize(windowWidth, windowHeight);
 
-            
+            //Set font size
+            ConsoleHelper.SetCurrentFont("Lucida Console", fontSize);
 
         }
         public static int GetResolutionHeight()

@@ -20,12 +20,13 @@ namespace JournalWriter.Controllers
             Account = new UserAccounts();
             display = new Display(InitializeDisplay.ForegroundColor);
             SetupPages();
-            display.CurrentPage = display.Pages[0];
+            display.CurrentPage = display.Pages[display.Pages.FindIndex(x => x.PageName == Names.MainPage)];
+            display.PagesQueue.Push(display.CurrentPage);
 
             Account.LoadUsers();
         }
 
-    public static void Run()
+        public static void Run()
         {
             while (true)
             {
@@ -46,9 +47,16 @@ namespace JournalWriter.Controllers
 
                     if (KeyInfo.Key == ConsoleKey.Enter)
                     {
-                        if (display.CurrentPage != display.PagesQueue.GetTop())
-                        {
-                            display.PagesQueue.Push(display.CurrentPage);
+                        if (display.PagesQueue.StackCount > 0) 
+                        { 
+                            if (display.CurrentPage.PageName != display.PagesQueue.GetTop().PageName)
+                            {
+                                display.PagesQueue.Push(display.CurrentPage);
+                            }
+                        }
+                        else 
+                        { 
+                            display.PagesQueue.Push(display.CurrentPage); 
                         }
 
                         //After selecting item on menu run a program
@@ -66,10 +74,7 @@ namespace JournalWriter.Controllers
                     }
                 }
             }
-            
         }
-
-
 
         //Setup Pages and menus and any other elements on page
         public static void SetupPages()
@@ -193,7 +198,7 @@ namespace JournalWriter.Controllers
                 case 0:
                     Console.Clear();
                     Account.Login();
-                    if (Account.loggedIn)
+                    if (Account.LoggedIn)
                     {
                         if (Account.CurrentUser.Name != Account.DefaultUser.Name)
                         {
@@ -277,7 +282,7 @@ namespace JournalWriter.Controllers
 
                     Account.CurrentUser = Account.DefaultUser;
 
-                    Account.loggedIn = false;
+                    Account.LoggedIn = false;
 
                     display.CurrentPage = display.PagesQueue.Pop();
 

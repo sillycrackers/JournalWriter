@@ -18,7 +18,7 @@ namespace JournalWriter.Controllers
 
         public List<User> Users { get; set; }
         public User CurrentUser { get; set; }
-        public bool loggedIn { get; set; }
+        public bool LoggedIn { get; set; }
 
         public User DefaultUser { get; set; } = new User("") { Name = "DefaultUser" };
 
@@ -34,7 +34,7 @@ namespace JournalWriter.Controllers
 
             Users.Add(CurrentUser);
 
-            loggedIn = false;
+            LoggedIn = false;
 
             FileManagement.Initialize(Users);
 
@@ -47,11 +47,11 @@ namespace JournalWriter.Controllers
         {
             string input = "";
             string userName = "";
-            loggedIn = false;
+            LoggedIn = false;
 
             Console.WriteLine("Please enter username or press ESC to go back.");
 
-            while (loggedIn == false)
+            while (LoggedIn == false)
             {
                 input = Display.ReadLineOrEscape();
 
@@ -65,7 +65,7 @@ namespace JournalWriter.Controllers
 
                         Console.WriteLine("Please Enter Password: ");
 
-                        while (loggedIn == false)
+                        while (LoggedIn == false)
                         {
                             input = Display.GetHiddenConsoleInput();
 
@@ -73,7 +73,7 @@ namespace JournalWriter.Controllers
                             {
                                 Console.WriteLine("Correct!");
                                 CurrentUser = Users[Users.FindIndex(x => x.Name == userName)];
-                                loggedIn = true;
+                                LoggedIn = true;
                             }
                             else
                             {
@@ -164,10 +164,13 @@ namespace JournalWriter.Controllers
                     Console.WriteLine("Invalid Input, try again");
                 }
 
+
             }
 
             //Create the account after receiving valid user name and password
             CreateUserAccount(name, password);
+            LoggedIn = true;
+            
 
             Console.Clear();
 
