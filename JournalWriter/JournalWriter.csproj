@@ -24,4 +24,9 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Google.Api.CommonProtos" Version="2.4.0" />
+    <PackageReference Include="System.Management" Version="6.0.0" />
+  </ItemGroup>
+
 </Project>

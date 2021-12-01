@@ -18,7 +18,7 @@ namespace JournalWriter.Controllers
         static DisplayController()
         {
             Account = new UserAccounts();
-            display = new Display();
+            display = new Display(InitializeDisplay.ForegroundColor);
             SetupPages();
             display.CurrentPage = display.Pages[0];
 
@@ -98,7 +98,7 @@ namespace JournalWriter.Controllers
             }
             else
             {
-                display.Pages.Add(new Page(pageName));
+                display.Pages.Add(new Page(pageName, InitializeDisplay.ForegroundColor));
 
                 var page = display.Pages[display.Pages.FindIndex(x => x.PageName == pageName)];
 
@@ -113,7 +113,7 @@ namespace JournalWriter.Controllers
             //Setup Past Entries page
             try
             {
-                display.Pages.Add(new Page(Names.PastEntriesPage));
+                display.Pages.Add(new Page(Names.PastEntriesPage, InitializeDisplay.ForegroundColor));
                 
             }
             catch (Exception ex)

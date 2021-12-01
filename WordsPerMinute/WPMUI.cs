@@ -38,8 +38,7 @@ namespace WordsPerMinute
         }
         public void StartChallenge(WPMParagraphs.WPMLengthSelect length)
         {
-            
-            SetupColors();
+            Console.ForegroundColor = ConsoleColor.White;
 
             DisplayChallengeText(_challengeTextTopPos, length);
 
@@ -74,17 +73,11 @@ namespace WordsPerMinute
         }
         public void WriteInstructions()
         {
-            
-            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine();
             Console.WriteLine(info);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
-        }
-        public void SetupColors()
-        {
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.ForegroundColor = ConsoleColor.White;
         }
         public void DisplayChallengeText(int position, WPMParagraphs.WPMLengthSelect length)
         {

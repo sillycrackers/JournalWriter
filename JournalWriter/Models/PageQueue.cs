@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using JournalWriter.Views;
+using JournalWriter.Controllers;
 
 namespace JournalWriter.Models
 {
@@ -12,7 +13,7 @@ namespace JournalWriter.Models
         public PageQueue()
         {
             stack = new List<Page>();
-            stack.Add(new Page("EmptyPage"));
+            stack.Add(new Page("EmptyPage", InitializeDisplay.ForegroundColor));
         }
 
         public void Push(Page p)

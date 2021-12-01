@@ -11,6 +11,7 @@ namespace JournalWriter.Views
     public class Page
     {
         public int HeaderWidth = 46;
+        public ConsoleColor ForegroundColor { get { return _foregroundColor; } set { _foregroundColor = value; } }
         public List<Menu> MenuList { get; set; }
         public Menu CurrentMenu { get; set; }
         public List<IDisplayElement> DisplayElements{ get; set; }
@@ -35,10 +36,11 @@ namespace JournalWriter.Views
 
         private string _pageName;
         private string _header;
+        private ConsoleColor _foregroundColor;
 
 
         //Constructor
-        public Page(string pageName)
+        public Page(string pageName, ConsoleColor foregroundColor)
         {
             DisplayElements = new List<IDisplayElement>();
 
@@ -47,6 +49,7 @@ namespace JournalWriter.Views
             PageName = pageName;
             GenerateHeader();
             HeaderHeight = CalculateHeaderSize();
+            _foregroundColor = foregroundColor;
 
         }
 
@@ -111,7 +114,7 @@ namespace JournalWriter.Views
 
             Console.WriteLine(_header);
 
-            Console.ResetColor();
+            Console.ForegroundColor = _foregroundColor;
 
             DisplayElements[0].TopPosition = HeaderHeight + 1;
 

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Management;
 using System.Text;
 using System.Threading;
 using JournalWriter.Views;
+
 
 namespace JournalWriter.Models
 {
@@ -26,7 +28,6 @@ namespace JournalWriter.Models
         public static void Run()
         {
             Console.CursorVisible = false;
-            SetupIntroConsole();
 
             int y = 7;
             int x = 18;
@@ -72,17 +73,6 @@ namespace JournalWriter.Models
             Console.SetCursorPosition(0, currentLineCursor);
         }
 
-        public static void SetupIntroConsole()
-        {
 
-            Console.ForegroundColor = ConsoleColor.Green;
-
-            Console.SetWindowSize(1, 1);
-            Console.SetBufferSize(50, 30);
-            Console.SetWindowSize(50, 30);
-            Console.Title = "Journal Reader";
-            Console.SetWindowPosition(0, 0);
-
-        }
     }
 }

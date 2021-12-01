@@ -13,9 +13,10 @@ namespace JournalWriter.Controllers
         [STAThread]
         static void Main(string[] args)
         {
-            ConsoleHelper.SetCurrentFont("Lucida Console", 36);
-           
+
             WPMUI wpm = new WPMUI();
+
+            InitializeDisplay.Initialize();
 
             IntroAnimation.Run();
 

@@ -15,48 +15,24 @@ namespace JournalWriter.Views
         public Page CurrentPage { get; set; }
         public PageQueue PagesQueue { get; set; }
         public List<Page> Pages { get; set; }
+        public ConsoleColor ForegroundColor { get { return _foregroundColor; } set { _foregroundColor = value; } }
 
-        public static int WindowHeight;
-        public static int WindowWidth;
-        public static int BufferHeight;
-        public static int BufferWidth;
-
-        private int _windowHeight = 30;
-        private int _windowWidth = 50;
-        private int _bufferHeight = 30;
-        private int _bufferWidth = 50;
+        private ConsoleColor _foregroundColor;
 
         //-------Constructors-------//
 
-        public Display()
+        public Display(ConsoleColor foregroundColor)
         {
             PagesQueue = new PageQueue();
-            SetupConsoleDefaults();
-            CurrentPage = new Page("CurrentPage");
+            CurrentPage = new Page("CurrentPage", foregroundColor);
             Pages = new List<Page>();
-
-            WindowHeight = _windowHeight;
-            WindowWidth  = _windowWidth;
-            BufferHeight = _bufferHeight;
-            BufferWidth  = _bufferWidth;
+            _foregroundColor = foregroundColor;
         } 
         //-------Methods-------//
     
         //-----------Action Methods-----------//
         //-----Methods that perform some sort of action------//
 
-        private void SetupConsoleDefaults()
-        {
-           
-            Console.ForegroundColor = ConsoleColor.Green;
-
-            Console.SetWindowSize(1, 1);
-            Console.SetBufferSize(_bufferWidth, _bufferHeight);
-            Console.SetWindowSize(_windowWidth, _windowHeight);
-            Console.Title = "Journal Reader";
-            Console.SetWindowPosition(0, 0);
-            
-        }
 
         //Method for password entry displaying only ****
         public static string GetHiddenConsoleInput()
