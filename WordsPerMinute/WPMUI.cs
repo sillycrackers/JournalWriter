@@ -129,8 +129,6 @@ namespace WordsPerMinute
             {
                 if (index > 0)
                 {
-                    //Console.CursorLeft = index;
-
                     sb.Remove(index - 1, 1);
                     if(Console.CursorLeft == 0)
                     {
