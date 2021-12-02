@@ -342,7 +342,7 @@ namespace JournalWriter.Controllers
             }
 
             Display.PressEnterTo("go back...");
-            //display.CurrentPage = display.PagesQueue.Pop();
+            display.CurrentPage = display.PagesQueue.Pop();
             Console.Clear();
             FileManagement.SaveUserData(Account.Users);
         }

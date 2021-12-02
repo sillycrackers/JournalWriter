@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Management;
 using System.Text;
-using System.Windows;
+
 
 namespace JournalWriter.Controllers
 {
@@ -14,25 +14,32 @@ namespace JournalWriter.Controllers
         {
             const int fontRatio = 49;
             const float windowHeightRatio = 0.66f;
-            //0.34 seems to work best for width
-            const float windowWidthRatio = 0.34f;
+            //0.35 seems to work best for width
+            const float windowWidthRatio = 0.35f;
+
+           
+            int resolutionHeight = GetResolutionHeight();
+            short fontSize = (short)(resolutionHeight / fontRatio);
+            ConsoleHelper.SetCurrentFont("Lucida Console", fontSize);
+
 
             int consoleMaxWidth = Console.LargestWindowWidth;
             int consoleMaxHeight = Console.LargestWindowHeight;
-            int resolutionHeight = GetResolutionHeight();
-            short fontSize = (short)(resolutionHeight / fontRatio);
             int windowHeight = (int)(consoleMaxHeight * windowHeightRatio);
             int windowWidth = (int)(consoleMaxWidth * windowWidthRatio);
+            int windowLeft = (consoleMaxWidth / 2) - (windowWidth / 2);
+            int windowTop = (consoleMaxHeight / 2) - (windowHeight / 2);
 
 
 
             Console.ForegroundColor = ForegroundColor;
-            
-            Console.SetWindowSize(windowWidth, windowHeight);
-            Console.SetBufferSize(windowWidth, windowHeight);
 
-            //Set font size
-            ConsoleHelper.SetCurrentFont("Lucida Console", fontSize);
+            //Console.SetWindowPosition(windowLeft, windowTop);
+            //Console.SetWindowSize(windowWidth, windowHeight);
+            //Console.SetBufferSize(windowWidth, windowHeight);
+            
+
+
 
         }
         public static int GetResolutionHeight()

@@ -4,7 +4,6 @@ using System.Text;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
-using System.Windows.Forms;
 using JournalWriter;
 using JournalWriter.Views;
 using JournalWriter.Models;
@@ -53,12 +52,6 @@ namespace JournalWriter.Controllers
         {
 
             Directory.CreateDirectory(RootPath + @"\" + ObjectDataFolderName);
-        }
-        public static void OpenBrowserSelectFolder()
-        {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-            fbd.ShowDialog();
-
         }
         public static void Initialize(List<User> users)
         {
